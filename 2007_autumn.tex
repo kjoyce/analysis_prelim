@@ -1,0 +1,322 @@
+\documentclass{homework}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{cleveref}
+\usepackage{upgreek}
+\usepackage[framed]{mcode}
+\usepackage{mathrsfs}
+\usepackage{units}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\newtheorem{lemma}{Lemma}
+\DeclareMathOperator*{\Res}{Res}
+
+\course{2007 Autumn Analysis Exam Solutions}
+\author{Kevin Joyce}
+
+
+\begin{document} 
+\newcommand{\figref}[1]{\figurename~\ref{#1}}
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\SS}{\mathcal S}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\TTheta}{\overline{\underline \Theta} }
+\newcommand{\del}{\partial}
+\newcommand{\approxsim}{\overset{\cdotp}{\underset{\cdotp}{\sim}}}
+\newcommand{\FF}{\mathcal F}
+\renewcommand{\Re}{\mathrm{Re}\,}
+\renewcommand{\Im}{\mathrm{Im}\,}
+\newcommand{\HH}{\mathcal H}
+\nocite{*}
+
+{\bf 1. } Determine all positive real numbers $a$ such athat $a^x \ge ax$ holds for all positive $x$.
+
+\begin{solution}
+  Let $f_a(x) = a^x - ax$ so $f'_a(x) = (\ln a) a^x - a$.  So critical points are when
+  $$
+    x_0(a) = \log_a\left(\frac a{\ln a}\right) = \frac 1{\ln a} \ln\left(\frac a{\ln a}\right).
+  $$
+  This point is unique when it exists since $a^x$ is injective. In fact, when $a\le 1$, $f'_a(x) < 0$ for all $x$ 
+  so $f_a(x)$ is unbounded below, and thus $a^x < ax$ for some $x$ and these $a$ will not suffice.
+
+  When $a > 1$, note $f'_a(x) < 0$ when $x<x_0(a)$ and $f'_a(x) > 0$ when $x > x_0(a)$, thus $f(x_0(a))$ is a global minimum for $f$. 
+  Hence, $f(x) \ge 0$ is equivalent to 
+  \begin{align*}
+    &f(x_0(a)) \ge 0 \\
+    \iff&\frac a{\ln a} - \frac a{\ln a}\ln\left(\frac a{\ln a}\right) \ge 0\\
+    \iff&1\ge \ln\left(\frac a{\ln a}\right)\\
+    \iff&e\ln a -  a \ge 0
+  \end{align*}
+  So we need only find $a$ so that $e \ln a - a \ge 0$. Note that $g'(a) = \frac ea -1$, and $g'(e) = 0$ with $g'(a) > 0$ when $a<e$ and $g'(a) < 0$ when $a>e$, so $g(a) \le g(e) = 0$.  Thus, the only value for which $g(a) \ge 0$, equivalent to the inequality, is when $a=e$.
+\end{solution}
+
+{\bf 2.} Let $f:[0,\infty) \to \RR$ be a continuous function with the property that there exist constants $t_0,a$ and $M$ such that for all $t\ge t_0,|f(t)| \le Me^{at}$.  Show that for all $s>a$,
+$$
+\mathcal L[f](s) = \int_0^\infty e^{-st}f(t)\,dt
+$$
+converges absolutely.
+
+\begin{solution}
+  Observe
+  \begin{align*}
+    \left| \int_0^R e^{-st} f(t)\, dt\right| 
+    &\le \int_0^R  e^{-st} \left|f(t)\right|\, dt \\
+    &\le M \int_0^R  e^{-(s-a)t} \, dt \\
+    &= \frac{M}{s-a} \left(1 - e^{-(s-a)R}\right). 
+  \end{align*}
+  Taking limits as $R\to \infty$, we see that the absolute value of the integral is bounded above by $\frac{M}{s-a}$ since $s-a >0$, thus the improper integral is absolutely convergent.
+\end{solution}
+
+{\bf 5.} Let $C([0,1])$ denote the set of complex-valued continuous functions on the interval $[0,1]$.  This is a complete metric space with the metric 
+$$
+d(f,g) = \sup_{x\in[0,1]} |f(x) - g(x)|.
+$$
+Define $T:C([0,1]) \to C([0,1])$ by 
+$$
+  Tf(x) = x + \int_0^x tf(t)\,dt
+$$
+Show that $T$ is a contractive map.  Then show that the fixed point is a solution to the differential equation $f'(x) = 1 + xf(x)$.
+
+\begin{solution}
+  Observe
+  \begin{align*}
+    d(Tf,Tg) 
+    &= \sup_{x\in[0,1]} |Tf(x) - Tg(x)|\\
+    &= \sup_{x\in[0,1]} \left|x + \int_0^x tf(t)\,dt - \left(x + \int_0^x tf(t)\,dt\right)\right|\\
+    &= \sup_{x\in[0,1]} \left|\int_0^x t(f(t)-g(t))\,dt\right|\\
+    &\le \sup_{x\in[0,1]} \int_0^x t|f(t)-g(t)|\,dt\\
+    &\le \int_0^1 t|f(t)-g(t)|\,dt \quad\text{since the integrand is positive $\int_0^x \cdot$ is increasing,}\\
+    &=\int_0^{1/2} t|f(t)-g(t)|\,dt + \int_{1/2}^{1} t|f(t)-g(t)|\,dt\\
+    &\le \frac 14 \sup_{x\in[0,1]}|f(t)-g(t)| + \frac 12 \sup_{x\in[0,1]}|f(t)-g(t)|\\
+    &\le \frac 34\, d(f,g),\\
+  \end{align*}
+  so $T$ is a contraction. The contraction mapping theorem provides a unique $f$ such that $Tf = f$. In particular,
+  $$
+    f(x) = x + \int_0^x tf(t)\,dt \quad \implies \quad f'(x) = 1 + xf(x)
+  $$
+  by differentiating both sides and the fundamental theorem of calculus.
+\end{solution}
+
+{\bf 6.}  Fix $N\in \NN$ and a compact interval $[a,b]$ and let $\mathcal F$ be the family of all polynomials $\ds{\sum_{j=0}^Na_jx^j}$ on $[a,b]$ for which $a_j|\le 1$ for all $j$.  Show that $\mathcal F$ is uniformly bounded and uniformly equicontinuous.
+
+\begin{solution}
+This is also on Spring 2007.
+
+For the even function $f(x) = |x|^n$ on $x\in[a,b]$, it attains its maximum at either $x = 0$, $x=a$ or $x=b$ since $f'(x) = 0$ or does not exist only when $x=0$.  Thus,
+\begin{align*}
+  \left| \sum_{n=1}^N a_n x^n \right| 
+  &\le \sum_{n=1}^N |a_n|\, |x|^n\\
+  &\le N \max\{|a|,|b|,|a|^2,|b|^2,\dots,|a|^N,|b|^N\}.\\
+\end{align*}
+So $\mathcal F$ is uniformly bounded.
+
+Now, let $\eps >0$ be given.  Since the monomial $f(x) = x^n$ is continuous (as
+a successive product of continuous functions), $f(x)$ is uniformly continuous
+on any given $[a,b]$ since the closed and bounded interval $[a,b]$ is compact. Thus, the distance $|x^n - t^n|< N\eps$ for all $0<n\le N$, for sufficiently small $|x-t|$, by choosing a minimum.  
+In particular, for a given representative of $\mathcal F$, $f(x) = \sum_{n=1}^N a_n x$, we have
+\begin{align*}
+  \left|\sum_{n=1}^N a_n x^n - \sum_{n=1}^N a_n t^n\right|
+  &\le \sum_{n=1}^N |a_n| \left|x^n - t^n\right| \\
+  &\le N \left|x^n - t^n\right| 
+  < \eps.
+  \end{align*}
+\end{solution}
+
+{\bf 7.} Prove or disprove: If ${f_n}$ is a sequence of continuous functions on $[0,1]$ such that $f_n(x)\to 0$ for every $x\in [0,1]$, then $\lim_{n\to\infty}\int_0^1f(x)\,dx=0$.  Discuss the situation.
+
+\begin{solution}
+  The claim is false as stated.  Consider $f_n \in C([0,1])$ such that the graphs of $f_n$ form a family of isosceles triangles centered at $\frac 1{2n}$ with base width $1/n$ and height $n$.  I.e. 
+  \begin{minipage}{.35\textwidth}
+  \begin{tikzpicture}
+    \draw[-latex] (-.1,0) -- (4,0);
+    \draw (0,0) -- (1,3) node[right] {$n$} -- (2,0) node[below] {$\frac 1n$};
+    \draw[dotted] (1,3) -- (1,0) node[below] {$\frac 1{2n}$};
+    \draw[-latex] (0,-.1) -- (0,3);
+  \end{tikzpicture}
+  \end{minipage}
+  \begin{minipage}{.6\textwidth}
+  $\ds{
+    f_n(x) = \begin{cases}
+    n - 2n^2\left |x - \frac 1{2n}\right| & x<\frac 1n\\
+    0 & x \ge \frac 1n
+    \end{cases}.
+  }
+  $
+  \end{minipage}
+  Via the geometric description, $\int_0^1 f_n(x)\,dx = \frac 12\,\frac 1n\, n
+  = \frac 12$ for all $n$, and thus 
+  $$\lim_{n\to \infty} \int_0^1 f_n(x)\,dx = \frac 12.$$ 
+  Yet, for each fixed $x\in(0,1]$, there exists an integer $N >
+  \frac 1x$, so $x > \frac 1N$ which implies $|f_n(x)| = 0$.  This with $f_n(0)
+  = 0$ for all $n$ implies that $f_n(x) \to 0$.
+
+  If we additionally require that $\{f_n\}$ be uniformly convergent over $[0,1]$, then the result holds, or if $\{f_n\}$ can be uniformly bounded then Lebesgue's dominated convergence theorem guarantees the equality.
+\end{solution}
+
+{\bf 8.} Show that if $f$ is uniformly continuous on $[1,\infty)$, then there exists $C\ge 0$ such that $|f(x)| \le Cx$ for sufficiently large $x$.  
+
+\begin{solution}
+Let $\delta > 0$ such that $|f(x) - f(t)|<1$ when $|x-t| \le \delta$ given by uniform continuity.  
+
+\begin{center}
+\usetikzlibrary{decorations.pathreplacing}
+\begin{tikzpicture}
+  \draw (0,0) -- (2.2,0);
+  \draw[dotted] (2.2,0) -- (2.8,0);
+  \draw[-latex] (2.8,0) -- (7,0);
+  \node[above] (1) at (1,0) {1};  
+  \foreach \x in {0,1,...,6} {
+    \draw[shift={(\x,0)}] (0pt,-2pt) -- (0pt,2pt);
+  };
+
+  \node[above] at (1.5,.5){$\delta$};
+  \draw[decoration={brace}, decorate] (1,.5) -- (2,.5);
+  \node[below] at (1,-2pt){$x_0$} ;
+  \node[below] at (2,-2pt){$x_1$};
+  \node[below] at (4,-2pt){$x_i$};
+  \node[below] at (6,-2pt){$x_N$};
+
+  \draw[shift={(5.7,0)}] (-2pt,-2pt) -- (2pt,2pt);
+  \draw[shift={(5.7,0)}] (-2pt,2pt) -- (2pt,-2pt);
+  \draw[-latex] (5,-.5) node[below] {$x$} -- (5.7,-2pt);
+
+\end{tikzpicture}
+\end{center}
+
+For each fixed $x$, let $\ds{ N_x = \min_{N\in \NN} \left\{ 1+N\delta \ge x \right\} } $ and $x_i = 1 + i\delta$ for $0\le i \le N_x$. So 
+\begin{align*}
+  |f(x) - f(1)| 
+  &\le |f(x) - f(x_{N_x-1})| + |f(x_{N_x-1}) - f(x_{N_x-2})| + \dots |f(x_1) - f(x_0)| < N_x.
+\end{align*}
+Since $N_x$ is a minimum, then $1+(N_x - 1)\delta < x$ which implies $N_x < \frac 1 \delta (x-1) + 1$. Now
+\begin{align*}
+ |f(x)| - |f(1)| &\le |f(x) - f(1)| < \frac 1\delta (x-1) + 1\\
+ \iff |f(x)| &<  \frac 1\delta x + \left(1 +|f(1)| -\frac 1\delta \right)\\
+ &= \frac 2\delta x + \left(-\frac x \delta + \underbrace{1 +|f(1)| -\frac 1\delta}_K \right).
+\end{align*}
+Let $K = 1 +|f(1)| -\frac 1\delta$, and take $x>K\delta$ so $-\frac x\delta + K < 0$, and thus
+$$
+  |f(x)| < \frac 2\delta x.
+$$
+\end{solution}
+
+{\bf 9.} Show that
+$$
+  \int_0^\infty \frac{x^2+1}{x^4+1}\,dx = \frac \pi{\sqrt 2}.
+$$  
+
+\begin{solution}
+Let $f(z) = \frac{z^2+1}{z^4+1} = \frac{p(z)}{q(z)}$.  Observe that $q(z) = \prod_{j=0}^3(z-z_j)$ where $z_j = e^{\pi i/4 + j\pi/2}$.  So $f(z)$ is analytic except at each isolated simple pole $z_j$ (since $p(z_j) \not= 0$).  Consider the contour consisting of a line segment from $-R$ to $R$, say $L_R$, followed by the upper half circle from $R$ to $-R$, say $C_R$.  If $R> \sqrt 2$, then $f$ is analytic on $L_R + C_R$ and each $z_j$ is interior to this contour.
+
+  \begin{center}
+  \begin{tikzpicture}
+    \draw(-4.25,0) -- (4.25,0);
+    \draw(0,-.25) -- (0,4.25);
+    \draw[-latex] (4,0) node[below]{$R$} arc (0:30:4) node[right]{$C_R$};
+    \draw (30:4) arc (30:180:4);		  
+    \draw[-latex] (-4,0) node[below]{$-R$} -- (-2,0) node[below]{$L_R$};
+
+    
+    \node[above] at (-2,2) {$z_1$};  
+    \fill (-2,2) circle (2pt);
+    \node[above] at (2,2) {$z_0$};  
+    \fill (2,2) circle (2pt);
+  \end{tikzpicture}
+  \end{center}
+
+The residue theorem gives 
+$$
+  \int_{L_R + C_R} f(z)\,dz = 2\pi i\left\{\Res_{z=z_0} f + \Res_{z=z_1} f\right\}.
+$$
+
+Observe
+\begin{align*}
+q'(z_0) 
+  &=  \prod_{j=1}^3(z-z_j) + \cancel{(z-z_0)\left.\frac{d}{dz}\prod_{j=1}^3(z-z_j)\right|_{z=z_0}}\\
+  &=  \frac{q(z)}{(z-z_0)},
+\end{align*}
+hence 
+$$
+\Res_{z=z_0} f = \lim_{z\to z_0} \frac{f(z)}{z-z_0} = \frac{p(z_0)}{q'(z_0)}.
+$$
+A similar argument gives $\Res_{z=z_1} = \frac{p(z_1)}{q'(z_1)}$.  Note also that $z_1 = z_0^3$,
+\begin{align*}
+  \int_{L_R + C_R} f(z)\,dz 
+  &= 2\pi i\left( \frac {z_0^2 + 1}{4z_0^3} + \frac{z_0^6 + 1}{4z_0^9} \right)\\
+  &= 2\pi i\left( \frac {z_0^2 + 1}{4z_0^3} + \frac{z_0^{-2} + 1}{4z_0} \right)\\
+  &= \frac{\pi i}{2}\left( \frac {z_0^2 + 1 + 1 + z_0^2}{z_0^3}\right)\\
+  &= -\pi i\left( z_0^3 + z_0\right)\\
+  &= \pi \sqrt 2.
+\end{align*}
+Using the triangle inequality and the reverse triangle inequality, we have
+$$
+  \left|\int_{C_R} f(z)\,dz\right| \le \frac{R^2+1}{R^4-1}\cdot \pi R = \pi \frac{R^{-1} + R^{-4}}{1 - R^{-4}}\to 0
+$$
+as $R\to \infty$.  Hence,
+$$
+  \int_{-\infty}^\infty \frac{x^2+1}{x^4+1}\,dx 
+  = \lim_{R\to \infty} \int_{L_R} f(z)\,dz 
+  = \lim_{R\to \infty} \int_{L_R + C_R} f(z)\,dz
+  = \pi\sqrt 2,
+$$
+and by even-symmetry, $\int_0^\infty \frac{x^2+1}{x^4+1}\,dx = \pi/\sqrt 2$.
+\end{solution}
+
+{\bf 10.} Prove the following analytic version of l'Hospital's rule: Let $f$ and $g$ be analytic functions in a neighborhood of $z_0$, not identically zero.  Show that if $\lim_{z\to z_0}f(z) = \lim_{z\to z_0}g(z) = 0$, then $f(z)/g(z)$ has a limit (possibly infinite) when $z$ approaches $z_0$ and $\lim_{z\to z_0}f(z)/g(z) = \lim_{z\to z_0} f'(z)/g'(z)$.
+
+\begin{solution}
+  This problem is similar to Spring 2007 10, and we modify the argument there.
+
+  Since $f$ and $g$ are analytic, they both can be represented as power series centered at $z_0$
+  $$
+    f(z) = \sum_{k=0}^\infty a_k(z-z_0)^k\quad\text{and}\quad g(z)= \sum_{k=0}^\infty b_k(z-z_0)^k.
+  $$
+  where $a_n = \frac{ f^{(n)}(z_0) }{n!}$ and $b_n = \frac{ g^{(n)}(z_0) }{n!}$.
+  Moreover, since each are not identically zero, there exist $n$ and $m$ such that $|a_n| > 0$ and $|b_m| > 0$ and $a_i = 0$ and $b_j = 0$ for $i<n$ and $j<m$.  When $n= m$
+  \begin{align*}
+    \lim_{z\to z_0}\frac{f(z)}{g(z)} 
+    &= \lim_{z\to z_0} \frac{\ds{(z-z_0)^{-n} \cdot \sum_{k=n}^\infty a_k(z-z_0)^k}}{\ds{(z-z_0)^{-n} \cdot \sum_{k=n}^\infty b_k(z-z_0)^k}}\\
+    &= \lim_{z\to z_0} \frac{\ds{\sum_{k=n}^\infty a_k(z-z_0)^{k-n}}}{\ds{\sum_{k=n}^\infty b_k(z-z_0)^{k-n}}}\\
+    &= \frac{a_n}{b_n} = \frac{f^{(n)}(z_0)}{g^{(n)}(z_0)}.
+  \end{align*}
+  When $n \ge m$, multiply the top and bottom by $(z-z_0)^m$ and observe
+  % $a_0,\dots,a_{n-1}$ and $b_0,\dots,b_{n-1}$ are each zero since both have zeros of order $n$.
+  \begin{align*}
+    \lim_{z\to z_0}\frac{f(z)}{g(z)} 
+    &= \lim_{z\to z_0} \frac{\ds{\sum_{k=n}^\infty a_k(z-z_0)^{k-m}}}{\ds{b_m + \sum_{k=m+1}^\infty b_k(z-z_0)^{k-m}}}\\
+    &= 0.
+  \end{align*}
+  And when $n < m$, 
+  \begin{align*}
+    \lim_{z\to z_0}\frac{f(z)}{g(z)} 
+    &= \lim_{z\to z_0} \frac{a_n + \ds{\sum_{k=n+1}^\infty a_k(z-z_0)^{k-n}}}{\ds{\sum_{k=m}^\infty b_k(z-z_0)^{k-n}}}\\
+    &= \infty.
+  \end{align*}
+  Proceed inductively on $1\dots \min\{n,m\}$ to establish the claim.
+\end{solution}
+
+{\bf 11.} Suppose $f$ is an entire function and that $u(x,y) = \Re[f(z)]$ is bounded above (i.e., there exists $u_0$ such that $u(x,y) \le u_0$).  Show that $u(x,y) $ is constant.
+
+\begin{solution}
+Let $g(z) = e^{f(z)} = e^{u(x,y)}\cdot e^{i\Im[f(z)]}$.  Note $|g(z)| = e^{u(x,y)} < e^{u_0}$ hence $g$ is bounded.  Since the composition of entire functions are entire, $g$ is entire, and by the Maximum Modulus Principle, must be constant.  Thus $u(x,y) = \ln(|g(z)|)$ is constant.
+\end{solution}  
+
+{\bf 12.} Let $n$ be an integer with $n>1$ and let $\omega$ be a primitive $n$th root of unity (i.e., $\omega^n=1$ but $\omega^k\not=1$ if $1\le k<n$). Show that 
+$$
+  \sum_{k=0}^{n-1} \omega^k = 0
+$$
+
+\begin{solution}
+  Observe
+$$
+  (1-\omega)\sum_{k=0}^{n-1} \omega^k = \sum_{k=0}^{n-1} \omega^k -\sum_{k=1}^{n} \omega^k = -\omega^n + 1 = 0.
+$$
+Since $(1-\omega^1) \not=0$ by assumption, the equality is established.
+\end{solution}
+
+\bibliographystyle{alpha}
+\bibliography{analysis_prelim}
+\end{document}
+

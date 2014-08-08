@@ -1,0 +1,234 @@
+\documentclass{homework}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{cleveref}
+\usepackage{upgreek}
+\usepackage[framed]{mcode}
+\usepackage{mathrsfs}
+\usepackage{units}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\newtheorem{lemma}{Lemma}
+\DeclareMathOperator*{\Res}{Res}
+
+\course{2009 Spring Analysis Exam Solutions}
+\author{Kevin Joyce}
+
+
+\begin{document} 
+\newcommand{\figref}[1]{\figurename~\ref{#1}}
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\SS}{\mathcal S}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\TTheta}{\overline{\underline \Theta} }
+\newcommand{\del}{\partial}
+\newcommand{\approxsim}{\overset{\cdotp}{\underset{\cdotp}{\sim}}}
+\newcommand{\FF}{\mathcal F}
+\renewcommand{\Re}{\mathrm{Re}\,}
+\renewcommand{\Im}{\mathrm{Im}\,}
+\newcommand{\HH}{\mathcal H}
+\nocite{*}
+
+{\bf 4.} Let $\{f_n\}$ and $\{g_n\}$ be real-valued functions on a set $X$. Assume that $f_n\to f$ and $g_n \to g$ uniformly on $X$.  
+\begin{quote}
+  {\bf (a)} If $\lambda,\mu$ are scalars, show that $\lambda f_n + \mu g_n \to \lambda f + \mu g$ uniformly on $X$
+  \begin{solution}
+    Observe
+    $$
+      |\lambda f_n(x) + \mu g_n(x) - \lambda f(x) - \mu g(x)| \le |\lambda| |f_n(x) - f(x)|  + |\mu| |g_n(x) - g(x)|.
+    $$
+    For a given $\eps >0$, take $n$ sufficiently large so that $\sup_X |f_n - f| < \frac \eps{|\lambda|}$ and $\sup_X |g_n - g|< \frac \eps{|\mu|}$.  Hence $\sup_X|\lambda f_n + \mu g_n - \lambda f - \mu g| < \eps$, where we used the fact that the supremum is an upper bound on the right hand side and is least on the left.
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (b)} Is it true that $f_n g_n \to fg$ uniformly on $X$?
+  \begin{solution}
+    This statement is false as it stands. Let $X=\RR$ and consider $f_n(x) =
+    \frac 1n$ for all $x$ and $g_n(x) = x$ for all $x$.  It is clear that both
+    $f_n \to 0$ and $g_n \to x$ both uniformly.  The convergence of $f_n g_n xn
+    \to 0$ is \emph{not} uniform, however.  To see this, let $\eps = 1$ be
+    fixed and consider $x_n = n$.  Then 
+    $$
+      |f_n(x_n)| = 1 \ge \eps
+    $$
+    negating uniform convergence to 0.
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (c)} If the sequences are uniformly bounded (i.e., there exists $M$ such that $|f_n(x)| \le M$ and $|g_n(x)| \le M$ for all $n\in \NN$ and for all $x\in X$), show that $f_ng_n \to fg$ uniformly on $X$.
+  \begin{solution}
+     Let $M_f$ and $M_g$ be the respective uniform bounds for $f$ and $g$. Observe
+     \begin{align*}
+      |f_n(x)g_n(x) - f(x)g(x)| 
+      &= |f_n(x)g_n(x) - f_n(x)g(x) + f_n(x)g(x) - f(x)g(x)|\\
+      &\le |f_n(x)| |g_n(x) - g(x)| + |g(x)| |f_n(x) - f(x)|\\
+      &\le M_f |g_n(x) - g(x)| + (|g(x) - g_n(x)| + |g_n(x)|) |f_n(x) - f(x)|\\
+      &\le M_f |g_n(x) - g(x)| + (|g(x) - g_n(x)| + M_g) |f_n(x) - f(x)|.
+     \end{align*}
+  \end{solution}
+  Now, for a given $\eps>0$, take $n$ sufficiently large so that $\sup_X|g_n -g| <\frac\eps{2M_f}$ and $\sup_X|f_n - f|< \frac \eps{2(\eps + M_g)}$ and the convergence is established arguing as in part (a).
+\end{quote}
+
+{\bf 5.} Define the distance between points $(x_1,y_1)$ and $(x_2,y_2)$ in the plane to be
+$$
+  |y_1-y_2|\quad\text{if }x_1=x_2,\quad\quad 1+|y_1-y_2|\quad\text{if }x_1\not=x_2.
+$$
+\begin{quote}
+  {\bf (a)} Show that this defines a metric on the plane.
+  \begin{solution} 
+    Denote points in the plane as $p_i = (x_i,y_i)$.  
+    \begin{enumerate}[i)]
+      \item If $p_1 = p_2$ then $x_1 = x_2$ and $|y_1 - y_2| = 0$.  On the other hand, if $p_1 \not= p_2$ then either $x_1 \not= x_2$ or $y_1 \not= y_2$.  In the first case, $d(p_1,p_2) = 1 + |y_1 - y_2| > 0$, and in the other case, both $|y_1 - y_2| > 0$ and $1 + |y_1 - y_2| > 0$, so $d(p_1,p_2) >0$.
+      \item Symmetry follows from symmetry of, $=$, $\not=$, and the distance metric on $\RR$.
+      \item Let $p_1,p_2$ and $p_3$ be points in the plane.  If $x_1=x_3$, then 
+      $$
+	d(x_1,x_3) = |y_1 - y_3| \le |y_1 - y_2| + |y_2 - y_3| \le 1 + |y_1 - y_2| +|y_2 - y_3|.
+      $$
+      If $x_1\not=x_3$, then it is not the case that $x_1=x_2=x_3$, thus $x_1\not=x_2$ or $x_2\not=x_3$ (or both), and in each of these cases
+      $$
+	d(x_1,x_3) = 1 + |y_1 - y_3| \le 1 + |y_1 - y_2| + |y_2 - y_3| \le 2 + |y_1 - y_2| + |y_2 - y_3|.
+      $$
+    \end{enumerate}
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (b)} Show that $\{0\}\times (-1/2,1/2)$ is open and that $\{0\}\times [-1/2,1/2]$ is compact.  
+  \begin{solution}
+    Let $p_0 \in \{0\}\times (-1/2,1/2)$, then $p_0 = (0,y_0)$ where $|y_0|<1/2$.  A ball of radius
+    $r<1$ about $p_0$ has points $p=(x,y)\in B(r,p_0)$ satisfying $x=0$ since $1+|y-y_0| \ge 1$.  Hence,
+    $$
+      d(p,p_0) = |y-y_0| < r\implies |y|< r + |y_0|,
+    $$
+    and if we take $r=\min\{1,1/2-|y_0|\}$, then $|y|<1/2$ and thus
+    $y\in\{0\}\times (-1/2,1/2)$. Hence each point $p_0$ of the set is an
+    interior point, so the set is open.
+
+    It suffices to show that the set $\{0\}\times [-1/2,1/2]$ satisfies
+    sequential compactness since it is a subset of a metric space. Let 
+    $p_n \in \{0\}\times [-1/2,1/2]$ then $x_n =0$ and $y_n \in [-1/2,1/2]$. 
+    By compactness of $[-1/2,1/2]$ in $\RR$, there exists a subsequence 
+    $\{y_{n_k}\}$ and a point $y$ so that $|y-y_{n_k}|\to 0$ in $\RR$. Choose
+    $p_{n_k} = (0,y_{n_k})$ and $p = (0,y)$ and note $d(p,p_{n_k}) = |y-y_{n_k}| \to 0$,
+    hence $p_{n_k}\to p$ in this space.
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (c)} Is $Y = [-1,1] \times [-1/4,1/4]$ compact?
+  \begin{solution}
+    The set is \emph{not} compact. It suffices to provide a sequence with no converging subsequences.  Consider $p_n = (1/n,0)$.  Then for any $n_k$, $d(p_{n_k},p_{n_j}) = 1$ for $k\not=j$, hence any $p_{n_k}$ is not Cauchy and does not converge.
+  \end{solution}
+\end{quote}
+
+{\bf 6.}
+\begin{quote}
+  {\bf (a)} Show that 
+  $$
+    F_n(x) = \left(1 + \frac xn\right)^n e^{-x}
+  $$
+  is bounded above and below by constants independent of $n$ for $x\in[0,\infty)$.
+  \begin{solution}
+  Note first that that $F_n(x) > 0$ since both factors are.  
+    $$
+      \left(1 + \frac xn\right)^n e^{-x}
+      \ge e^{-x} = 1 - e^{-n} \to 1\quad\text{as }n\to\infty.
+    $$
+  Now,
+  \begin{align*}
+    F_n(x) 
+    &= \sum_{k=0}^n\binom nk \left( \frac xn \right)^k e^{-x}\\
+    &= \sum_{k=0}^n \frac{n\cdot(n-1)\cdot\dots\cdot(n-k+1)}{k!n^k}x^k e^{-x}\\
+    &\le \sum_{k=0}^n \frac{x^k}{k!} e^{-x}\\
+    &\le 1.
+  \end{align*}
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (b)} Evaluate, with justifications,
+  $$
+    \lim_{n\to\infty}\int_0^n \left(1 + \frac xn\right)^n e^{-2x}\,dx
+  $$
+  \begin{solution}
+    Since $|F_n(x)| \le 1$, we have 
+    $$
+      \int_0^n \left(1 + \frac xn\right)^n e^{-2x}\,dx 
+      \le \int_0^n e^{-x}\,dx = 1 - e^{-n} \le 1.
+    $$
+    Recall that $(1+x/n)^n \to e^x$ as $n\to\infty$ for each real $x$.  Moreover, the convergence is monotone increasing since $F_n(x)$ is monotone increasing and $F_n(x)e^{x} = \left(1 + \frac xn\right)^n$.  Let $\eps > 0$ be given, then
+    \begin{align*}
+      \int_0^n \left(1 + \frac xn\right)^n e^{-2x}\,dx 
+      &= \int_0^n \left[\left(1 + \frac xn\right)^n - e^x\right] e^{-2x} + e^{-x}\,dx \\
+      &= -\int_0^n \left|e^x - \left(1 + \frac xn\right)^n\right| e^{-2x} + e^{-x}\,dx \\
+      &> -\eps\int_0^n e^{-2x}\,dx + \int_0^ne^{-x}\,dx
+    \end{align*}
+    for sufficiently large $n$.  Since $\int_0^n e^{-2x}\,dx \to \frac 12$ and $\int_0^n e^{-x}\,dx \to 1$, we have
+    $$
+      \int_0^n \left(1 + \frac xn\right)^n e^{-2x}\,dx > \frac{\eps}2 + 1
+      \implies
+      \int_0^n \left(1 + \frac xn\right)^n e^{-2x}\,dx = 1.
+    $$
+  \end{solution}
+\end{quote}
+
+{\bf 7.} Let $(X,d)$ be a metric space.  A function $f:X\to \RR$ is called Lipschitz if there is a constant $L$ such that $|f(x) - f(y)|\le Ld(x,y)$, for al $x,y\in X$.  
+\begin{quote}
+  {\bf (a)} Show that the sum of two real-valued Lipschitz functions is Lipschitz.
+  \begin{solution} 
+    Let $f$ and $g$ be two Lipschitz functions with respective Lipschitz constants $L_f$ and $L_g$.  Observe
+    $$
+      |f(x) + g(x) - f(y) - g(y)| \le |f(x) + f(y)| + |g(x) - g(y)| \le (L_f + L_g)|x-y|.
+    $$
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (b)} Prove that the product of two bounded real-valued Lipschitz functions is again Lipschitz. 
+  \begin{solution}
+    Let $M_f$ and $M_g$ be the respective bounds for $f$ and $g$ with Lipschitz constants as above.  Observe
+    $$
+      |f(x)g(x) - f(y)g(y)| \le |f(x)g(x) - f(x)g(y)| + |f(x)g(y) - f(y)g(y)| \le (M_fL_g + M_gL_f)|x-y|.
+    $$ 
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (c)} Show that the product of two real-valued Lipschitz functions need not be Lipschitz.
+  \begin{solution}
+    Consider $f(x) = x$ on $\RR$ and it is clear that $f$ is Lipschitz. However, $f^2$ is not.  To see this, let $L>0$ be given and observe
+    $$
+      |x^2 - y^2| = |x+y||x-y| > L|x-y|
+    $$
+    for $x>L$ and $y=0$.
+  \end{solution}
+\end{quote}
+
+{\bf 8.} Consider the mapping
+$$
+  \omega = J(z) = \frac 12\left(z + \frac 1z\right).
+$$
+For each $r>0$, describe the image of the circle $|z| = r$ under this mapping (e.g., as a certain line, circle, ellipse, etc.).
+\begin{solution}
+  We can parametrize the circle $|z| = r$ as $re^{i\theta} = r\cos\theta + ir\sin\theta$ for $-\pi \le \theta \le \pi$.  Let $x = \Re \omega$ and $y = \Im \omega$, then
+  \begin{align*}
+    x 
+    &= \frac 12\left( re^{i\theta} + r^{-1}e^{-i\theta} + re^{-i\theta} + r^{-1}e^{i\theta}\right)\\
+    &= \frac 12\left( e^{i\theta} + e^{-i\theta} \right)(r + r^{-1}) \\
+    &= \cos\theta (r+r^{-1})
+    \intertext{ and }
+    y
+    &= \frac 1{2i}\left( re^{i\theta} + r^{-1}e^{-i\theta} - re^{-i\theta} - r^{-1}e^{i\theta}\right)\\
+    &= \frac 1{2i}\left( e^{i\theta} - e^{-i\theta} \right)(r - r^{-1}) \\
+    &= \sin\theta (r+r^{-1}).
+  \end{align*}
+  If we let $a = r+r^{-1}$ and $b = r-r^{-1}$, then
+  $$
+    \frac{x^2}{a} + \frac{y^2}{b} = 1
+  $$
+  and such points describe an ellipse.
+\end{solution}
+
+{\bf 9.}
+
+\bibliography{analysis_prelim}
+\end{document}
+
+

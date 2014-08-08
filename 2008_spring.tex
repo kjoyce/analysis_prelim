@@ -1,0 +1,393 @@
+\documentclass{homework}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{cleveref}
+\usepackage{upgreek}
+\usepackage[framed]{mcode}
+\usepackage{mathrsfs}
+\usepackage{units}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\newtheorem{lemma}{Lemma}
+\DeclareMathOperator*{\Res}{Res}
+
+\course{2008 Spring Analysis Exam Solutions}
+\author{Kevin Joyce}
+
+
+\begin{document} 
+\newcommand{\figref}[1]{\figurename~\ref{#1}}
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\SS}{\mathcal S}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\TTheta}{\overline{\underline \Theta} }
+\newcommand{\del}{\partial}
+\newcommand{\approxsim}{\overset{\cdotp}{\underset{\cdotp}{\sim}}}
+\newcommand{\FF}{\mathcal F}
+\renewcommand{\Re}{\mathrm{Re}\,}
+\renewcommand{\Im}{\mathrm{Im}\,}
+\newcommand{\HH}{\mathcal H}
+\nocite{*}
+
+{\bf 4.} Show that a uniformly continuous real-valued function on a bounded subset of $\RR^2$ must have bounded range.
+
+\begin{solution}
+  Let $f:D\to \RR$ and suppose not. Then there exists a sequence $\{f(x_n)\}$
+  such that $|f(x_n)| >n$.  Since $D\subseteq \RR^2$, its closure $\bar D$ is
+  compact \cite[thm.~9.2.7]{strichartz00}.  So, there exists a subsequence
+  $\{x_{n_k}\}$ that converges that converges in $D$.
+  Hence, $\{x_{n_k}\}$ is Cauchy, so for any given $\delta>0$, there
+  exists an $N$ such that $\|x_{n_k} - x_{n_j}\| < \delta$ whenever $k>j\ge N$,
+  and, in particular, $\|x_{n_N} - x_{n_{N+1}}\|$.  But then
+  $$
+    |f(x_{n_{N+1}}) - f(x_{n_N})| 
+    \ge |f(x_{N+1})| - |f(x_{n_N})| 
+    >n_{N+1} - n_N
+    >1.
+  $$
+  Thus, $f$ cannot be uniformly continuous. 
+\end{solution}
+
+{\bf 5.} Prove that there exists a unique continuous real-valued function $f$ on $[0,1]$ such that 
+$$
+  f(x) = \int_0^x \cos(tf(t))\,dt,
+$$
+for all $x$ in $[0,1]$.
+
+\begin{solution}
+Let $T:C([0,1]) \to C([0,1])$ by $T[f](x) = \int_0^x \cos(tf(t))\,dt$. Observe
+\begin{align*}
+  \sup_{x\in[0,1]}|T[f](x) - T[g](x)|
+  &= \sup_{x\in[0,1]} \left| \int_0^x\cos(tf(t))\,dt - \int_0^x\cos(tg(t))\,dt\right|\\ 
+  &= \sup_{x\in[0,1]} \left| \int_0^x\big\{\cos(tf(t)) - \cos(tg(t))\big\}\,dt\right|\\
+  &= \sup_{x\in[0,1]} \left| \int_0^x\int_{tg(t)}^{tf(t)}\sin(y)\,dydt\right|\\
+  &\le \sup_{x\in[0,1]} \int_0^x\int_{tg(t)}^{tf(t)}|\sin(y)|\,dydt\\
+  &\le \sup_{x\in[0,1]} \int_0^x|tf(t) - tg(t)|\cdot 1dt\\
+  &\le \int_0^1t|f(t) - g(t)|dt\\
+  &= \int_0^{1/2}t|f(t) - g(t)|dt + \int_{1/2}^1t|f(t) - g(t)|dt\\
+  &\le \frac14 \sup_{t\in[0,1]}|f(t) - g(t)| + \frac 12\sup_{t\in[0,1]}|f(t) - g(t)|\\
+  &= \frac34 \sup_{t\in[0,1]}|f(t) - g(t)|.
+\end{align*}
+So, $T$ as a map from $C([0,1])$ to itself under the $\sup$ metric (which is a complete space) is a contraction.  By the contraction mapping principle, there is a unique $f$ so that $T[f] = f$, yielding the desired equality.
+\end{solution}
+
+{\bf 6.} A real-valued function $f$ on $\RR$ is called Lipschitz if there exists a positive number $L$ such that $|f(x) - f(y)|\le L|x-y|$, for all $x,y\in\RR$.  The least number $L$ for which the above inequality holds is called the Lipschitz constant for $f$.
+
+\begin{quote}
+  {\bf (a)} Show that $f(x) = \arctan(x)$ is a Lipschitz function, and determine its Lipschitz constant.
+\end{quote}
+
+\begin{solution}
+  Recall that 
+  $$
+    \frac d{dx} \arctan x = \frac 1{1+x^2},
+  $$
+  so
+  $$
+    |\arctan x - \arctan y| = \left| \int_y^x \frac 1{1+t^2}\,dt \right| \le |x-y|\cdot 1
+  $$
+  since
+  $$
+    \left|\frac 1{1+t^2}\right| < 1.
+  $$
+  Hence $L \le 1$, and in fact $L=1$.  To see this, observe that for $y=-x$,
+  $$
+    \lim_{x\to 0} \frac{|\arctan(x) - \arctan(-x)|}{|x-(-x)|} = \lim_{x\to 0} \frac{\arctan x}{x} \stackrel{\text{l'Hop}}= \lim_{x\to 0} \frac{(1+x^2)^{-1}}{1} = 1
+  $$
+  So, for any $L<1$ then we can take $x$ sufficiently small so that 
+  \begin{align*}
+    &\left|\frac{|\arctan x - \arctan(-x)|}{|x-(-x)|} - 1\right| < (1-L) \\
+    &\implies |\arctan x - \arctan(-x)| > (-(1-L) + 1)|x-(-x)| = L|x-(-x)|
+  \end{align*}
+  so any $L<1$ cannot be a Lipschitz constant, and thus $L\ge 1$.
+\end{solution}
+
+\begin{quote}
+  {\bf (b)} If $f_n$ is a sequence of real-valued Lipschitz functions on $\RR$ uniformly converging to a real-valued function $f$ on $\RR$, then prove that $f$ is uniformly continuous.
+\end{quote}
+
+\begin{solution}
+  Take $\{L_n\}$ the sequence of Lipschitz constants for $\{f_n\}$, then $|f_n(x) - f_n(y)| \le L_n|x-y|$. Let $N>0$ so that 
+  $$
+    \sup_{x\in\RR}|f_n(x) - f(x)| < \eps/3
+    \quad\text{ for }n\ge N. 
+  $$
+  Observe
+  \begin{align*}
+    |f(x) - f(y)| 
+    &\le |f(x) - f_N(x)| + |f_N(x) - f_N(y)| + |f_N(y) - f(y)|\\
+    &< \frac \eps3 + L_N|x-y| + \frac \eps3\\
+    &<\eps\quad\text{ for }|x-y|< \eps/(3L_N).
+  \end{align*}
+\end{solution}
+
+{\bf 7.} Let $f$ be a continuously differentiable real-valued function on $[0,b]$, where $b>0$, with $f(0) = 0$.  
+\begin{quote}
+  {\bf (a)} Show that 
+  $$
+    f(x)^2 \le 2x^{1/2}\int_0^xt^{1/2}f'(t)^2\,dt,
+  $$
+  for all $x$ in $[0,b]$.
+\end{quote}
+
+\begin{solution}
+  Let $g(t) = t^{-1/4}$ and $h(t) = t^{1/4}f'(t)$, then with the observation that $\frac{d}{dt} g^2(t) = 2x^{1/2}$, Cauchy-Schwartz-Bunyakovski says
+  \begin{align*}
+    2x^{1/4}\int_0^x t^{1/2}f'(t)\,dt 
+    &= \int_0^x g(t)^2\,dt \int_0^x h(t)^2\, dt \\
+    &\ge \left(\int_0^x g(t) h(t) \right)^2\\
+    &= \left(\int_0^x f'(t)\,dt\right)^2\\
+    &= f(x)^2.
+  \end{align*}
+\end{solution}
+
+\begin{quote}
+  {\bf (b)} Prove that
+  $$
+    \int_0^b\frac{f(x)^2}{x^2}dx \le 4 \int_0^b f'(x)^2dx.
+  $$
+\end{quote}
+
+\begin{solution}
+  Dividing both sides of the last result by $x^2$ and integrating both sides over $(0,b]$, we have 
+  \begin{align*}
+    \int_0^b\frac{f(x)^2}{x^2}dx 
+    &\le \int_0^b\left\{ 2x^{-3/2} \cdot \int_0^x t^{1/2}f'(t)^2\,dt\right\}dx\\
+    &= \left.\left\{-4x^{-1/2} \int_0^x t^{1/2}f'(t)\,dt\right\}\right|_{x=0}^{x=b} + \int_0^b 4x^{-1/2} x^{1/2}f'(x)^2dx\\
+    &= 4 \int_0^b f'(x)dx -4b^{-1/2} \int_0^b t^{1/2}f'(t)^2\,dt + 4\lim_{x\to0}\frac{\int_0^x t^{1/2}f'(t)^2\,dt}{\sqrt x}\\
+    &= 4 \int_0^b f'(x)dx -4b^{-1/2} \int_0^b t^{1/2}f'(t)^2\,dt + \cancel{4\lim_{x\to0}\frac{x^{1/2}f'(x)^2}{\frac 12 x^{-1/2}}}\\
+    &\le 4 \int_0^b f'(x)dx.
+  \end{align*}
+\end{solution}
+
+{\bf 8.} Let $(X,d)$ be a metric space, and assume that $d$ is bounded on $X$, that is, there exists a number $M$ such that $d(x,y) \le M$, for all $x,y \in X$.  For a nonempty subset $A$ of $X$ let $f_A$ denote the function defined by
+$$
+  f_A(x) = \inf\{d(x,a):a\in A\},\quad x\in X.
+$$
+Let $\mathcal C$ denote the nonempty subsets of $X$ which are closed.
+\begin{quote}
+  {\bf (a)} If $x\in X$ and $A\in\mathcal C$, then show that $f_A(x) = 0$ if and only if $x\in A$.
+\end{quote}
+\begin{solution}
+  If $x\in A$, then $d(a,a) = 0$ and this is the minimum value of $d(x,a)$ hence $f_A(x) = 0$.  On the other hand, if $x\not\in A$ then there exists an open ball, say of radius $\eps$, such that $B_\eps(x)\cap A = \emptyset$ since $A$ is closed. So for each $a \in A$, $d(x,a) \ge \eps > 0$, and thus $\inf\{d(x,a):a\in A\} \ge \eps > 0$. Hence $f_A(x) \not=0$.
+\end{solution}
+
+\begin{quote}
+  {\bf (b)} Prove that $\rho$ defined by 
+  $$
+    \rho(A,B) = \sup\{|f_A(x) - f_B(x)|\} :x\in X\}
+  $$
+  defines a metric on $\mathcal C$.
+\end{quote}
+\begin{solution}
+\begin{enumerate}[i)]
+  \item Clearly, $\rho(A,A) = \sup\{|f_A(x) - f_A(x)|\} = \sup\{0\} = 0$.  Now, if $\rho(A,B) = 0$, then 
+  $$
+    |f_A(x) - f_B(x)| = 0
+  $$ 
+  for all $x\in X$. In particular whenever $x\in A$, we have
+  $$
+    0 = |0 - f_B(x)| = |f_B(x)| \implies x\in B.
+  $$
+  A symmetric argument proves that for $x\in B$, then $x\in A$.  We have shown $A=B$.
+  \item The symmetry of $|\cdot|$ gives the symmetry $\rho(A,B) = \rho(B,A)$.
+  \item Observe
+  $$
+    \rho(A,C) = \sup_{x\in X}\{|f_A(x) - f_B(x) + f_B(x) - f_C(x)|\} \le \sup_{x\in X}\{|f_A(x) - f_B(x)|\} + \sup_{x\in X}\{|f_B(x) - f_C(x)|\}
+  $$
+  by the triangle inequality in $\RR$ and since the terms in the $\sup$ are positive.
+\end{enumerate}
+\end{solution}
+
+\begin{quote}
+  {\bf (c)} Show that the map $x\mapsto \{x\}$ is an isometry of $X$ into $C$.
+\end{quote}
+\begin{solution}
+  Observe
+  \begin{align*}
+    \rho(\{x\},\{y\}) 
+    &= \sup_{z\in X} \{|f_{\{x\}}(z) - f_{\{y\}}(z)|\}\\
+    &= \sup_{z\in X} \{|d(x,z) - d(y,z)|\}.\\
+  \end{align*}
+  The reverse-triangle inequality gives $|d(x,z) - d(y,z)| \le d(x,y)$ and $|d(x,x) - d(y,x)| = d(x,y)$ so the supremum is acheived at $z=x$
+  .  Hence $\rho(\{x\},\{y\}) = d(x,y)$.
+\end{solution}
+
+{\bf 9.} Let $X$ be the set of all bounded functions $f:\NN\to \RR$.  
+\begin{quote}
+  {\bf (a)} Show that $\rho$ defined by 
+  $$
+    \rho(f,g) = \sup\{|f(n) - g(n)|:n\in\NN\}
+  $$
+  is a metric on $X$.
+\end{quote}
+\begin{solution}
+\begin{enumerate}[i)]
+  \item Clearly $\rho(f,f) = \sup\{|f(n) - f(n)|\} = \sup\{0\} = 0$.  If $\rho(f,g) = 0$ then $|f(n) - g(n)| = 0$ for all $n$, and thus $f(n) = g(n)$.
+  \item The symmetry of $|\cdot|$ gives the symmetry $\rho(f,g) = \rho(g,f)$.
+  \item Observe
+  $$
+    \rho(f,h) = \sup_{n\in\NN}\{|f(n) - g(n) + g(n) - h(n)|\} \le \sup_{n\in\NN}\{|f(n) - g(n)|\} + \sup_{n\in\NN}\{|g(n) - h(n)|\}
+  $$
+  by the triangle inequality in $\RR$ and since the terms in the $\sup$ are positive.
+\end{enumerate}
+\end{solution}
+\begin{quote}
+  {\bf (b)} Prove that the set $K$ consisting of all $f:\NN\to \RR$ such that $0\le f(n)\le1/n$, fora ll $n\in\NN$ is a compact subset of $X$.[Hint: Prove that $K$ is closed and totally bounded.]
+\end{quote}
+\begin{solution}
+  Suppose $g\not\in K$ then $g(N) \not\in [0,1/N]$ for some $N\in\NN$. So $|g(N) - \frac 1{2N}|\ge \frac 1{2N}$.  Now consider a ball of radius $\frac 1{2N}$ about $g$. If $f$ is in such a ball, then $\rho(f,g) < \frac 1{4N}$, and thus $|g(N) - f(N)| < \frac 1{4N}$.  Observe
+  \begin{align*}
+    \left|f(N) - \frac 1{2N}\right| 
+    &= \left|g(N) - \frac{1}{2N} - \left(g(N)-f(N)\right)\right| \\
+    &\ge |g(N) - \frac{1}{2N}| - \left|g(N) - f(N)\right|\\
+    &> \frac 1{2N} - \frac 1{4N}  = \frac 1{2N}
+  \end{align*}
+  So $f \not\in K$, and we've shown the complement of $K$ is open, and thus $K$ is closed. 
+  
+  Let $\eps > 0$ be given. For $K$ to be totally bounded, we must provide a finite cover of $\eps$ balls. Let $N>0$ such that $\frac 1N < \eps$.
+\end{solution}
+
+{\bf 10.} Let $a_0,a_1,a_2,\dots$ be complex numbers such that $\sum_{n=2}^\infty n|a_n| < |a_1|$.  
+\begin{quote}
+  {\bf (a)} Show that the series $\sum_{n=0}^\infty a_n z^n$ convertes absolutely for all $|z|<1$.
+\end{quote}
+\begin{solution}
+  We first show that $a_n$ is bounded.  This follows since the sequence of partial sums $S_N = \sum_{n=2}^{N} n|a_n| < |a_1|$ converges as a monotone increasing, bounded sequence. Hence,
+  $$
+    S_N - S_{N-1} = N|a_N| < 1
+  $$
+  for sufficiently large $N$, and thus
+  $$
+    |a_n| \le M = \max\{1,|a_0|,|a_1|\}.
+  $$
+  Hence,
+  $$
+    \sum_{n=0}^N |a_n z^n| \le  M \sum_{n=0}^N|z|^n = M \frac{1-|z|^{N+}}{1-|z|} \to \frac{M}{1-|z|}
+  $$
+  for all $|z|<1$.
+\end{solution}
+
+\begin{quote}
+  {\bf (b)} Prove that the analytic function $f$ defined by $f(x) = \sum_{n=0}^\infty a_n z^n$ for $|z|<1$, is injective on the unit disk $\{z\in \CC:|z|<1\}.$
+\end{quote}
+\begin{solution}
+  Suppose $f(z) = f(w)$. Then 
+  \begin{align*}
+  0 
+  &= |f(z) - f(w)| \\
+  &= \left|\sum_{n=1}^\infty a_n(z^n - w^n)\right|\\
+  &= |z-w|\left|\sum_{n=1}^\infty a_n \sum_{k=0}^{n-1}z^{n-1-k}w^k\right|\\
+  &= |z-w|\left|a_1 + \sum_{n=2}^\infty  a_n \sum_{k=0}^{n-1}z^{n-1-k}w^k\right|\\
+  &\ge |z-w|\left( |a_1| - \sum_{n=2}^\infty |a_n| n\right)
+  \end{align*}
+  by the reverse triangle inequality and since the inner sum contains $n$ terms less than 1.  By assumption, the second factor is greater than zero, hence $|z-w| = 0$, and $z=w$ implies $f$ is injective.
+\end{solution}
+
+{\bf 11.} Let $T$ be defined by $\ds{T(z) = \frac{1-z}{1+z}}$, for all $z\not=1$.  Show that
+$$
+  \Re T(z) = \frac{1-|z|^2}{|1+z|^2}.
+$$
+
+\begin{solution} 
+  Observe
+  \begin{align*}
+    \Re T(z) 
+    &= \frac 12\left(T(z) + \bar{T(z)}\right) = \frac 12\left(\frac{1-z}{1+z} + \frac{1-\bar z}{1+\bar z}\right) = \frac12\left(\frac{(1-z)(1+\bar z) + (1-\bar z)(1+z)}{|1+z|^2}\right)\\
+    &=\frac 12\left(\frac{1-2\Re z - |z|^2 + 1+2\Re z - |z|^2}{|1+z|^2} \right) = \frac{1-|z|^2}{|1+z|^2}.
+  \end{align*}
+\end{solution}
+
+\begin{quote}
+  {\bf (b)} Show that $T$ induces an analytic bijection between theunit disk $\mathbb D = \{z \in \CC:|z|<1\}$ and the right half plane $H = \{z\in \CC:\Re z>0\}$.
+\end{quote}
+
+\begin{solution}
+  By part {\bf(a)}, $T(\mathbb D) \subseteq H$. Observe for $w \in H$,
+  $$
+    \frac{1-z}{1+z} = w \iff 1-z = w+wz \iff 1-w = z(1+w) \iff z = \frac{1-w}{1+w}.
+  $$
+  Moreover,
+  $$
+    \left|\frac{1-w}{1+w}\right|^2 = \frac{(1-w)(1-\bar w)}{(1+w)(1+\bar w)} = \frac{1-2\Re w + |w|^2}{1+2\Re w + |w|^2} < 1
+  $$
+  since $\Re w > 0$ implies $2\Re w > -2\Re w$. Hence if we define $\tilde T:H\to \mathbb D$ by $\tilde T(w) = T(w)$ then $\tilde T T z = z$ and $T\tilde T w = w$, and thus $T$ is a bijection. Moreover, both are analytic since $-1 \notin H\cup\mathbb D$.
+\end{solution}
+
+\begin{quote}
+  Let $f$ be an analytic function on the unit disk $\mathbb D$, such that $f(z)$ has positive real part for each $z\in\mathbb D$ and $f(0)=1$.  Prove that 
+  $$
+    \frac{1-|z|}{1+|z|}\le |f(z)| \le \frac{1+|z|}{1-|z|}
+  $$
+\end{quote}
+
+\begin{solution}
+  The Schwarz Lemma states that if $g:\mathbb D \to \mathbb D$ with $g(0) = 0$, then $|g(z)|\le |z|$ \cite{boes10}. Note that $T\circ f :\mathbb D\to \mathbb D$ is analytic with $T\circ f(0) = T(1) = 0$. Hence
+  $$
+    |T\circ f(z)|\le |z| \implies \left|\frac{1 - f(z)}{1+f(z)}\right| \stackrel\dagger\le |z|.
+  $$
+  Using the reverse triangle inequality in the numerator and standard triangle inequality in the numerator
+  $$
+    \frac{1 - |f(z)|}{1 + |f(z)|} \le |z| \iff |f(z)| \ge \frac{1 - |z|}{1+|z|}
+  $$
+  and, similarly
+  $$
+    \frac{|f(z)| - 1}{1+|f(z)|} \le |z| \iff |f(z)| \le \frac{ 1 + |z|}{1 - |z|}.
+  $$
+\end{solution}
+
+{\bf 12.} Consider the function $\ds{f(z) = \frac{ee^{iz}}{\cosh z}}$ for all $x\in \RR$.
+
+\begin{quote}
+  {\bf (a)} Show that $f(x+ipi) = -e^{-\pi}\frac{e^{ix}}{\cosh x}$.
+\end{quote}
+\begin{solution}
+  Observe
+  \begin{align*}  
+    f(x+i\pi) 
+    &= \frac{e^{ix} e^{-\pi}}{\frac 12(e^{x+i\pi}+e^{-x-i\pi})} = \frac{e^{ix} e^{-\pi}}{e^{i\pi}\cosh x} = -e^{-\pi}\frac{e^{ix}}{\cosh x}.
+  \end{align*}
+\end{solution}
+\begin{quote}
+  {\bf (b)} By integrating $f$ around rectangles with vertices $-R,R,R+\pi i,$ and $R-\pi i$ for arbitrary large positive numbers $R$, evaluate the integral 
+  $$
+    \int_{-\infty}^\infty \frac{\cos x}{\cosh x}\,dx
+  $$
+\end{quote}
+\begin{solution}
+  Note $\cosh(i\pi/2) = 0$ so $z_0 = i\pi/2$ is an isolated singularity of $f$.  Moreover $\left.\frac d{dz}\cosh(z)\right|_{z_0} = \sinh(z_0) = i$, so $f$ has a simple pole there. If we denote the contour as $C$, then 
+  $$
+    \int_C f(z)\,dz = 2\pi i \Res_{z_0}f = 2\pi i\left( \frac{e^{iz_0}}{\sinh(z_0)} \right) = 2\pi e^{-\pi/2}
+  $$
+  Parametrize the right vertical segment, say $L_1$, by $z(t) = it + R$ for $0\le t\le \pi$.  Then
+  $$
+    \left|\int_{L_1} f(z)\,dz\right|  
+    = \left|\int_0^\pi \frac{e^{-t}e^{iR}}{\frac 12(e^Re^{it} + e^{-R}e^{-it})}\,idt\right|
+    \le \pi \frac{1}{\frac 12(e^R - e^{-R})} \to 0\quad\text{ as }R\to\infty
+  $$
+  Similarly, if we parametrize the the left vertical segment backwards by $z(t) = it -R$ for $0\le t\le \pi$, then
+  $$
+    \left|\int_{L_2} f(z)\,dz\right|  
+    = \left|\int_\pi^0 \frac{e^{-t}e^{-iR}}{\frac 12(e^{-R}e^{it} + e^{R}e^{-it})}\,idt\right|
+    \le \pi \frac{1}{\frac 12(e^R - e^{-R})} \to 0\quad\text{ as }R\to\infty
+  $$
+  Hence
+  \begin{align*}
+    \lim_{R\to\infty} \int_C f(z)\,dz 
+    &= \lim_{R\to\infty} \int_{-R}^Rf(x)\,dx + \int_{R}^{-R} f(x+i\pi)\,dx\\
+    &= \lim_{R\to\infty} \int_{-R}^R \frac{e^{ix}}{\cosh x} + e^{-\pi} \frac{e^{ix}}{\cosh x}\,dx\\
+    &= 2\pi e^{-\pi/2}
+  \end{align*}
+  Equating real parts and dividing, we have
+  $$
+    \int_{-\infty}^\infty \frac{\cos x}{\cosh x}\,dx = \frac{2\pi e^{-\pi/2}}{1 + e^{-\pi}}.
+  $$
+
+\end{solution}
+\bibliographystyle{alpha}
+\bibliography{analysis_prelim}
+\end{document}
+
+

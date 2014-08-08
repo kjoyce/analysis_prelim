@@ -1,0 +1,323 @@
+\documentclass{homework}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{cleveref}
+\usepackage{upgreek}
+\usepackage[framed]{mcode}
+\usepackage{mathrsfs}
+\usepackage{units}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\newtheorem{lemma}{Lemma}
+\DeclareMathOperator*{\Res}{Res}
+
+\course{2008 Autumn Analysis Exam Solutions}
+\author{Kevin Joyce}
+
+
+\begin{document} 
+\newcommand{\figref}[1]{\figurename~\ref{#1}}
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\SS}{\mathcal S}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\TTheta}{\overline{\underline \Theta} }
+\newcommand{\del}{\partial}
+\newcommand{\approxsim}{\overset{\cdotp}{\underset{\cdotp}{\sim}}}
+\newcommand{\FF}{\mathcal F}
+\renewcommand{\Re}{\mathrm{Re}\,}
+\renewcommand{\Im}{\mathrm{Im}\,}
+\newcommand{\HH}{\mathcal H}
+\nocite{*}
+
+{\bf 4.} For $A$ and $B$ in $\mathcal P(\ZZ_+)$ (the power set of $\ZZ_+$, consisting of all sets of positive integers) define $d(A,B)$ as follows: If $A=B$, $d(A,B) = 0$.  If $A\not=B$ and if $m$ is the smallest positive integer that is in $A$ or $B$ but not both, $d(A,B) = \frac 1m$.
+\begin{quote}
+  {\bf (a)} Show that $d$ is a metric on $\mathcal P(\ZZ_+)$.
+\end{quote}
+\begin{solution}
+Denote the set of all elements in $A$ or $B$ but not both, i.e. $(A\cup B)\setminus(A\cap B) = (A\setminus B)\cup (B\setminus A)$, as $A\triangle B$.
+\begin{enumerate}[i)]
+  \item By definition, $d(A,A) = 0$.  On the other hand, if $d(A,B) \not=0$, then there exists an element $m \in A\triangle B = (A\setminus B)\cup (B\setminus A)$, and thus $A\not=B$.
+  \item By symmetry of $\cup$ and $\cap$, $d$ is also symmetric.
+  \item Suppose $d(A,C) > d(A,B) + d(B,C)$, then $d(A,C) > d(A,B)$ and $d(B,C)$. If $x = \min A\triangle C$, then $x < \min A \triangle B$ and $x < \min B \triangle C$, hence $x \in (A\triangle B)^c= (A\cup B)^c \cup (A\cap B)$ and $x \in (B\triangle C) = (B\cup C)^c \cup (B\cap C)$.  If $x \in B$, then $x\in A\cup B$ and $B\cup C$, hence $x$ must be in $A\cap B\cap C \subseteq A\cap C$, a contradiction.  Yet, if $x\not in B$ $x \in B$, then $x \in (A\cup B)^c = A^c \cap B^c$ and $x \in (B \cup C)^c = B^c \cap C^c$ implies $x \not\in (A\cup C) \subseteq A\triangle C$ also a contradiction.
+\end{enumerate}
+\end{solution}
+
+\begin{quote}
+  {\bf (b)} If $\{A_n:n\in \ZZ_+\}$ is a sequence of subsets of $\mathcal P(\ZZ_+)$ 
+  satisfying $A_n\subseteq A_{n+1}$ for all $n$ and if
+  $A=\bigcup_{n=1}^\infty A_n$, show that $A_n\to A$ in the metric space
+  $(\mathcal P(\ZZ_+),d)$.
+\end{quote}
+\begin{solution}
+  Note that $A\triangle A_n = A \setminus A_n$ since $A_n\subseteq A$.  
+  If there exists an $m$ such that $A_m = A_n$ for all $n \ge m$, then
+  $d(A,A_n) = d(A,A) = 0$ since $\bigcup_{n=1}^\infty A_n = A$ and proof is done.  
+
+  Now, assume otherwise, i.e.~for each $m>0$, there exists $n>m$ such that
+  $A_n\setminus A_m \not= \emptyset$, and since the sequence is nested,
+  $A\setminus A_m \not= \emptyset$ for all $m$.   Morever, if $m<n$ then $A\setminus A_n
+  \subseteq A\setminus A_m$ imples $\min A\setminus A_m \le \min A\setminus
+  A_n$ which implies $d(A,A_n) \le d(A,A_m)$.  Hence, the sequence defined by
+  $a_n = d(A,A_n)$ is decreasing.
+     
+    So $a_n = (\min A\setminus A_n)^{-1}$ for all $n$.  Since $A$ is the union of all $A_n$, there exists $(a_{n_1})^{-1} \in A_{n_1}$ and $(a_{n_1})^{-1} \not\in A_1$.  Proceed inductively to define a subsequence so that $(a_{n_{k-1}})^{-1} \not\in A_{n_k}$. Hence, $(a_{n_k})^{-1} = \min A_{n_k} < \min A_{n_{k-1}} = (a_{n_{k-1}})^{-1}$.  Hence $a_{n_k}$ is strictly decreasing sequence of positive integers and thus converges to $0$, and since $a_n$ is monotone decreasing $a_n$ converges to zero.  Hence $d(A_n,A)$ can be made arbitarily small and the proof is complete.
+    \end{solution}
+
+\begin{quote}
+  Show that the metric space $(\mathcal P(\ZZ_+),d)$ is compact.
+\end{quote}
+\begin{solution}
+Since this is a metric space, it suffices to prove that it is complete and
+totally bounded.  We first show completeness.  Let $A_n$ be a given Cauchy
+sequence.  Then, for sufficiently large $m>n$, we have 
+$$d(A_n,A_m) < \frac \eps 2.$$
+
+Let 
+$$
+B_n = \bigcap_{k=n}^\infty A_k.
+$$
+and note that $B_n$ is nested as in part {\bf (b)}.  So $B_n \to B = \bigcup B_n$ in this space.  
+Note $A_n \supseteq B_n$ so $A_n \triangle B_n = A_n \setminus B_n$.  Moreover, if 
+$$
+  J = \min A_n\setminus B_n = \min A_n \setminus \bigcap_{k=n}^\infty A_k
+$$
+then $J \in A_n$ and there exists an $m\ge n$ such that $J \not\in A_m$.  Hence
+$ J \in (A_n \cup A_m) \setminus (A_n \cap A_m) = A_n \triangle A_m$.  So 
+$$
+  J \ge \min A_n\triangle A_m > \frac 2\eps \iff d(A_n,B_n) = \frac 1J < \frac{\eps}2. 
+$$
+Finally, using the converges of $B_n$ and the above inequality, we have
+\begin{align*}
+  d(A_n,B) \le d(A_n,B_n) + d(B,B_n) < \eps
+\end{align*}
+So $A_n$ converges to $B$ in this space.
+
+We now show that the space is totally bounded.  Let $\eps > 0$ be a given
+radius.  There exists an $N\in \NN$ such that $\frac 1N \le \eps$.  Consider
+the collection of balls 
+$$
+  \Big\{ B(\eps,D): D\in\mathcal P(\{1,\dots,N\})\Big\}.
+$$
+Now, for any $A \in \mathcal P(\NN)$, the set $D_0=\{x\in A: x \le N\} \in P(\{1,\dots,N\})$.  Observe
+$A \triangle D_0 = A\setminus D_0 = \{x\in A: x > N\}$ implies $d(A,D_0) < \frac 1N \le \eps$.  Hence,
+$A$ is covered in the collection above, and since it is indexed by the finite set $P(\{1,\dots,N\})$, the
+cover is as desired and the space is totally bounded.
+
+%$$
+%  A \in B(\eps,\emptyset) \iff d(A,\emptyset)^{-1} = \min A > \frac 1\eps \ge N.
+%$$
+%That is, for any set $A$, such that any element in $A$ is greater than $N$, then $A \in B(\eps,\emptyset)$.  For the remaining sets, every element is less than $N$.  So the finite collection of balls $\Big\{B(\eps,C):C\in\mathcal P(\{1,\dots,N\})\Big\}$, covers those sets. Hence, the space is totally bounded.
+%THIS SOLUTION IS BOGUS
+%
+%  We show that the space is sequentially compact since it is a metric space.
+%  Let $A_n$ be a sequence in $(\mathcal P(\ZZ_+),d)$.  If $A_n$ has a
+%  subsequene that is nested as in (b), then the proof is complete.  If not, then
+%  every subsequence is not nested.  We can inductively construct a subsequence
+%  such that each proceeding element is strictly contained within the previous one, say
+%  without loss of generality $A_1\supsetneq A_2 \supsetneq A_3 \supsetneq \dots$.
+%  (Ughh... I don't think this is true, but if it were...)
+%
+%  Let $A = \bigcap A_n$.  Let $a_n = d(A,A_n)$ and note that $A\triangle A_n = A_n
+%  \setminus A \supsetneq A_{n-1} \setminus A = A\triangle A_{n-1}$ so $\min
+%  A\triangle A_{n-1} \le \min A \triangle A_n$ and thus $\{a_n\}$ is a
+%  decreasing sequence.  We proceed similarly to (b) by finding a subsequence
+%  that is strictly decreasing.  Since $(a_1)^{-1} \not\in \bigcap A_n$, there exists an $n_1$ such that $(a_1)^{-1} \not\in
+%  A_{n_1}$.  Proceeding inductively, there exists an $n_{k+1} > n_k$ such that $(a_{n_k})^{-1} \not\in A_{n_{k+1}}$.  Hence
+%  $(a_{n_{k}})^{-1} = \min A_k \setminus A < \min A_{n_{k+1}} \setminus A = (a_{n_{k+1}})^{-1}$.  Thus $\{a_{n_k}\}$ is strictly
+%  decreasing, and thus the monotone decreasing sequence $\{a_n\}$ converges to zero implies $A_n \to A$.
+%
+%  In both cases, $A_n$ has a converging subsequence, so the space is sequentially compact.  
+\end{solution}
+
+\newcommand{\diam}{\mathrm{diam}}
+{\bf 6.} The \emph{diameter} of a nonempty set $E$ in a metric space $(X,d)$ is defined to be
+$$
+  \diam(E) = \sup\{d(x,y):x,y \in E\}.
+$$ 
+Show that if $\{E_k:k\in\ZZ_+\}$ is a decreasing sequence of non-empty closed subsets of $(X,d)$
+whose diameters tend to $0$ and if $(X,d)$ is complete, the $\bigcap_{k=1}^\infty E_k$ is a singleton (i.e., consists of a single point).
+
+\begin{solution}
+  Let $x_k \in E_k$, and we show that $\{x_k\}$ is a Cauchy sequence.  Let
+  $\eps >0$ be given, then there exists an $N>0$ such that $\diam E_N < \eps$.
+  Note that $E_n \subseteq E_m \subseteq E_N$ for $n>m\ge N$ since $E_k$ are
+  decreasing.  Hence $x_n,x_m \in E_N$ and $d(x_n,x_m) < \eps$.  Since
+  $\{x_n\}$ was shown to be Cauchy, there exists a unique limit, say $x$, that
+  they converge to.  
+  
+  We now show $x \in \bigcap_{k=1}^\infty E_k$.  Fix an arbitrary $k$, then $E_k \supseteq E_n$
+  for each $n \ge k$ since the sets are decreasing.  The subsequence $\{x_n\}_{n=k}^\infty$ converges
+    to $x$, and since $E_k$ is closed, $x \in E_k$.  Since $k$ was arbitrarly choosen,
+    $x\in\bigcap_{k=1}^\infty E_k$.
+
+  It remains to show that $\bigcup_{k=1}^\infty E_k$ is a singleton.  Let $\eps > 0$ be given, then there
+  exists a $n$ such that $\diam E_n < \eps$.  Since $\bigcap_{k=1}^\infty E_k \subseteq E_n$, we have
+  $\diam \bigcap_{k=1}^\infty E_k \le \diam E_n < \eps$.  Hence $\diam \bigcap_{k=1}^\infty E_k = 0$. This
+  implies $\bigcap_{k=1}^\infty E_k$ has only one element, for if otherwise then it has two distinct elements
+  for which $d(x,y) > 0$.
+\end{solution}
+
+{\bf 7.} Let $(X,d)$ be a complete metric space and suppose that $T:X\to X$ is a continuous mapping such that
+$$
+  d(T(x),T(y)) \le \alpha[d(T(x),x) + d(T(y),y) + d(x,y)]
+$$
+for all $x,y \in X$ and for $\alpha$ independent of $x$ and $y$ satisfying $0< \alpha <1/3$.  Prove that $f$ has a unique fixed point.
+
+\begin{solution}
+  Let $x_0$ be some fixed element in $X$ and $x_n = T(x_{n-1})$.  We will show that this sequence is Cauchy.  Observe, first
+  \begin{align*}
+    d(T(x_n),T(x_n)) &\le \alpha[ d(T(x_n),x_n) + d(T(x_{n-1}),x_{n-1}) + d(x_n,x_{n-1}) ]\\
+    d(x_{n+1},x_n) &\le \alpha[ d(x_{n+1},x_n) + d(x_n,x_{n-1}) + d(x_n,x_{n-1}) ]\\
+    (1-\alpha)d(x_{n+1},x_n) &\le 2\alpha\, d(x_n,x_{n-1})\\
+    d(x_{n+1},x_n) &\le \frac{2\alpha}{1-\alpha} d(x_n,x_{n-1})\\
+    d(x_{n+1},x_n) &\le \beta^n d(x_1,x_0)
+  \end{align*}
+  where $\beta = \frac{2\alpha}{1-\alpha} < \frac{2/3}{1 - 1/3} = 1$.
+  Now, for $n>m$
+  \begin{align*}
+    d(x_n,x_m) 
+    &\le d(x_n,x_{n-1}) + d(x_{n-1},x_{n-2}) + \dots +d(x_{m+1},x_m)\\
+    &\le \beta^{n-1} d(x_1,x_0) + \beta^{n-2}d(x_1,x_0) + \dots + \beta^{m}d(x_1,x_0)\\
+    &= d(x_1,x_0) \frac{\beta^m - \beta^n}{1-\beta}
+  \end{align*}
+  which can be made arbitrarily small by making $n>m\ge \log_\beta \frac{d(x_1,x_0)}{\eps(1-\beta)}$ for an arbitrary $\eps > 0$.
+
+  Since $X$ is complete, there exists a limit to this sequence, say $x$.  Observe, 
+  \begin{align*}
+    d(T(x),x) 
+    &\le d(T(x),x_n) + d(x_n,x) \\
+    &\le \alpha[d(T(x),x) + d(x_n,x_{n-1}) + d(x,x_{n-1})] + d(x_n,x) \\
+    d(T(x),x) 
+    &\le (1-\alpha)^{-1}[\alpha d(x_n,x_{n-1}) + \alpha d(x,x_{n-1}) + d(x_n,x)]\\
+    &\le (1-\alpha)^{-1}[(1 + \alpha )d(x_n,x) + 2\alpha d(x_{n-1},x)].
+  \end{align*}
+  Hence, we need only choose $N$ such that for each $n>N+1$ implies $d(x_n,x) < (1-\alpha)/(1+\alpha)\eps < \eps$ since $\frac {2\alpha}{1-\alpha} < 1$. So, $d(T(x),x) = 0$ and thus $T(x) = x$.
+\end{solution}
+
+{\bf 8.} A function $f:\CC \to \RR$ is called \emph{lower semicontinuous} if, for every sequence $(z_n)$ in $\CC$ converging to $z$ we have
+$$
+  \liminf_{n\to\infty} f(z_n) \ge f(z).
+$$
+Prove that a lower semicontinuous function $f:\CC\to \RR$ which is bounded below and satisfies $\ds{\lim_{|z|\to \infty} = \infty}$, has a minimum value.
+
+\begin{solution}
+  Since $f(z)$ is bounded below, $\inf\{f(z):z\in\CC\} = M > -\infty$.  Also, for each $n\in \NN$, since $M-1/n$ is not a lower bound, there exists $z_n$ such that $M \le f(z_n) < M-1/n.$  Since $\{f(z_n)\}$ converges, it is bounded.  Thus $\{|z_n|\}$ is also bounded, otherwise $\{f(z_n)\}$ would be unbounded.  Hence, there exists a subsequence $z_{n_k}$ that converges to some $z_0 \in \CC$.  Since $f(z_n) \to M$, it follows that $f(z_{n_k}) \to M$ also.  Observe now
+  $$
+    M = \lim_{n\to\infty} f(z_n) = \liminf_{k\to\infty} f(z_{n_k}) \ge f(z_0).
+  $$
+  Hence, $f(z_0) = M$ since $M\le f(z_0)$ as it is a lower bound.
+\end{solution}
+
+{\bf 9.} Suppose $f$ is analytic in the annulus $\{z:1\le|z|\le 2\}$.  Suppose that $|f(z)| \le 3$ if $|z|=1$ and that $|f(z)| \le 12$ if $|z|=2$.  Show that $|f(z)|\le 3|z|^2$ for $1\le |z|\le 2$.
+
+\begin{solution}
+  Consider the function $g(z) = \frac{f(z)}{z^2}$ which is analytic on the
+  annulus $1\le |z| \le 2$.  By the maximum modulus principle, $|g(z)|$ is
+  bounded on the boundary of the annulus, $|z| = 1$ or $|z| = 2$.  When $|z|=1$
+  then $|g(z)| \le \frac 31 = 3$ and when $|z|=2$, $|g(z)| \le \frac {12}{2^2} =
+  3.$  In either case, $|g(z)| \le 3$, and thus for all $z$ in the annulus. Hence
+  $$
+    \left|\frac{f(z)}{z^2}\right| \le 3 \implies |f(z)| \le 3|z^2| = 3|z|^2.
+  $$
+\end{solution}
+
+{\bf 10.} Compute 
+$$
+  \int\limits_{-\infty}^\infty \frac{\cos x}{(1+x^2)^2}\,dx.
+$$
+
+\begin{solution}
+  Let 
+  $$
+    f(z) = \frac{e^{iz}}{(1+z^2)^2}
+  $$
+  Let $C_R$ be a contour whose image is the upper half circle of radius $R$ centered at $z=0$ oriented positively, and $L_R$ be along the real axis from $-R$ to $R$.  Note that $(1+z^2)^2$ is a fourth degree polynomial with two roots $\pm
+  i$, both of order two.  Hence $f$ has exactly one isolated singularity in the interior of the closed contour $C_R + L_R$, which is a pole of order two at $z=i$.  Thus
+  \begin{center}
+  \begin{tikzpicture}
+    \draw(-4.25,0) -- (4.25,0);
+    \draw(0,-.25) -- (0,4.25);
+    \draw[-latex] (4,0) node[below]{$R$} arc (0:30:4) node[right]{$C_R$};
+    \draw (30:4) arc (30:180:4);		  
+    \draw[-latex] (-4,0) node[below]{$-R$} -- (-2,0) node[below]{$L_R$};
+
+    
+    \node[above right] at (0,2) {$z_0$};  
+    \fill (0,2) circle (2pt);
+  \end{tikzpicture}
+  \end{center}
+
+  $$
+    \frac{1}{2\pi i}\int\limits_{C_R + L_R} \frac{f(z)}{(1+z^2)^2} = \Res_{z=i} f(z) = \left.\frac d{dz} \frac{e^{iz}}{(1+i)^2} \right|_{z=i} = \frac{(2i)^2 ie^{-1} - e^{-1}2(2i)}{(2i)^4} = \frac{1}{2ie}. 
+  $$
+  Now, for $z = x+iy$,
+  $$
+    \left|\int_{C_R} \frac{e^{iz}}{(1+z^2)^2}\,dz\right| \le \frac{e^{-y}}{R^4 - 2R^2 -1}\,\cdot\pi R \to 0\quad\text{ as }R\to\infty.
+  $$
+  Hence 
+  $$
+    \frac{\pi}{e} = \lim_{R\to \infty}\int\limits_{C_R + L_R} f(z)\,dz = \int_{-\infty}^\infty \frac{e^{ix}}{(1+x^2)^2}\,dx
+  $$
+  and equating real parts gives the desired result.
+\end{solution}
+
+{\bf 11.} Let $\ds{\omega = -\frac 12  + \frac 12i\sqrt 3}$.  
+\begin{quote}
+  {\bf (a)} If $g$ is an entire function such that $g(z) = g(\omega z)$ for all $z\in \in \CC$, show that the power series expansion for $g$ contains only powers of $z$ with exponents divisible by 3.
+  \begin{solution}
+    Since $g$ is entire, for any $|z|>0$ we can represent both $g(z)$ and $g(z\omega)$ as power series centered at 0, and thus
+    $$
+      0 = g(z) - g(\omega z) = \sum_{k=0}^\infty a_k z^k - \sum_{k=0}^\infty a_k (z\omega)^k = \sum_{k=1}^\infty a_k z^k (1 - \omega^k).
+    $$
+    By the uniqueness of power series representation, each $a_kz^k (1 - \omega^k) = 0$. Note that $\omega = e^{2\pi i/3}$ is a primative third root of unity.  So for each coefficient where 3 does not divide $k$, $a_k = 0$.
+  \end{solution}
+\end{quote}
+
+\begin{quote}
+  {\bf (b)} If $f$ is an entire function, show that there exist entire functions $g,h$, and $k$ such that
+  \begin{itemize}
+    \item $f(z) = g(z) + h(z) + k(z)$ for all $z\in \in \CC$,
+    \item $g(z) = g(\omega z)$ for all $z\in \CC$,
+    \item $h(\omega z) = \omega h(z)$ for all $z\in \CC$, and
+    \item $k(\bar \omega z) = \omega k(z)$ for all $z\in \CC$.
+  \end{itemize}
+  \begin{solution}
+    Let 
+    $$
+      g(z) = \sum_{n=0}^\infty a_{3n}z^{3n},\quad h(z) = \sum_{n=0}^\infty a_{3n+1}z^{3n+1},\quad k(z) = \sum_{n=0}^\infty a_{3n+2}z^{3n+2}
+    $$
+    Since $g,h,$ and $k$ are composed of the each of the terms of $f$ counting by three, it is clear that their sum is $f$.  Moreover, since $f$ was assumed to be entire, each of the series above converges for all $z$ since they have fewer terms.  Calculating similarly to {\bf (a)}, $g(z) = g(\omega z)$.  Moreover,
+    $$
+      h(\omega z) = \sum_{n=0}^\infty a_{3n+1}(e^{2\pi i/3} z)^{3n+1} = \omega h(z)
+    $$
+    and
+    $$
+      g(\omega z) = \sum_{n=0}^\infty a_{3n+1}(e^{2\pi i/3} z)^{3n+2} = e^{4\pi i/3} h(z) = \bar \omega h(z)
+    $$
+    since $e^{4\pi i/3} \cdot e^{2\pi i/3} = 1$.
+  \end{solution}
+\end{quote}
+
+{\bf 12.} Use complex numbers to find (and proov) a closed-form expression for
+$$
+  \sum_{k=0}^n \cos(k\theta).
+$$
+\begin{solution}
+  Well,
+  \begin{align*}
+  \sum_{k=0}^n \cos(k\theta) 
+  &= \sum_{k=0}^n \frac{e^{ik\theta} + e^{-ik\theta}}{2}\\
+  &= \frac 12\left(\sum_{k=0}^n e^{ik\theta} + \sum_{k=0}^ne^{-ik\theta}\right)\\
+  &= \frac 12\left(\frac{1-e^{i\theta(n+1)}}{1-e^{i\theta}} + \frac{1-e^{-i\theta(n+1)}}{1-e^{-i\theta}}\right)\\
+  &= \frac 12\left(\frac{1-e^{i\theta(n+1)}-e^{-i\theta}+e^{i\theta n} + 1-e^{-i\theta(n+1)}-e^{i\theta} + e^{i\theta n}}{|1-e^{i\theta}|^2}\right)\\
+%  &= \frac 12\left(\frac{2-2\cos(n+1)\theta-2\cos\theta + 2\cos n \theta}{(1+\cos\theta)^2 + \sin^2\theta}\right)\\
+  &= \frac{1-\cos(n+1)\theta-\cos\theta + \cos n \theta}{2+2\cos\theta}\\
+  \end{align*}
+\end{solution}
+
+\bibliographystyle{alpha}
+\bibliography{analysis_prelim}
+\end{document}
+

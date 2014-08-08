@@ -1,0 +1,401 @@
+\documentclass{homework}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{cleveref}
+\usepackage{upgreek}
+\usepackage[framed]{mcode}
+\usepackage{mathrsfs}
+\usepackage{units}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\newtheorem{lemma}{Lemma}
+
+\course{2007 Spring Analysis Exam Solutions}
+\author{Kevin Joyce}
+
+
+\begin{document} 
+\newcommand{\figref}[1]{\figurename~\ref{#1}}
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\SS}{\mathcal S}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\TTheta}{\overline{\underline \Theta} }
+\newcommand{\del}{\partial}
+\newcommand{\approxsim}{\overset{\cdotp}{\underset{\cdotp}{\sim}}}
+\newcommand{\FF}{\mathcal F}
+\renewcommand{\Re}{\mathrm{Re}\,}
+\renewcommand{\Im}{\mathrm{Im}\,}
+\newcommand{\HH}{\mathcal H}
+\nocite{*}
+
+{\bf 5.} (a) Give a precise statement of the Contractive Mapping Principle.
+
+\begin{solution}
+  Let $T:M\to M$ be a map from a metric space $(M,d)$ to itself such that 
+  $$
+    d(x,y) \le k d(T(x),T(y))
+  $$
+  for some $k<1$.  Then there exists a unique $x_0$ such that
+  $$
+    T(x_0) = x_0.
+  $$
+\end{solution}
+
+{\bf 5.} (b) Consider the mapping $f:[1,\infty) \to [1,\infty)$ given by 
+$$
+  f(x) = \frac x2 + \frac a{2x}
+$$
+for fixed $a$ with $1<a<3$.  Show that $f$ is a contractive mapping.  What is its fixed point?
+
+\begin{solution}
+We take $M = ([1,\infty),| \ldots - \dots|)$ to by the metric space with the standard metric from $\RR$.  Observe
+\begin{align*}
+  |f(y) - f(x)| 
+  &= \left| \int_x^y f'(t) \,dt \right|\\
+  &\stackrel{\dagger}\le\int_x^y\left|  f'(t) \right|\,dt \\
+  &\le |y-x| \cdot \max |f'(x)|
+\end{align*}
+where 
+$$
+  f'(x) = \frac 12 - \frac a2x^{-2}.
+$$
+Note that $f''(x) = ax^{-3} > 0$ for $x>1$, so $f$ is increasing and thus $|f'(x)| \le \max\{\lim_{x\to\infty} f'(x), |f'(1)|\} = \max\{\frac 12, |\frac 12(1-a)|\}< 1$. Letting $k$ be this maximum, we have shown $f$ to be a contraction.  
+
+A contraction satisfies
+$$
+  x = \frac 12 + \frac a2 x^{-1}
+$$ 
+when
+$$
+  0 = x^2 - \frac 12 x - \frac a2
+$$
+when 
+$$
+  x = \frac {1 \pm \sqrt{1 + 8a} }4.
+$$
+So 
+$$
+  x = \frac {1 + \sqrt{1 + 8a} }4.
+$$
+
+\end{solution}
+
+{\bf 6.} (a) Let $f$ be a continuous function on $[a,b]$.  Show that if, for all $k\in \NN$, $\int_a^bf(x)x^k\, dx = 0$, then $f\equiv0$.
+\begin{solution}
+  Let $\eps > 0$ be given.  We invoke Weierstrauss to obtain a polynomial $p(x)$ so that 
+  $$
+    f(x) = p(x) + R_\eps(x)
+  $$
+  where $\sup |R_\eps| < \eps$. Since $\int_a^b x^n f(x) = 0$ for all $n$, 
+  \begin{align*}
+    & 0 = \int_a^b p(x) f(x)\,dx = \int_a^b f^2(x) - R_\eps(x)f(x)\,dx\\
+    \implies& \int_a^b f^2(x) = \int_a^b R_\eps(x) f(x)\, dx < (b-a)\eps\cdot \sup|f|.
+  \end{align*}
+
+  Hence $\int_a^b f^2 = 0$. We show that this implies that $f \equiv 0$ by contrapositve.
+  That is, suppose $|f(x_0)| > 0$ for some $x_0 \in [a,b]$.  Without loss
+  of generality, we can take $a < x_0 < b$ by continuity.  Now, continuity
+  gives $\delta > 0$ with $x_0-a>\delta$ and $b-x_0<\delta$ so that $|f(x) - f(x_0)| < \frac{|f(x_0)|}{2}$, and, in
+  particular, $|f(x)| > \frac{|f(x_0)|}2$ whenever $|x-x_0|<\delta$. Observe
+  \begin{align*}
+    \int_a^b f^2(x)\,dx 
+    &= \int_{x_0 - \delta}^{x_0+\delta} f^2(x)\,dx + \int_{|x-x_0|\ge\delta} f^2(x)\,dx\\
+    &\ge \int_{x_0 - \delta}^{x_0+\delta} |f(x)|^2\,dx \\
+    &\ge 2\delta\cdot \frac{|f(x_0)|^2}{4}\\
+    &>0.
+  \end{align*}
+\end{solution}
+
+{\bf 6.} (b) Let $f$ be a continuous function on $[a,b]$.  Show that if, for all $k \in \NN$, $\int_{-a}^af(x)x^{2k}\,dx = 0$, then $f\equiv 0$.
+
+\begin{solution}
+Observe that
+$$
+  f(-x)(-x)^{2k+1} = - f(x)x^{2k+1},
+$$
+so by linearity of integrals and symmetry of the interval, for any given polynomial 
+$$
+  \int_{-a}^a p(x)f(x)\,dx = \int_{-a}^aq(x)f(x)\,dx
+$$
+where $q$ is a polynomial containing only the even monomial terms of $p$.  The argument proceeds from here exactly as in (a).
+\end{solution}
+
+{\bf 7.} Let $(X,d)$ be a compact metric space.  Show that $(X,d)$ is complete.
+\begin{solution}
+  Let $\{x_n\}$ be Cauchy sequence in $(X,d)$.  Since $(X,d)$ is compact, there
+  exists a limit point, say $x$, of $\{x_n\}$. Let $\eps >0$ be given. There
+  exists $M>0$ so that $d(x_m,x_n) < \eps/2$ for $M\le m <n$. Since $x$ is a
+  limit point, there exists $N\ge M$ so that $d(x_N,x) < \eps/2$ for $n\ge N$.
+  Combining these, we have that for $n \ge N \ge M$,
+  $$
+    d(x_n,x) \le d(x_n,x_N) + d(x_N,x) < \eps/2 + \eps/2 = \eps.
+  $$
+\end{solution}
+
+{\bf 8.} Fix $N \in \NN$ and a compact interval $[a,b]$, and let $\mathcal F$ be the family of all polynomials $\ds{\sum_{j=0}^N a_jx^j}$on $[a,b]$ for which $|a_j| \le 1$ for all $j$. Show that $\mathcal F$ is uniformly bounded and uniformly equicontinuous.
+
+\begin{solution}
+For the even function $f(x) = |x|^n$ on $x\in[a,b]$, it attains its maximum at either $x = 0$, $x=a$ or $x=b$ since $f'(x) = 0$ or does not exist only when $x=0$.  Thus,
+\begin{align*}
+  \left| \sum_{n=1}^N a_n x^n \right| 
+  &\le \sum_{n=1}^N |a_n|\, |x|^n\\
+  &\le N \max\{|a|,|b|,|a|^2,|b|^2,\dots,|a|^N,|b|^N\}.\\
+\end{align*}
+So $\mathcal F$ is uniformly bounded.
+
+Now, let $\eps >0$ be given.  Since the monomial $f(x) = x^n$ is continuous (as
+a successive product of continuous functions), $f(x)$ is uniformly continuous
+on any given $[a,b]$ since the closed and bounded interval $[a,b]$ is compact. Thus, the distance $|x^n - t^n|< N\eps$ for all $0<n\le N$, for sufficiently small $|x-t|$, by choosing a minimum.  
+In particular, for a given representative of $\mathcal F$, $f(x) = \sum_{n=1}^N a_n x$, we have
+\begin{align*}
+  \left|\sum_{n=1}^N a_n x^n - \sum_{n=1}^N a_n t^n\right|
+  &\le \sum_{n=1}^N |a_n| \left|x^n - t^n\right| \\
+  &\le N \left|x^n - t^n\right| 
+  < \eps.
+  \end{align*}
+\end{solution}
+
+{\bf 9. (a)} Show that $\sin \theta \ge \frac 2\pi\theta$, for all $0\le \theta \le \frac \pi 2$.
+
+\begin{solution}
+See Jordan's Lemma  \cite[p.~262]{brown04}.
+
+Let $f(\theta) = \sin\theta$, and note $f''(\theta) = - \sin \theta < 0$ for $0< \theta < \frac \pi 2$, hence $f$ is concave down there.
+Observe that the line defined by $\ell(\theta) = \frac 2\pi\theta $ between $0$ and $\frac \pi 2$ is a line segment between $f(0)$ and $f(\pi/2)$.  We will show that for such a concave down function, the line segment given by $\ell$ lies entirely below the graph of $f$.
+
+Let $0=a<x_0<b=\frac \pi2$.  By the mean value theorem then the fundamental theorem of calculus, there exists $x_1,x_2$ such that $a<x_1<x_0<x_2<b$,
+\begin{align*}
+\frac{f(b) - f(x_0)}{b-x_0}- \frac{f(x_0) - f(a)}{x_0 - a} 
+&= f'(x_2) - f(x_1)\\
+&= \int_{x_1}^{x_2} f''(t)dt \\
+&< 0.
+\end{align*}
+Thus, 
+{\small
+\begin{align*} 
+      & (x_0 - a)(f(b) - f(x_0)) < (b-x_0)(f(x_0) - f(a))\\
+  \iff&  (x_0 - a)(f(b) - f(x_0)) + (f(x_0) - f(a))(x_0 - a)< (b-x_0)(f(x_0) - f(a))+ (f(x_0) - f(a))(x_0 - a)\\
+  \iff&  (x_0 - a)\Big(f(b) - f(a)\Big)< \Big(f(x_0) - f(a)\Big))(b - a)\\
+  \iff&  \ell(x_0) = (x_0 - a)\frac{f(b) - f(a)}{b - a} + f(a)< f(x_0).\\
+  \iff&  \frac 2\pi < \sin x_0.\\
+\end{align*}
+}
+We remark that what we have shown is that for any function $f:[a,b] \to \RR$ such that $f''(x) <0$ there, $f(x) \ge \ell(x)$ where $\ell$ is the line between $(a,f(a))$ and $(b,f(b))$.
+\end{solution}
+
+{\bf 9. (b)} By using part (a), or by any other method, show that if $\lambda < 1$, then
+$$
+  \lim_{R\to\infty} R^\lambda \int_0^{\pi/2} e^{-R\sin\theta}\,d\theta = 0.
+$$
+
+\begin{solution}
+  By part (a)
+  $$
+   -R\sin \theta \le \theta -\frac{2R}{\pi} 
+  $$
+  so
+  \begin{align*}
+  0 < R^{\lambda}\int_0^{\pi/2} e^{-R\sin\theta}\,d\theta 
+  &\le R^{\lambda}\int_0^{\pi/2} e^{-2R\theta/\pi}\\
+  %&= R^{\lambda} \frac{\pi}{2R}(1-e^{-R})\\
+  &= R^{\lambda-1} \frac{\pi}{2}(1-e^{-R})\\
+  \end{align*}
+  for all $R>0$.  Letting $R\to \infty$, both sides of the inequality go to $0$, hence by squeezing, the integral goes to $0$.
+\end{solution}
+
+{\bf 10.} Show that if $f$ and $g$ are analytic functions that both have a zero of order $n\ge 0$ at $z_0$, then 
+$$
+  \lim_{z\to z_0}\frac{f(z)}{g(z)} = \frac{f^{(n)}(z)}{g^{(n)}(z)}.
+$$
+
+\begin{solution}
+  Since $f$ and $g$ are analytic, they both can be represented as power series centered at $z_0$
+  $$
+    f(z) = \sum_{k=0}^\infty a_k(z-z_0)^k\quad\text{and}\quad g(z)= \sum_{k=0}^\infty b_k(z-z_0)^k.
+  $$
+  Moreover, $a_0,\dots,a_{n-1}$ and $b_0,\dots,b_{n-1}$ are each zero since both have zeros of order $n$.
+  Thus
+  \begin{align*}
+    \lim_{z\to z_0}\frac{f(z)}{g(z)} 
+    &= \lim_{z\to z_0} \frac{\ds{(z-z_0)^{-n} \cdot \sum_{k=n}^\infty a_k(z-z_0)^k}}{\ds{(z-z_0)^{-n} \cdot \sum_{k=n}^\infty b_k(z-z_0)^k}}\\
+    &= \lim_{z\to z_0} \frac{\ds{\sum_{k=n}^\infty a_k(z-z_0)^{k-n}}}{\ds{\sum_{k=n}^\infty b_k(z-z_0)^{k-n}}}\\
+    &= \frac{a_n}{b_n}.
+  \end{align*}
+  Now, 
+  $$
+    \left(\frac{d}{dz}\right)^nf(z) = n!a_n \quad\text{and}\quad\left(\frac{d}{dz}\right)^ng(z) = n!b_n
+  $$
+  So 
+  $$
+    \frac{f^{(n)}(z)}{g^{(n)}(z)} = \frac{a_n}{b_n}
+  $$
+  and the equality is established.
+\end{solution}
+
+{\bf 11.} Evaluate 
+$$
+  \int_0^\infty \left(\frac{\sin x}{x}\right)^3\,dx.
+$$
+Justify each step in your calculation.
+
+\begin{solution}
+See \cite[ch.~7.75 p.~269]{brown04}.  First note
+  $$
+    \sin^3(x) = \left(\frac{e^{ix} - e^{-ix}}{2i}\right)^3
+    = \frac{1}{8i^3}(e^{3ix} - 3e^{ix} + 3e^{-ix} - e^{-3ix}).
+  $$
+  Now, let
+  $$
+    f(z) = \frac{e^{3iz} - 3e^{iz} + 2}{z^3},
+  $$
+  and observe that $\ds{f(x) + f(-x) = 8i^3\left(\frac{\sin x}{x}\right)^3}$. Moreover, $f$ has a simple pole at $z=0$ since
+  \begin{align*}
+    f(z) 
+    &= z^{-3} \sum_{n=0}^\infty \left\{\frac{(3iz)^n}{n!} - \frac{3(iz)^n}{n!}\right\} + 2z^{-3}\\
+    &=  \cancel{\left\{ \frac{1}{0!z^3} - \frac{3}{0!z^3} + 2\right\}} 
+      + \cancel{\left\{ \frac{3i}{1!z^2} - \frac{3iz}{1!z^2} \right\}} 
+      + \left\{ \frac{-9}{2!z} - \frac{-3}{2!z} \right\}
+      + \sum_{n=0}^\infty\left\{(3i)^n - 3i^n\right\}\frac{z^n}{n!}\\
+    &\stackrel{\dagger}= \frac{-3}{z} + g(z).
+  \end{align*}
+  where $g(z)$ is the analytic function given by the power series of positive power terms in the Laurent series for $f(z)$.
+
+  Let $\Gamma$ be the indented contour given by the path sum of the paths indicated below in the complex plane.
+
+  \begin{center}
+  \begin{tikzpicture}
+    \draw(-4.25,0) -- (4.25,0);
+    \draw(0,-.25) -- (0,4.25);
+    \draw[-latex] (4,0) arc (0:30:4) node[right]{$C_R$};
+    \draw (30:4) arc (30:180:4);		  
+    \draw[-latex] (-4,0) -- (-2,0) node[below]{$L_2$};
+    \draw[-latex] (180:.5) arc (180:45:.5) node[right]{$C_\rho$};
+    \draw (45:.5) arc (45:0:.5);		  
+    \draw[-latex] (0,0) -- (2,0) node[below]{$L_2$};
+  \end{tikzpicture}
+  \end{center}
+
+Since $f$ is analytic in the interior of $\Gamma$, the Cauchy-Gorsat theorem gives
+$$
+  0 \stackrel*= \int_{\Gamma} f(z)\,dz = \int_{L1} f(z)\,dz + \int_{L2} f(z)\,dz + \int_{C_R} f(z)\,dz + \int_{C_\rho} f(z)\,dz.
+$$
+If we parametrize $L_1$ by $z(t) = t$ for $\rho\le t \le R$ and $-L_2$ by $z(t) = -t$ for $\rho\le t\le R$, then
+\begin{align*}
+  \int_{L1} f(z)\,dz + \int_{L2} f(z)\,dz 
+  &= \int_\rho^R f(t)dt + \int_R^\rho f(-t)(-dt) \\
+  &= \int_\rho^R f(t) + f(-t)dt\\
+  &= 8i^3\int_\rho^R \left(\frac{\sin t}{t}\right)^3dt
+\end{align*}
+
+Now, note 
+$$
+  \left| \int_{C_R} f(z) \,dz\right| \le \pi R \frac{ e^{-3 \Im z} + e^{-\Im z} + 2 }{R^3}
+$$
+where $z \in C_R$, and if $R\to \infty$ the modulus goes to 0.
+
+For the last path integral we parametrize $-C_\rho$ with $z(t) = \rho e^{it}$ for $0\le t\le \pi$, so 
+\begin{align*}
+  \int_{C_\rho} f(z)\, dz 
+  &\stackrel{\dagger}= \int_{C_\rho} \frac{-3}z \, dz + \int_{C_\rho} g(z) \, dz\\
+  &= 3 \int_{0}^\pi \frac{ i\rho e^{it} }{\rho e^{it}}\,dt + \int_{C_\rho}g(z)\,dz \\
+  &= 3\pi i + \int_{C_\rho}g(z)\,dz.
+\end{align*}
+
+Finally note,
+$$
+  \left|\int_{C_\rho}g(z)\,dz\right| \le \pi \rho \max_{|z|\le 1}|g(z)|
+$$
+when $\rho \le 1$, and when $\rho \to 0$ the modulus goes to 0.  We now have
+\begin{align*}
+  0 &\stackrel*= \lim_{\substack{\rho \to 0\\R\to \infty}}\left\{\int_{L_1+L_2} f(z)\,dz + \int_{C_R+C_\rho}f(z)\,dz\right\}\\
+  0 &= 8i^3\int_0^\infty \left(\frac{\sin t}{t}\right)^3dt + 3\pi i\\
+\end{align*}
+if and only if
+$$
+  \int_0^\infty \left(\frac{\sin t}{t}\right)^3dt = \frac{3\pi}{8}.
+$$
+\end{solution}
+
+{\bf 12.} Suppose $f$ is an entire function and that $u(x,y) = \Re[f(z)]$ is bounded above (i.e., there exists $u_0$ such that $u(x,y) \le u_0$).  Show that $u(x,y) $ is constant.
+
+\begin{solution}
+Let $g(z) = e^{f(z)} = e^{u(x,y)}\cdot e^{i\Im[f(z)]}$.  Note $|g(z)| = e^{u(x,y)} < e^{u_0}$ hence $g$ is bounded.  Since the composition of entire functions are entire, $g$ is entire, and by the Maximum Modulus Principle, must be constant.  Thus $u(x,y) = \ln(|g(z)|)$ is constant.
+\end{solution}  
+
+{\bf 13. (a)} Let $P(z)$ and $Q(z)$ be polynomials of degrees $n$ and $m$ correspondingly, and let $m \ge n+2$.  Write the expression
+$$
+  \frac{1}{z^2} \cdot \frac{P(1/z)}{Q(1/z)}\quad(z\not=0)
+$$
+as the quotient of two polynomials, and point out why $z=0$ is a removable singular point of that quotient.
+
+\begin{solution}
+  Let
+  $$
+    P(z) = a_0 + \dots + a_nz^n\quad\text{and}\quad Q(z) = b_0 + \dots + b_mz^m\quad(a_n\not=0\text{ and }b_m\not=0).
+  $$
+  Observe,
+  \begin{align*}
+    \frac{1}{z^2} \cdot \frac{P(1/z)}{Q(1/z)}
+    &= \frac{1}{z^2}\frac{a_0 + a_1z^{-1} \dots + a_nz^{-n}}{ b_0 + b_1z^{-1}\dots + b_mz^{-m} }\\
+    &= \frac{a_0z^{m-2} + \dots + a_nz^{n-m-2}}{ b_0z^m + \dots + b_m }.
+  \end{align*}
+  Taking the limit as $z\to 0$ gives $0/b_m =0$ when $m>n+2$ and $a_n/b_m$ when $m\ge n+2$.  In either case, the limit exists. This new expression is the quotient of two analytic functions with the denominator non-zero, hence it is analytic. Thus, the expression can be extended analytically to $z=0$ so the singularity is removable. 
+\end{solution}
+
+{\bf 13. (b)} Use the final result in part (a) to show that if all the zeros of $Q(z)$ are interior to a given simple closed curve $C$, then
+$$
+  \int_{C} \frac{P(z)}{Q(z)}\, dz = 0
+$$
+
+\begin{solution}
+See \cite[ch.~6.64, p.~228]{brown04}. Let $f(z) = \frac{P(z)}{Q(z)}$ which has
+finitely many isolated singularities.  Hence, there is an annular region with
+repsective radii $R_1<R_2$ containing the contour $C$ for which $f$ is
+analytic. By Laurent's theorem, we may write $f$ as the series
+$$
+  f(z) = \sum_{k=-\infty}^\infty b_k z^k\quad
+  \text{with}\quad
+  b_k = \frac{1}{2\pi i}\int_C \frac{f(z)}{z^{k+1}}\,dz
+$$
+for $R_1<|z|<R_2$.
+If we evaluate the quantity in part (a),
+$$
+  \frac{1}{z^2} f(z^{-1}) = \sum_{k=-\infty}^\infty b_kz^{-k-2}
+$$
+for $R_1< |z^{-1}|< R_2$ if and only if $R_2^{-1}<|z|<R_1^{-1}$.  Since this function has a removable singularity at $z=0$, this series may only have terms with non-negative powers of $z$.  Hence $b_{-1}=b_0=b_1=\dots=0$.  In particular
+  $$
+    0 = b_{-1} = \frac{1}{2\pi i}\int_{C} f(z)\,dz.
+  $$
+  We have established the desired equality.
+\end{solution}
+
+{{\bf 14.} Evaluate the integral
+$$
+  \int_{|z|=2}\frac{ \sin \pi z\, dz }{ (2z + 1)^3. }
+$$}
+
+\begin{solution}
+  Let $D$ be the annular region $1<|z+1/2|<3$ and note that the contour $|z|=2$ is entirely within $D$.  Let $f(z) = \frac{\sin \pi z}{(z+1/2)^3}$, then $f$ is analytic when $z\not=-1/2$ as the quotient of two entire functions and, in particular, is analytic in $D$. By Laurent's theorem, $f$ can be expressed in $D$ as
+    $$
+      f(z) = \sum_{k=-\infty}^\infty b_k (z+1/2)^k
+    $$
+    and the integral of $f$ around $|z| = 2$ is given by $2\pi i b_{-1}$.  Using the uniqueness of representation and the Taylor series of $\sin \pi z$ centered at $-1/2$, we have
+    \begin{align*}
+      f(z) 
+      &= (z+1/2)^{-3} \sum_{n=0}^\infty (-1)^n \left.\frac{d^n}{dz^n} \sin\pi z\right|_{z=-1/2} (z+1/2)^n\\
+      &= \frac{-1}{(z+1/2)^3} + \frac{0}{(z+1/2)^2} + \frac{\pi^2}{z+1/2} + \sum_{n=3}^\infty(-1)^n\left.\frac{d^n}{dz^n} \sin\pi z\right|_{z=-1/2} (z+1/2)^{n-3}
+    \end{align*}
+    so
+    \begin{align*}
+      \int_{|z|=2}\frac{ \sin \pi z\, dz }{ (2z + 1)^3 } 
+      = 8\int_{|z|=2}\frac{ \sin \pi z\, dz }{ (z + 1/2)^3 } 
+      = 16\pi^3 i 
+    \end{align*}
+\end{solution}
+
+\bibliographystyle{alpha}
+\bibliography{analysis_prelim}
+\end{document}
+
