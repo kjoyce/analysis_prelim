@@ -226,8 +226,122 @@ For each $r>0$, describe the image of the circle $|z| = r$ under this mapping (e
   and such points describe an ellipse.
 \end{solution}
 
-{\bf 9.}
+{\bf 9.} Let $m>2$ be a positive integer, and let $\omega$ be a primitive $m$-th root of unity.  For complex numbers $\alpha$ and $\beta$ evaluate
+$$
+  \frac 1m \sum_{k=0}^{m-1}|\alpha + \omega^k\beta|^2\omega^k.
+$$
+\begin{solution}
+  First observe
+  \begin{align*}
+    \frac 1m \sum_{k=0}^{m-1}|\alpha + \omega^k\beta|^2\omega^k
+    &= \frac 1m \sum_{k=0}^{m-1}(\alpha + \omega^k\beta)(\bar \alpha + \omega^{-k}\bar \beta)\omega^k\\
+    &= \frac 1m \sum_{k=0}^{m-1}(\alpha + \omega^k\beta)(\omega^k\bar \alpha + \bar \beta)\\
+    &= \frac 1m \sum_{k=0}^{m-1}\left(\omega^k|\alpha|^2 + \omega^{2k}\beta\bar\alpha + \alpha\bar\beta + \omega^k|\beta|^2 \right).\\
+  \end{align*}
+  To simplify this sum, we use the fact that
+  $$
+    (\omega -1) \sum_{k=0}^{m-1} \omega^k = \omega^m - 1 = 0 \implies \sum_{k=0}^{m-1} \omega^k = 0
+  $$
+  since $m>2$ and $\omega$ is primitive. Similarly
+  $$
+    (\omega^2 -1) \sum_{k=0}^{m-1} \omega^{2k} = \omega^{2m} - 1 = (\omega^m - 1)(\omega^m + 1) = 0\implies \sum_{k=0}^{m-1} \omega^{2k} = 0.
+  $$
+  Hence, the sum above simplifies to  $\alpha\bar \beta$.
+\end{solution}
 
+{\bf 10.} Let $b>2$ and put $\omega = e^{2\pi i/b}$.  Define $z^b$ with respect to the principal branch of the logarithm on $G = \CC \setminus \{x\in \RR : x \le 0\}$.
+
+\begin{quote}
+  {\bf (a)} Show that
+  $$
+    \int_{[0,R\omega]}\frac{dz}{1+z^b} = e^{2\pi i/b} \int_0^R \frac{dx}{1+x^b}.
+  $$
+  For $R>1$ let $\gamma_R$ be the contour sketched in the following figure
+  \begin{center}
+  \begin{tikzpicture}
+    \draw(-.25,0) -- (4.25,0);
+    \draw(0,-.25) -- (0,4.25);
+    \draw[-latex] (4,0) node[below]{$R$} arc (0:30:4) node[right]{$\gamma_R$};
+    \draw (30:4) arc (30:60:4) node[above right]{$R\omega$};		  
+    \draw[-latex] (2,{2*sqrt(3)}) -- (1,{sqrt(3)});
+    \draw (1,{sqrt(3)}) -- (0,0);
+    \draw[-latex] (0,0) node[below left]{$0$} -- (2,0);
+
+    %\node[above right] at (0,2) {$z_0$};  
+    %\fill (0,2) circle (2pt);
+  \end{tikzpicture}
+  \end{center}
+  \begin{solution}
+    Parametrize $[0,R\omega]$ by $z(t) = t\omega$ for $0\le t \le R$, then
+    $$
+      \int_{[0,R\omega]}\frac{dz}{1+z^b} = \int_0^R \frac{\omega dt}{1+(t\omega)^b} = \omega\int_0^R \frac{dt}{1+t^b}
+    $$
+    since $(t\omega)^b = \exp(\log(te^{2\pi i/b})b ) = \exp(\log(t)b + 2\pi i)  = t^b$.
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (b)} Show that
+  $$
+    \lim_{R\to\infty} \int_{\gamma_R} \frac{dz}{1+z^b} = (1 - e^{2\pi i/b})\int_0^\infty\frac{dx}{1+x^b}.
+  $$
+  \begin{solution}
+    Denote the arc from $R$ to $\omega R$ on $\gamma_R$ as $C_R$. Note that the integral along this contour is bounded above by
+    $$
+      \left|\int_{C_R}\frac{dz}{1+z^b} \right| \le \frac{1}{1 - |z^b|}\cdot \frac{2\pi R}{b},
+    $$ 
+    and $|z^b| = |\exp(\log( Re^{i\theta} )b)| = |\exp(\log(R)b + i\theta)| = R^b$ implies 
+    $$
+      \frac{1}{1 - |z^b|}\cdot \frac{2\pi R}{b} \to 0\quad\text{as }R\to \infty
+    $$
+    since $b > 2$.  Now
+    \begin{align*}
+      \lim_{R\to\infty}\int_{\gamma_R}\frac{dz}{1+z^b} 
+      &= \lim_{R\to\infty}\left\{\int_0^R \frac{dx}{1+x^b} + \int_{C_R} \frac{dz}{1+z^b} + \int_{[R\omega,0]} \frac{dz}{1+z^b}\right\}\\
+      &= \int_0^\infty \frac{dx}{1+x^b} + 0 - \omega\int_0^\infty \frac{dx}{1+x^b}\\
+      &= (1-\omega)\int_0^\infty \frac{dx}{1+x^b}.
+    \end{align*}
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (c)} Use the Residue Theorem to evaluate $\ds{\int_{\gamma_R} \frac{dz}{1+z^b}}$.
+  \begin{solution}
+    The integrand is singular provided $1 + z^b = 1 + \exp(\log(z)b) = 0$. Observe
+    \begin{align*}
+      \exp(\log(z)b) &= \exp(\ln|z|b) + ib\arg z) \\
+      &= |z|^b \exp(ib\arg z) \\
+      &= -1 
+    \end{align*}
+    implies $|z| = 1\text{ and }\arg z = \pi/b$.
+    Hence, $e^{i\pi/b}$ is an isolated singularity interior to $\gamma_R$ when $R>1$.  
+
+    Since $\frac d{dz} (1 + z^b) = bz^{b-1}$ which is non-zero at $e^{i\pi/b}$, the singularity
+    is a simple pole, and the residue of the integrand is given by
+    $$
+      \frac{1}{b\exp\left(\pi i \frac{b-1}{b}\right)}
+    $$
+    
+    The Residue Theorem indicates that for such $R$,
+    $$
+      \int_{\gamma_R} \frac{dz}{1+z^b} = \frac{2\pi i}{b\exp\left(\pi i \frac{b-1}{b}\right)}
+    $$
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (d)} Use (b) and (c) to evaluate $\ds{\int_0^\infty \frac{dx}{1+x^b}}$.
+  \begin{solution}
+    Well,
+    \begin{align*}
+      \int_0^\infty \frac{dx}{1+x^b} 
+      &=  \frac{2\pi i}{(1-\omega)b\exp\left(\pi i \frac{b-1}{b}\right)}\\
+      &= \frac{2\pi i}{b}\left(\exp\left(\pi i \frac{b-1}{b}\right) - \exp\left(\pi i \frac{b-1}{b} + \frac{2\pi i}{b} \right)\right)^{-1}\\
+      &= \frac{2\pi i}{b}\left(\exp\left(\pi i \frac{b-1}{b}\right) - \exp\left(\pi i \frac{1-b}{b} - \frac{2b\pi i}{b} \right)\right)^{-1}\\
+      &= \frac{2\pi i}{b}\left(\sin\left(\pi\frac{b-1}{b}\right)\right)^{-1}.
+    \end{align*}
+  \end{solution}
+\end{quote}
+
+
+\bibliographystyle{alpha}
 \bibliography{analysis_prelim}
 \end{document}
 

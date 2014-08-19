@@ -1,8 +1,9 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.3.9)  8 AUG 2014 14:31
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.3.9)  19 AUG 2014 08:44
 entering extended mode
+ \write18 enabled.
  %&-line parsing enabled.
-**2009_spring.tex
-(./2009_spring.tex
+**2009_autumn.tex
+(./2009_autumn.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
 yphenation, ibycus, monogreek, greek, ancientgreek, loaded.
@@ -609,8 +610,8 @@ x.code.tex
 File: tikzlibrarymatrix.code.tex 2008/06/18 v2.10 (rcs-revision 1.2)
 )
 \c@lemma=\count138
- (./2009_spring.aux)
-\openout1 = `2009_spring.aux'.
+ (./2009_autumn.aux)
+\openout1 = `2009_autumn.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
@@ -717,62 +718,43 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-]
-Overfull \hbox (9.63171pt too wide) in paragraph at lines 108--115
-\OT1/cmr/m/n/12 [\OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 =\OT1/cm
-r/m/n/12 2\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 =\OT1/cmr/m/n/12
- 2]$ then $\OML/cmm/m/it/12 x[] \OT1/cmr/m/n/12 = 0$ and $\OML/cmm/m/it/12 y[] 
-\OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 [\OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/n/12 1\OML/c
-mm/m/it/12 =\OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1\OML/cmm/m/it/
-12 =\OT1/cmr/m/n/12 2]$. By com-pact-ness of $[\OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/n
-/12 1\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1\OM
-L/cmm/m/it/12 =\OT1/cmr/m/n/12 2]$
+] [2]
+Overfull \hbox (10.40402pt too wide) detected at line 128
+[]\OML/cmm/m/it/12 nd\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x[]; y[]\OT1/cmr/m/n/12 
+) \OMS/cmsy/m/n/12 ^^T \OML/cmm/m/it/12 nd\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y[]
+; x[]\OT1/cmr/m/n/12 ) + \OML/cmm/m/it/12 nd\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x
+[]; x[]\OT1/cmr/m/n/12 )  =[]\OMS/cmsy/m/n/12 )  \OML/cmm/m/it/12 nd\OT1/cmr/m/
+n/12 (\OML/cmm/m/it/12 x[]; y[]\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ \OML/cmm/
+m/it/12 nd\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y[]; x[]\OT1/cmr/m/n/12 ) \OMS/cmsy
+/m/n/12 ^^T \OML/cmm/m/it/12 nd\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x[]; x[]\OT1/c
+mr/m/n/12 )
  []
 
-[2] [3]
-Overfull \hbox (88.54404pt too wide) detected at line 190
-\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x\OT1/cmr
-/m/n/12 )\OML/cmm/m/it/12 g\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x\OT1/cmr/m/n/12 )
- \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y\OT1
-/cmr/m/n/12 )\OML/cmm/m/it/12 g\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y\OT1/cmr/m/n/
-12 )\OMS/cmsy/m/n/12 j ^^T j\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12
- x\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 g\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x\OT1/cm
-r/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/i
-t/12 x\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 g\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y\OT
-1/cmr/m/n/12 )\OMS/cmsy/m/n/12 j \OT1/cmr/m/n/12 + \OMS/cmsy/m/n/12 j\OML/cmm/m
-/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 g\
-OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ \OML/c
-mm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y\OT1/cmr/m/n/12 )\OML/cmm/m/it/1
-2 g\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y\OT1/cmr/m/n/12 )\OMS/cmsy/m/n/12 j ^^T \
-OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M[]L[] \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 M[]L
-[]\OT1/cmr/m/n/12 )\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 x \OMS/cmsy/m/n/12 ^^@ \O
-ML/cmm/m/it/12 y\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 :
- []
-
-[4] [5] [6] (./2009_spring.bbl [7]) [8] (./2009_spring.aux) ) 
+(./2009_autumn.bbl [3]) [4] (./2009_autumn.aux) ) 
 Here is how much of TeX's memory you used:
- 14657 strings out of 494985
- 263251 string characters out of 1181035
- 320147 words of memory out of 3000000
- 17518 multiletter control sequences out of 15000+50000
+ 14555 strings out of 494985
+ 260789 string characters out of 1181035
+ 321147 words of memory out of 3000000
+ 17416 multiletter control sequences out of 15000+50000
  11557 words of font info for 46 fonts, out of 3000000 for 9000
  73 hyphenation exceptions out of 8191
- 49i,12n,53p,792b,602s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fon
-ts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/pu
-blic/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.
-pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/sh
-are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-tex
-live/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm
-10.pfb>
-Output written on 2009_spring.pdf (8 pages, 164857 bytes).
+ 49i,12n,53p,792b,352s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/font
+s/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
+s/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi6.
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/sh
+are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/t
+ype1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/a
+msfonts/cm/cmsl12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
+cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy6.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-texliv
+e/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on 2009_autumn.pdf (4 pages, 154985 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
+ 74 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

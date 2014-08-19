@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: /home/kjoyce/2014_summer/analysis_prelim/2009_spring.aux
+The style file: alpha.bst
+Database file #1: analysis_prelim.bib
+You've used 4 entries,
+            2543 wiz_defined-function locations,
+            581 strings with 4988 characters,
+and the built_in function-call counts, 1260 in all, are:
+= -- 115
+> -- 43
+< -- 3
++ -- 14
+- -- 12
+* -- 76
+:= -- 220
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 19
+chr.to.int$ -- 4
+cite$ -- 4
+duplicate$ -- 62
+empty$ -- 106
+format.name$ -- 19
+if$ -- 252
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 7
+newline$ -- 23
+num.names$ -- 12
+pop$ -- 29
+preamble$ -- 1
+purify$ -- 25
+quote$ -- 0
+skip$ -- 42
+stack$ -- 0
+substring$ -- 55
+swap$ -- 4
+text.length$ -- 3
+text.prefix$ -- 3
+top$ -- 0
+type$ -- 20
+warning$ -- 0
+while$ -- 11
+width$ -- 7
+write$ -- 52

@@ -1,0 +1,185 @@
+\documentclass{article}
+\usepackage{amssymb, latexsym, amsmath, eucal, graphics, fullpage, epsfig, amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{notation}{Notation}
+
+\begin{document}
+\setlength{\baselineskip}{18pt}
+\textbf{Problem 1.}
+\vskip.1in
+\textbf{Solution} We will prove that this is an increasing sequence by induction.  Notice that 
+\[
+        a < a+\sqrt{a} \Rightarrow \sqrt{a} < \sqrt{a+\sqrt{a}} \Rightarrow x_1 < x_2
+\]
+Now assume that $x_{n-1} < x_n$, Then
+\[
+	x_{n+1} = \sqrt{a+x_n} > \sqrt{a+x_{n-1}} = x_n
+\]
+And so strict increasingness holds by induction.  Now we show that it is bounded.  Notice that the graph of $y=\sqrt{x+a}$ and the graph of $y=x$ has a single intersection, which is found to be at $x = \frac{1+\sqrt{1+4a}}{2}$, and since
+\[
+	\frac{d}{dx} \sqrt{x+a} = \frac{1}{2\sqrt{x+a}} < 1 \mbox{ for } x > \frac{1}{4} - a
+\]
+Notice that 
+\[
+	\frac{1+\sqrt{1+4a}}{2} > \frac{1}{4} - a
+\]
+And so if $x > \frac{1+\sqrt{1+4a}}{2}$, then we have that the slope of $\sqrt{x+a}$ is less than 1.  this means that the graph of $y=x$ passes through the graph of $y=\sqrt{x+a}$ as we move through the intersection.  So then if the was an $x_n$ such that $x_n > \frac{1+\sqrt{1+4a}}{2}$, then we would have that $x_{n+1} = \sqrt{x+a} < x_n$, and the sequence would fail to be increasing.  So then we have that the sequence is bounded above by $\frac{1+\sqrt{1+4a}}{2}$.  hence it must converge.  Morover, this value is the limit, since the limit of any convergent recursive sequence must also be a fixed point of the generating function.
+\vskip.1in
+\textbf{Problem 2}
+\vskip.1in
+\textbf{Solution} For the first part, suppose that there is a positive decreasing function $f(x)$ such that $\lim_{x \to \infty}xf(x) \neq 0$ and 
+\[
+	\int_0^\infty f(x) dx < \infty
+\]
+Since $\lim_{x \to \infty}xf(x) \neq 0$ and $f$ is positive, we must have that
+\[
+	\lim_{x \to \infty}xf(x) =\alpha > 0
+\]
+and thus there is an $x_0$ such that $xf(x) > \frac{\alpha}{2}$ for all $x > x_0$, and so $f(x) > \frac{\alpha}{2x}$ for $x > x_0$.  This gives that
+\[
+	\int_{1}^\infty f(x) dx  \geq \int_{x_0}^\infty f(x) dx \geq \frac{\alpha}{2} \int_{x_0}^\infty \frac{1}{x}  dx = \lim_{t \to \infty} \ln(t) -\ln(x_0) = \infty
+\]
+But this contradicts that $\int_1^\infty f(x) dx < \infty$.\\
+Part(b) is a millenium problem I'm sure...
+\vskip.1in
+\textbf{Problem 3}
+\vskip.1in
+\textbf{Solution}  Let $g$ be defined as the hint.  then we have that
+\[
+	g(x) = \int_0^x |f^\prime(t)|dt \geq \left| \int_0^x f^\prime(t) dt \right| = |f(x)-f(0)| = |f(x)|, \mbox{ since } f(0) = 0
+\]
+Additionally, notice that
+\[
+	g^\prime(x) = |f^\prime(x)|
+\]
+Lastly, consider the follwing calculation, using integration by parts
+\[
+	\int_0^1 g(x)g^\prime(x) dx = \left. g^2(x) \right|_0^1 - \int_0^1 g(x)g^\prime(x) dx
+\]
+which implies that
+\[
+	2\int_0^1 g(x)g^\prime(x) dx = g^2(1) - g^2(0)
+\]
+Since $g(0) = 0$ we get that $\int_0^1 g(x)g^\prime(x) dx = \frac{1}{2}g^2(1)$.  bringing these three facts together we get that
+\[
+	\int_0^1 |f(x)f^\prime(x)|dx = \int_0^1 |f(x)|g^\prime(x) dx \leq \int_0^1 g(x)g^\prime(x) dx = \frac{1}{2}g^2(1) = \left( \int_0^1|f^\prime(x)|dx\right)^2 \leq \int_0^1|f^\prime(x)|^2 dx
+\]
+where the last inequality holds due to Cauchy-Bunakovsky-Schwarz.
+\vskip.1in
+\textbf{Problem 4}
+\vskip.1in
+\textbf{Solution} Notive that for $x=1$ the sequence is just $(1^nf(1))_n = f(1)$, and thus it converges.  For a fixed $x \in [\frac{1}{2},1)$ we have that $x^n \to 0$, and thus $x^nf(x) \to 0$.  So our pointwise limit is given by
+\[
+	\lim x^nf(x) = \begin{cases} 0 & \frac{1}{2} \leq x < 1\\
+					f(1) & x=1
+			\end{cases}
+\]
+Now suppose that the convergence is uniform.  Then we must have that $\lim x^nf(x)$ is continuous at 1, since each $x^nf(x)$ is continuous at 1.  But since $x^nf(x)$ coverges to 0 uniformly on $[\frac{1}{2}, 1)$, we would have to have that $f(1)=0$.  So then the uniform limit is 0, which means that $f$ must be bounded.\\
+Now suppose that $f$ is bounded and that $f(1) = 0$. Let $\epsilon$ be given.  Then since $f$ is continuous at 1, there is a delta such that for all $x \in (1-\delta, 1]$ we have that $|f(x) - f(1)| < \epsilon$, and since $f(1) = 0$, we get that $|f(x)| < \epsilon$ for all $x \in (1-\delta, 1]$.  Now since $f$ is bounded, let $\alpha = \max_{x \in [\frac{1}{2}, 1-\delta]} |f(x)|$.  Let $N$ be such that $(1-\delta)^n \leq \frac{\epsilon}{\alpha}$.  Now $x^n$ is increasing on $[\frac{1}{2}, 1-\delta]$, and thus we have that, for any $x \in [\frac{1}{2}, 1-\delta]$, for all $n \geq N$:
+\[
+	x^nf(x) \leq (1-\delta)^n\alpha < \frac{\epsilon}{\alpha} \alpha = \epsilon
+\]
+and thus the convergence is uniform.
+\vskip.1in
+\textbf{Problem 5}
+\vskip.1in
+\textbf{Solution} Since $\int_0^\infty f(x) dx$ converges, then we must have that $f(x)to 0$ as $x \to \infty$.  Since $f$ is decreasing, and converging to $0$ we must have that $f(x) \geq 0$.  Now then, since $f$ is nonnegative and decreasing we have that
+\[
+	\sum_{n=1}^\infty f(n\delta) \leq \int_0^\infty f(\delta x) dx = \frac{1}{\delta} \int_0^\infty f(u) du 
+\]
+which converges, and thus we have that $\sum_{n=1}^\infty f(n\delta)$ converges.  Furthermore, notice that
+\[
+	\int_0^\infty f(x) dx = \int_0^\delta f(x) dx + \sum_{n=1}^\infty \int_{n\delta}^{(n+1)\delta} f(x) dx = \int_0^\delta f(x) dx + \sum_{n=1}^\infty \delta \int_{n}^{n+1} f(x\delta) dx \leq \delta f(0) + \delta \sum_{n=1}^\infty f(n\delta)
+\]
+Subtracting $\delta f(0)$, and using the previous comparison we get that
+\[	
+	\int_0^\infty f(x) dx - \delta f(0) \leq \delta \sum_{n=1}^\infty f(n\delta) \leq \int_0^\infty f(x) dx
+\]
+Letting $\delta \to 0$, and applying the squeeze theorem, gives the result.
+\vskip.1in
+\textbf{Problem 6.}
+\vskip.1in
+\textbf{Solution} 
+\vskip.1in
+\textbf{Problem 7.}
+\vskip.1in
+\textbf{Solution}  Part (a) is easy.  Let $f$ be lipschitz, with lipschitz constant $M$.  Given $\epsilon>0$ for any $x,y \in X$ such that $d(x,y) < \frac{\epsilon}{M}$ we have
+\[
+	|f(x) - f(y)| \leq Md(x,y) < M \frac{\epsilon}{M} = \epsilon
+\]
+Since our choices of $x$ and $y$ were arbitrary we have that $f$ is uniformly continuous.\\
+However, not ever uniformly continuous function need be lipschitz.  Let $X = [0,1]$, and let $f = \sqrt{x}$, then since $f$ is continuous, and $X$ compact, we must have that $f$ is uniformly continuous.  However, notice that
+\[
+	\lim_{x \to 0} f^\prime(x) = \lim_{x \to 0}\frac{1}{2\sqrt{x}} = \infty
+\]
+and so $f$ has an unbounded derivative, and thus cannot be lipschitz.\\
+The remaining parts are not obvious.  Also, they're dumb.
+\vskip.1in
+\textbf{Problem 8.}
+\vskip.1in
+\textbf{Solution} Consider that
+\[
+	\cos^n(\theta) = \left(\frac{e^{i\theta} + e^{-i\theta}}{2}\right)^n = \frac{1}{2^n}\sum_{k=0}^n \binom{n}{k}e^{i(n-k)\theta}e^{-ik\theta}
+\]	
+\[
+	= \frac{1}{2^n}\sum_{k=0}^n \binom{n}{k}e^{i(n-2k)\theta}
+\]
+Notice that $\cos^n(\theta)$ is real.  Thus we have that
+\[
+	\cos^n(\theta)=Re(\cos^n(\theta)) = Re\left( \frac{1}{2^n}\sum_{k=0}^n \binom{n}{k}e^{i(n-2k)\theta}\right) =  \frac{1}{2^n}\sum_{k=0}^n \binom{n}{k}Re \left(e^{i(n-2k)\theta}\right)
+\]
+\[
+	= \frac{1}{2^n}\sum_{k=0}^n \binom{n}{k}\cos((n-2k)\theta)
+\]
+\vskip.1in
+\textbf{Problem 9}
+\vskip.1in 
+\textbf{Solution} First we note that the Laurent expansion must converge uniformly on the annulus.  The we must also have that
+\[
+	\left| \sum_{n \in \mathbb{Z}} c_nz^n\right|
+\]
+Also converge uniformly.  This follows from the obervation that, for an $z$ and $n$:
+\[
+	\left| \left| \sum_{-n \leq k \leq n} c_kz^k\right| - |f(z)|\right| \leq \left|\ \sum_{-n \leq k\leq n} c_nz^n - f(z)\right|
+\]
+Anyway, we get that, from the hint
+\[
+	\int_0^{2\pi} |f(re^{i\theta})|^2 d\theta = \int_0^{2\pi}\left( \sum_{n \in \mathbb{Z}} c_nr^ne^{in\theta}\right)\left(\sum_{m \in \mathbb{Z}} \overline{c_m}r^me^{-im\theta}\right) d\theta
+\]
+\[
+	=\int_0^{2\pi} \sum_{n \in \mathbb{Z}} \sum_{m \in \mathbb{Z}} c_n\overline{c_m} r^{m+n} e^{i(n-m)\theta} d\theta =  \sum_{n \in \mathbb{Z}} \sum_{m \in \mathbb{Z}} c_n\overline{c_m} r^{m+n}\int_0^{2\pi} e^{i(n-m)\theta} d\theta
+\]
+It is easy to see that
+\[
+	\int_0^{2\pi} e^{i(n-m)\theta} d\theta = 
+\begin{cases}	0 & n \neq m\\
+			2\pi & n=m
+\end{cases}
+\]
+So then all the terms where $n \neq m$ in the above expression drop out.  This gives that 
+\[
+	\int_0^{2\pi} |f(re^{i\theta})|^2 d\theta  = \sum_{n \in \mathbb{Z}}2\pi c_n \overline{c_n} r^{2n} = 2\pi \sum_{n \in \mathbb{Z}} |c_n|^2 r^{2n} 
+\]
+Notice now that
+\[
+	\int_\Omega |f(x+iy)|^2 dxdy = \int_0^1 \int_0^{2\pi} r|f(re^{i\theta})|^2 d\theta dr
+\]
+\[
+	 = \int_0^1 2\pi \sum_{n \in \mathbb{Z}} |c_n|^2 r^{2n+1} dr = 2\pi \sum_{n \in \mathbb{Z}} |c_n|^2\int_0^1  r^{2n+1} dr
+\]
+Now if $|c_n| > 0$ for any $ n \leq -1$, then we would have that
+\[
+	\int_0^1 r^{2n+1} dr = \infty
+\]
+for $n \leq -1$.  This would contradict that $\int_\Omega |f|^2 dxdy < \infty$.  So then $c_n = 0$ for $n \leq -1$.  This implies that the singularity at $0$ is removable, since the negative coefficients of the laurent series are all 0.
+\vskip.1in
+\textbf{Problem 10}
+\vskip.1in
+\textbf{Solution}  I am not going to do all the work here, but it is easy to show that the value of the integral is $\frac{\pi}{4e}$.
+
+
+\end{document}

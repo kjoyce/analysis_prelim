@@ -1,0 +1,283 @@
+\documentclass{article}
+\usepackage{amssymb, latexsym, amsmath, eucal, graphics, fullpage, epsfig, amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{notation}{Notation}
+
+\begin{document}
+\setlength{\baselineskip}{18pt}
+\textbf{1.} Let $(a_n)$ and $(b_n)$ be sequences of positive numbers such that
+\[
+	\inf_{n \in \mathbb{N}} \left( b_n - b_{n+1}\frac{a_{n+1}}{a_n} \right) > 0.
+\]
+Prove that $\sum_{n=1}^\infty a_n < \infty$.
+\vskip.1in
+\textbf{Solution}.  We shall prove this by considering the sequence of partial sums
+\[
+	s_k = \sum_{n=1}^k a_n
+\]
+and showing that this is a monotonically increasing sequence that is bounded above, and must therefore be convergent.  That it is monotonically increasing is obvious since the terms $a_i$ are positive.  So it only remains to be  shown that it is bounded above.  Since we have
+\[
+\inf_{n \in \mathbb{N}} \left( b_n - b_{n+1}\frac{a_{n+1}}{a_n} \right) > 0.
+\]
+we get that there is an $\alpha>0$ such that for all $n$ 
+\[
+	b_n - b_{n+1}\frac{a_{n+1}}{a_n} \geq \alpha \Rightarrow a_nb_n - a_{n+1}b_{n+1} \geq \alpha a_n.
+\]
+Since this is true for all $n$, we can sum both sides over $n=1$ to $n=k$ to get that
+\[
+	\sum_{n=1}^k a_nb_n - \sum_{n=1}^k a_{n+1}b_{n+1} \geq \alpha s_k
+\]
+\[
+	\Rightarrow a_1b_1 + \sum_{n=2}^k a_nb_n - \sum_{n=2}^k a_{n}b_{n} + a_{k+1}b_{k+1} \geq \alpha s_k
+\]
+\[
+	\Rightarrow \alpha s_k \leq a_1b_1-a_{k+1}b_{k+1} < a_1b_1
+\]
+So then the sequence of partial sums is bounded above by $\frac{1}{\alpha}a_1b_1$, and being monotonically increasing, must be convergent.  Hence $\sum a_n < \infty$.
+\vskip.1in
+\textbf{Problem 2.} Let $f$ be a continuous real valued function on $[0,1]$, which is twice differentiable and satisfies $f(0) = f(1)$.  Suppose that $M > 0$ is such that $|f^{\prime \prime}(x)|\leq M$ for all $0<x<1$. Prove that $|f^\prime (\frac{1}{2})| \leq \frac{M}{4}$ and $|f^\prime 
+(x)| \leq \frac{M}{2}$, for all $0<x<1$.
+\vskip.1in
+\textbf{Solution}.  We start by making the following observation for any $y \in (0,1)$:
+\[
+	\left|\int_0^y \int_x^y f^{\prime \prime}(t) dtdx - \int_y^1 \int_y^x f^{\prime \prime}(t)dtdx\right|=|f^\prime(y)|
+\]
+This is seen to be true by just applying the fundamental theorem of calculus:
+\[
+	\int_0^y \int_x^y f^{\prime \prime}(t) dtdx - \int_y^1 \int_y^x f^{\prime \prime}(t)dtdx = \int_0^y f^\prime(y) - f^\prime(x) dx - \int_y^1 f^\prime(x) - f^\prime(y)dx
+\]
+\[
+	= yf^\prime(y) - (f(y) - f(0))+ \int_y^1 f^\prime(y) - f^\prime(x) dx = yf^\prime(y) - f(y) + f(0) + (1-y)f^\prime(y) - (f(1) - f(y))
+\]
+\[
+	= f^\prime(y) - f(y) + f(0) - f(1) + f(y) = f^\prime(y) \mbox{ since } f(0)=f(1)
+\]
+Now since $|f^{\prime \prime}(x)| \leq M$, we get that
+\[
+	|f^\prime(y)| = \left|\int_0^y \int_x^y f^{\prime \prime}(t) dtdx - \int_y^1 \int_y^x f^{\prime \prime}(t)dtdx\right| \leq \int_0^y \int_x^y |f^{\prime \prime}(t)| dtdx + \int_y^1 \int_y^x |f^{\prime \prime}(t)|dtdx
+\]
+\[
+	\leq \int_0^y \int_x^y M dtdx + \int_y^1 \int_y^x M dtdx = \int_0^y M(y-x) dx + \int_y^1 M(x-y)dx = M \left( \left. \left( yx - \frac{x^2}{2}\right)\right|_0^y + \left. \left( \frac{x^2}{2}-yx\right)\right|_y^1 \right)
+\] 
+\[
+	= M \left( y^2 - \frac{y^2}{2} + \frac{1}{2} - y - \frac{y^2}{2} +y^2 \right) = M\left(y^2-y+\frac{1}{2} \right)
+\]
+Now it is a matter of basic algebra to see that $g(y) = y^2-y+\frac{1}{2}$ is a parabola with minimum $g(\frac{1}{2}) = \frac{1}{4}$, and $g(0) = g(1) = \frac{1}{2}$ as the maximums over the unit interval.  This gives that 
+\[
+	\left|f^\prime\left(\frac{1}{2}\right)\right| \leq \frac{M}{4} \mbox{ and } |f^\prime(x)| \leq \frac{M}{2}
+\]
+\vskip.1in
+\textbf{Problem 3.} Let $f$ be a continuous real valued function on $[0,1]$.  Find the following limits
+\[
+	\mbox{(a) } \lim_{n \to \infty} n \int_0^1 x^nf(x) dx.
+\]
+\[
+	\mbox{(b) } \lim_{n \to \infty} n \int_0^1 e^{-nx} f(x) dx.
+\]
+\vskip.1in
+\textbf{Solution. } We claim that the limit in (a) is $f(1)$, and the limit in (b) is $f(0)$.  We first show that if the result is true for polynomials, then it will hold for all continuous functions.  To do this we will use the Stone-Weierstrass Theorem.  We can use this theorem because we are looking at continuous real valued functions over a compact set $[0,1]$.  Let $p_n$ be a sequence of polynomials that converge uniformly to $f$.  Then, since we have unform convergence of thei sequence of functions, then we have that it can be integrated term by term.  This gives that
+\[
+	 \lim_{n \to \infty} n \int_0^1 x^nf(x) dx  =  \lim_{n \to \infty} n \int_0^1 x^n\lim_{m \to \infty}p_m(x) dx = \lim_{m \to \infty}\lim_{n \to \infty}  n \int_0^1 x^np_m(x)
+\]
+\[
+	 = \lim_{m \to \infty} p_m(1) = f(1)
+\]
+Similarly
+\[
+	 \lim_{n \to \infty} n \int_0^1 e^{-nx}f(x) dx  =  \lim_{n \to \infty} n \int_0^1 e^{-nx}\lim_{m \to \infty}p_m(x) dx = \lim_{m \to \infty}\lim_{n \to \infty}  n \int_0^1e^{-nx}p_m(x)
+\]
+\[
+	 = \lim_{m \to \infty} p_m(0) = f(0)
+\]
+So then, we need show the result for polynomials.  We shall now consider the first limit.  Let $p(x) = \sum_{k=0}^m a_kx^k$ be a polynomial.  We have that
+\[
+	 \lim_{n \to \infty} n \int_0^1 x^np(x) dx = \lim_{n \to \infty} n \sum_{k=0}^m a_k \int_0^1 x^{n+k} dx =  
+\]
+\[
+	\lim_{n \to \infty} n \sum_{k=0}^m a_k \left.\frac{x^{n+k+1}}{n+k+1}\right|_0^1 =    \sum_{k=0}^m a_k \lim_{n \to \infty} \frac{n}{n+k+1} = \sum_{k=0}^m a_k = p(1)
+\]
+So then we have established the first limit.\\
+For the second limit, we shall first establish the following by induction
+\[
+	\lim_{n \to \infty} n \int_0^1 e^{-nx}x^m dx = 0 \mbox{ for } m>0
+\]
+ For $m=1$, we use integration by parts to get that
+\[
+	\lim_{n \to \infty} n \int_0^1 e^{-nx}x dx = \lim_{n\to \infty}n\left(\left. -\frac{xe^{-nx}}{n}\right|_0^1  + \frac{1}{n} \int_0^1 e^{-nx}dx \right) = \lim_{n \to \infty} n \left( \frac{-e^{-n}}{n} + \frac{1}{n} \left(-\frac{e^{-n}}{n} + \frac{1}{n}\right)\right)
+\] 
+\[
+	 = \lim_{n \to \infty} -e^{-n} + \frac{1}{n} - \frac{e^{-n}}{n} = 0
+\]
+Now we assume true for $m < k$, and consider the case $m=k$. Again applying integration by parts we get
+\[
+	\lim_{n \to \infty} n \int_0^1 e^{-nx}x^k dx  = \lim_{n \to \infty} n \left( \left. -\frac{e^{-nx}x^k}{n} \right|_0^1 + \frac{1}{n} \int_0^1 ne^{-nx}x^{k-1}dx \right)
+\]
+\[
+	= \lim_{n \to \infty} e^{-n} +\lim_{n \to \infty} n \int_0^1 e^{-nx}x^{k-1} dx = 0+0= 0
+\]
+Thus, we have the result for all $m>0$.  For $m=0$ we see that
+\[
+	\lim_{n \to \infty} n\int_0^1 e^{-nx} = \lim_{n \to \infty} n\left(-\frac{e^{-n}}{n} + \frac{1}{n}\right) = \lim_{n \to \infty} -e^{-n} +1 = 1
+\]
+So, for an arbitrary polynomial $p(x)$ we have that
+\[
+	\lim_{n \to \infty}  n \int_0^1e^{-nx}p(x) = \sum_{k=0}^m a_k \lim_{n \to \infty} n \int_0^1 e^{-nx}x^k dx = a_0 + 0 + \ldots + 0 = a_0 = p(0)
+\]
+So then we have established the second limit for polynomials, and thus all continuous functions.
+\vskip.1in
+textbf{Problem 5.}
+\vskip.1in
+\textbf{Solution}
+\vskip.1in
+\textbf{Problem 6.}
+\vskip.1in
+\textbf{Solution}
+First we prove the hint.  We shall do so by induction.  For the case $m=2$ the right hand side of the formula becomes (using the observation that for $i < j$, $r_i - r_j = \sum_{k=i}^{j-1} a_k$),
+\[
+        r_1 - \frac{r_3}{2} - \frac{r_2}{2} = r_1 - \frac{r_3 +r_2}{2} = r_1 - \frac{2r_3 + a_2}{2}
+\] 
+\[
+	= r_1 - r_3 - \frac{a_2}{2} = a_1 + a_2 - \frac{a_2}{2} = a_1 + \frac{a_2}{2}
+\]
+which is equal to the left hand side of the formula for $m=2$.  Now assume it is the case for $m=p$.  Then we have that
+\[
+	\sum_{k=1}^p \frac{a_k}{k} = r_1-\frac{r_{p+1}}{p}-\sum_{k=2}^p \frac{r_k}{k(k-1)}
+\]
+Adding $\frac{a_{p+1}}{p+1}$ to both sides gives that
+\[
+	\sum_{k=1}^{p+1} \frac{a_k}{k} = r_1-\frac{r_{p+1}}{p}-\sum_{k=2}^p \frac{r_k}{k(k-1)} + \frac{a_{p+1}}{p+1}
+\]
+\[
+	= r_1-\frac{r_{p+1}}{p}-\sum_{k=2}^p \frac{r_k}{k(k-1)} + \frac{r_{p+1} - r_{p+2}}{p+1}
+\]
+\[
+	= r_1 - \frac{r_{p+2}}{p+1} - \sum_{k=2}^p \frac{r_k}{k(k-1)} -\frac{r_{p+1}}{p} + \frac{r_{p+1}}{p+1}
+\]
+\[
+	= r_1 - \frac{r_{p+2}}{p+1} - \sum_{k=2}^p \frac{r_k}{k(k-1)}  +\frac{r_{p+1}}{p(p+1)}
+\]
+\[
+	= r_1 - \frac{r_{p+2}}{p+1} - \sum_{k=2}^{p+1} \frac{r_k}{k(k-1)}  
+\]
+And this it is true for $m=p+1$, and we have establsihed the result by induction.\\
+Now, in order to prrove part (a), we will use this formula for the sequence of partial sums and show that it converges.  First notice that since $r_n$ is the tail of a coverging series, we must have that $r_n \to 0$.  So then there is an $M$ such that for all $n \geq M$, we get $|r_n| < 1$.  So then we have that for all $n \geq M$
+\[
+	\frac{|r_k|}{k(k-1)} < \frac{1}{k(k-1)}
+\]
+and since the series $\sum \frac{1}{k(k-1)}$ converges (expand using partial fractions and partial sums, and it telescopes nicely), we must have that
+\[
+	\sum_{k=2}^\infty \frac{r_k}{k(k-1)} \mbox{ converges.}
+\]
+As a result, we directly apply the formula for the partial sums above to get that
+\[
+	\lim_{n \to \infty} \sum_{k=1}^n \frac{a_k}{k} = r_1 - \sum_{k=2}^\infty \frac{r_k}{k(k-1)} \mbox{ converges.}
+\]
+Thus we have shown part (a).
+\vskip.1in
+\textbf{Problem 7}
+\vskip.1in
+\textbf{Solution} Let $\epsilon > 0$ be given and let $N$ be such that $|x_n| \leq \frac{\epsilon}{2K}$.  Now applying the triangle inequality we have that, for $n \geq N$:
+\[
+	|a_{n1}{x_1} + \ldots +a_{nn}x_n| \leq | a_{n1}x_1 + \ldots +a_{nN}x_{N}| + |a_{nN+1}x_{N+1} + \ldots +a_{nn}x_n| 
+\]
+\[
+	\leq | a_{n1}x_1 + \ldots +a_{nN}x_{N}| +|a_{nN+1}||x_{N+1}| + \ldots + |a_{nn}||x_n|
+\]
+\[
+	< | a_{n1}x_1 + \ldots +a_{nN}x_{N}|  + \frac{\epsilon}{2K}(|a_{nN+1}| + \ldots + |a_{nn}|)
+\]
+\[
+	\leq | a_{n1}x_1 + \ldots +a_{nN}x_{N}|  + \frac{\epsilon}{2K}(|a_{n1}| + \ldots+ |a_{nn}|) \leq | a_{n1}x_1 + \ldots +a_{nN}x_{N}|  + \frac{\epsilon}{2K} K
+\]
+\[
+	 = | a_{n1}x_1 + \ldots +a_{nN}x_{N}|  + \frac{\epsilon}{2}
+\]
+Now each of the terms in the first sum individually converge to 0, and thus the finite sum must converge to 0, hence there is an $N^\prime > N$ such that $| a_{n1}x_1 + \ldots +a_{nN}x_{N}| <\frac{\epsilon}{2}$ for all $n \geq N^\prime$, and hence
+\[
+	|a_{n1}x_1 + \ldots +a_{nn}x_n| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\]
+for all $n \geq N^\prime$.  Thus
+\[
+	a_{n1}x_1 + \ldots +a_{nn}x_n \to 0
+\]
+\vskip.1in
+\textbf{Problem 8.}
+\vskip.1in
+\textbf{Solution} We shall first show that $f$ is uniformly continuous and thus continuous.  First note that since $X$ is compact, then we must have that $f_n$ is uniformly equicontinuous.   this follows from noting that the negation of uniform equicontinuity is that there is one $f_n$ is the sequence that fails to be uniformly continuous, but since $X$ compact, and each $f_n$ is continuous, they all must be uniformly continuous.  Now then we can go on to show the uniform continuity of $f$.  Let $\epsilon<0$ be given, and let $\delta$ be such that $d(x,y) < \delta$ implies $|f_n(x) - f_n(y)| < \frac{\epsilon}{2}$ for all $n$ (we appeal to the uniform equicontinuity to get such a $\delta$).  Now let $n \to \infty$, and since we have pointwise convergence, and absolute value is continuous, we get that
+\[
+	|f(x) - f(y)| = \lim_{n \to \infty}|f_n(x) - f_n(y)| \leq \frac{\epsilon}{2} < \epsilon
+\]
+Hence $f$ is uniformly continuous.\\
+We can now move on to proving that the convergence is uniform.  let $\epsilon > 0$ be given, and suppose that $\delta_1$ is such that $d(x,y) < \delta_1 \Rightarrow |f_n(x) - f_n(y)| < \frac{\epsilon}{3}$, we are appealing to the uniform equicontinuity to  get $\delta_1$.  Similarly, let $\delta_2$ be such that $d(x,y) < \delta_2 \Rightarrow |f(x) -f(y)| < \frac{\epsilon}{3}$, and we are appealing to the uniform continuity of $f$ to get such a $\delta_2$.  Now let $\delta = \min \{\delta_1, \delta_2\}$.  We note that 
+\[
+	\bigcup_{x \in X} B(x,\delta)
+\]
+forms an open cover of $X$, and by compactness, we must have a finite subcover i.e. there are finitely many $x_i \in X$ such that
+\[
+	X = \bigcup_{i=1}^k B(x_i,\delta).
+\]
+Now let $N_i$ be such that $|f_n(x_i) - f(x_i)| < \frac{\epsilon}{3}$ for all $n \geq N_i$, and let $N = \max_{1 \leq i \leq k} N_i$.  Now, for any $x$ there is an $x_i$ such that $x \in B(x_i,\delta)$, and thus for all $n \geq N$, we have, forr any $x \in X$:
+\[
+	|f_n(x) - f(x)| =|f_n(x) - f_n(x_i) + f)n(x_i) - f(x_i) + f(x_i) - f(x)| \leq |f_n(x) - f_n(x_i)| + |f_n(x_i) - f(x_i)| + |f(x_i) - f(x)|
+\]
+Since $d(x,x_i) <\delta < \delta_1$ we get that $ |f_n(x) - f_n(x_i)| < \frac{\epsilon}{3}$, and similarly, since $d(x,x_i) < \delta < \delta_2$ we get that $|f(x_i) - f(x)| < \frac{\epsilon}{3}$.  Because $n \geq N \geq N_i$ we have that $|f_n(x) - f_n(x_i)| <\frac{\epsilon}{3}$.  Combining all these we get that for all $n \geq N$ and any $x \in X$:
+\[
+	|f_n(x) - f(x)| < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon
+\]
+So then $f_n$ converges uniformly to $f$.
+\vskip.1in
+\textbf{Problem 9}.
+\vskip.1in
+\textbf{Solution}
+First we will show that $g$ is continuous.  Forst note that the $d(x, A)$ are continuous, following from the continuity of metrics.  So the only thing required to show that $g$ is continuous is to show that $d(X,A) +d(x,B) > 0$.  Since $d(x,A),d(x,B) \geq$ we need only show that it is impossible to have that $d(x,A)+d(x,B) = 0$.  Assume that this is the case for some value $x \in X$, then we must have that $d(x,A) = d(x,B) = 0$.  Since, in general, $d(x,S) = \inf \{d(x,y) : y \in S \}$, we have a sequence $y_n \subset A$ and $z_n \subset B$ such that $d(x,y_n) \to 0$ and $d(x,z_n) \to 0$.  Since $f$ is continuous, we have that $d(x,y_n) \to 0 \Rightarrow |f(x) - f(y_n)| \to 0$, and similarly $d(x,z_n) \to 0 \Rightarrow |f(z_n) - f(x)| \to 0$.  Using the triangle inequality we get that
+\[
+	|f(z_n)-f(y_n)| = |f(z_n)-f(x) + f(x)-f(y_n)| \leq |f(z_n)-f(x)|+|f(x)-f(y_n)| \to 0
+\]
+and thus $|f(z_n) - f(y_n)| \to 0$.  now since $z_n \subset B$ and $y_n \subset A$ we have that $f(z_n) \geq \frac{M}{3}$ and $f(y_n) \leq \frac{-M}{3}$ for all $n$.  Thus
+\[
+	|f(z_n) - f(y_n)| = f(z_n) - f(y_n) \geq \frac{2M}{3} \mbox{ for all } n
+\]
+which contradicts that $|f(z_n)-f(y_n)| \to 0$.  So then $d(x,A)+d(x,B) > 0$ and $g$ is continuous.  Furthermore
+\[
+	|g(x)| = \frac{M}{3}\frac{|d(x,A) - d(x,B)|}{d(x,A)+d(x,B)} \leq \frac{M}{3} \frac{d(x,A)+d(x,B)}{d(x,A)+d(x,B)} = \frac{M}{3}
+\]
+Now for $y \in A$ it is easy to see that $g(y) = -\frac{M}{3}$, and so
+\[
+	 -M \leq f(y) \leq -\frac{M}{3} \Rightarrow -\frac{2M}{3} \leq f(y) +\frac{M}{3} \leq 0 \Rightarrow -\frac{2M}{3} \leq f(y) - g(y) \leq 0
+\]
+and thus $|f(y) - g(y)| \leq \frac{2M}{3}$for all $y \in A$.  Similiarly, if $y \in B$ then we have that $g(y) = \frac{M}{3}$, and so
+\[
+	\frac{M}{3} \leq f(y) \leq M \Rightarrow 0 \leq f(y) - \frac{M}{3} \leq \frac{2M}{3} \Rightarrow 0 \leq f(y) - g(y) \leq \frac{2M}{3}
+\]
+and thus $|f(y) -g(y)| \leq \frac{2M}{3}$ for all $y \in B$.  Now if $y \notin A \cup B$, then we have that $|f(y)|\leq \frac{M}{3}$, and since we have already shown that $|g(y)|\leq \frac{M}{3}$, we get that
+\[
+	|f(y) - g(y)| \leq |f(y)| + |g(y)| \leq \frac{2M}{3}
+\]
+So, for any $y \in Y$ we have that $|f(y) - g(y)| \leq \frac{2M}{3}$.\\
+Now, to show that second part.  Since $|f| \leq 1$, we know by the previous part that there is a function $h_1:X \to [-1,1]$ such that $|h_1| \leq \frac{1}{3}$, and that $|f(y)-h_1(y)| \leq \frac{2}{3}$.  Now then $f-h_1$ is a function on $Y$ that is bounded by $\frac{2}{3}$, so we apply the previous part to $f-h_1$ to get that there is an $h_2:X \to [-1,1]$ such that 
+\[
+	|h_2| \leq \frac{2}{9} \mbox{ and } |f(y)-h_1(y)-h_2(y)| \leq \frac{4}{9}. 
+\]
+We can continue to define $h_k$ by induction.  Let the $h_i:X \to [-1,1]$ be so defined for $1 \leq i \leq k$.  That is we have that 
+\[
+	|h_i| \leq \frac{2^{\i-1}}{3^i}\mbox{ and that } |f(y) - h_1(y) - \ldots - h_i(y)| \leq \frac{2^i}{3^i}, \mbox{ for all } y \in Y \mbox{ and } 1\leq i \leq k.
+\]
+Now we apply the first part to get an $h_{k+1} : X \to [-1,1]$ such that $|h_{k+1}| \leq \frac{2^k}{3^{k+1}}$ and that
+\[
+	 |f(y) - h_1(y) - \ldots - h_k(y) - h_{k+1}(y)| \leq \frac{2^{k+1}}{3^{k+1}}
+\]
+Now we claim that $g(x) = \sum_{i=1}^\infty h_i(x)$ is the desired function.\\
+To show this, we must show two things: That $g$ is continuous, and $g(y) = f(y)$.  The latter is the easiest, noting, that by definition of $g$, for all $y \in Y$:
+\[
+	|f(y) - g(y)| = \lim_{n \to \infty} |f(y) - h_1(y) - \ldots - h_n(y)| \leq \lim_{n \to \infty} \left( \frac{2}{3}\right)^k = 0
+\]
+To show that $g$ is continuous, it is sufficient to show that the infinite sum of continuous function $\sum h_i$ converges uniformly.  To show this we appeal to the Weierstrass $M$-test:  Note that because 
+\[
+	|h_k| \leq \left(\frac{2^{k-1}}{3^k}\right) \mbox{ and } \sum_{k=1}^\infty \left(\frac{2^{k-1}}{3^k}\right)  = \frac{1}{3} \sum_{k=0}^\infty \left(\frac{2}{3}\right)^k = 1
+\]
+So then all the conditions of The Weierstrss $M$-test are fufilled, and we get that $\sum h_i$ is uniformly convergent, and thus being the uniformly convergent sum of continuous functions, $g$ must be continuous.
+\end{document}

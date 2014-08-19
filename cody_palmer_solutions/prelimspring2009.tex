@@ -1,0 +1,228 @@
+\documentclass{article}
+\usepackage{amssymb, latexsym, amsmath, eucal, graphics, fullpage, epsfig, amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{notation}{Notation}
+
+\begin{document}
+\setlength{\baselineskip}{18pt}
+\textbf{Problem 1.}
+\vskip.1in
+\textbf{Solution} See Autumn 2009 Problem 4, it is a slight generalization of this problem, but the idea is the same.
+\vskip.1in
+\textbf{Problem 2}
+\vskip.1in
+\textbf{Solution} Since all the numbers are nonnegative we have that
+\[
+	(a+b)(c+d) \leq ef \Rightarrow ac+bd+ad+bc \leq ef
+\]
+Furthermore,
+\[
+	(\sqrt{ad}-\sqrt{bc})^2 \geq 0 \Rightarrow ad + bc - 2\sqrt{ad}\sqrt{bc} \geq 0 \Rightarrow ad+bc \geq 2\sqrt{ad}\sqrt{bc}
+\] 
+Using these facts:
+\[
+	(\sqrt{ac} + \sqrt{bd})^2 = ac+bd +\sqrt{ac}\sqrt{bd} = ac+bd +2\sqrt{ad}\sqrt{bc} \leq ac+bd+ad+bc \leq ef
+\]
+and thus
+\[
+	\sqrt{ac} + \sqrt{bd} \leq \sqrt{ef}
+\]
+	
+\vskip.1in
+\textbf{Problem 3}
+\vskip.1in
+\textbf{Solution} First we wil show that the sequence is bounded.  Notice that all the terms must be nonnegative, since our intial terms are nonnegative, and each subsequent term is given by a sum of nonnegative terms.  Moriver, we will show by indiuction that it must be less than or equal to 1.  We are given that $a_0$ and $a_1$ are less than one.  So now assume that each term $a_k$ is less than one for all $k \leq n$.  Then we have that
+\[
+`	a_{n+1} = \frac{1}{3}(1+a_n + a_{n-1}^3) \leq \frac{1}{3}( 1+1+1) = 1
+\]
+And so the result holds by induction.  Now we show that this is an increasing sequence.  We prove the increasingness by induction.  It is obviously increasing up to $n=2$.  Assume that the sequence is increasing for all $k \leq n$.  Then we have that
+\[
+	a_{n+1} = \frac{1}{3}(1+a_n + a_{n-1}^3) \geq \frac{1}{3}(1+a_{n-1} +a_{n-2}^3) = a_{n}
+\]
+So the sequence is increasing and bounded by 1, so the limit must exist.  But whatis the limit?  Well taking the limit of both sides ofthe relation we get that the limit of the sequence , call it $a$, must satisfy
+\[
+	a = \frac{1}{3}(1+a+a^3) \Rightarrow a^3-2a + 1 = 0 \Rightarrow (a-1)(a^2+a-1) = 0
+\]
+So then $a=1$ or $a = \frac{-1\pm \sqrt{5}}{2}$  But since all the terms of the sequence are nonnegative and bounded by 1, we must have that $a=1$.
+\vskip.1in
+\textbf{Problem 4}
+\vskip.1in
+\textbf{Solution} (a).  We will do this in two steps. Let $\lambda$ be a  nonzero scalar, and $f_n \to f$ uniformly.  Let $\epsilon$ be given and let $N$ be such that for $n \geq N$ we have that $|f_n(x) - f(x)| < \frac{\epsilon}{|\lambda|}$ for all $x \in X$/  This gives that for all $x \in X$ and $n \geq N$:
+\[
+	|\lambda f_n(x) - \lambda f(x)| = |\lambda||f_n(x) - f(x)| < |\lambda| \frac{\epsilon}{|\lambda|} = \epsilon
+\]
+and thus $\lambda f_n \to \lambda f$ uniformly.  Now suppose that $g_n \to g$ uniformly.  Let $\epsilon$ be given and let $N_1$ be such that for all $x \in X$ and $n \geq N_1$ $|f_n(x) - f(x)| < \frac{\epsilon}{2}$ and let $N_2$ be such that for all $x \in X$ and $n \geq N_2$ we have $|g_n(x) - g(x)| <\frac{\epsilon}{2}$.  Let $N = \max\{N_1, N_2\}$  then we have for all $x \in X$ and $n \geq N$:
+\[
+	|(f_n(x) + g_n(x)) - (f(x)+g(x))| = |f_n(x) - f(x) + g_n(x) - g(x)| \leq |f_n(x) - f(x)| + |g_n(x) - g(x)| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\] 
+and thus $f_n+g_n \to f+g$ uniformly.  Combining these facts gives the result.\\
+(b).  Consider the following counterexample:
+\[
+	f_n(x) = \begin{cases}
+		\frac{1}{x} + \frac{1}{n} & x \in (0,1]\\
+		\frac{1}{n} & x=0
+		\end{cases}
+\]
+and the pointwise limit is given by
+\[
+	 f(x) = \begin{cases}
+		\frac{1}{x}  & x \in (0,1]\\
+		0 & x=0
+		\end{cases}
+\]
+We want to show that $f_n \to f$ uniformly.  Let $\epsilon$ be given, and let $N$ be such that $\frac{1}{n} < \epsilon$ for all $n \geq N$.  Notice then, for $x \in (0,1]$ we have
+\[
+	|f_n(x) - f(x)| = \left| \frac{1}{x} + \frac{1}{n} - \frac{1}{x} \right| = \frac{1}{n} < \epsilon
+\]
+and
+\[
+	|f_n(0) - f(0)| = \frac{1}{n} < \epsilon
+\]
+And so the convergence to $f$ is uniform.  However, we now claim that $f_n^2$ does not converge uniformly to $f^2$.  To see this, notice that
+\[	
+	\left|f_n^2\left(\frac{1}{n}\right) - f^2\left(\frac{1}{n}\right)\right| = \left|n^2+2 + \frac{1}{n^2} - n^2\right| = 2+\frac{1}{n^2} > 2
+\]
+So there is a point $x$ for every $n$ such that $|f_n^2(x) - f^2(x)| > 2$, which means that the convergence cannot be uniform.\\
+(c).  First we will note that since $|f_n(x)| \leq M$ for all $n$ and $x$, then we must have that $|\lim f_n(x)| \leq M \Rightarrow |f(x)|\leq M$.  So then our limits are also bounded.  Let $\epsilon$ be given then, similar to what we did in part (a) we can find and $N$ such that for all $n \geq N$ and $x \in X$ we have
+\[
+	|f_n(x) - f(x) | < \frac{\epsilon}{2M}  \mbox{ and } |g_n(x) - g(x)| < \frac{\epsilon}{2M}
+\]
+So then, for all $n \geq N$ and $x \in X$ we have:
+\[
+	|f_ng_n(x) - fg(x)| = |f_ng_n(x) - fg_n(x) + fg_n(x) -fg(x)| \leq |f_ng_n(x) - fg_n(x)| + | fg_n(x) - fg(x)|
+\]
+\[
+	= |g_n(x)||f_n(x) - f(x)| + |f(x)||g_n(x) - g(x)| \leq M|f_n(x) - f(x)| + M|g_n(x) - g(x)| < M\frac{\epsilon}{2M} +  M\frac{\epsilon}{2M} = \epsilon
+\]
+\vskip.1in
+\textbf{Problem 5}
+\vskip.1in
+\textbf{Solution} (a). First we prove that $d((x_1, y_1),(x_2, y_2)) = 0 \iff (x_1, y_1) = (x_2,y_2)$  Notice that $1+|y_1 - y_2| >0$ for any $y_1, y_2$, and thus we cannot have that $x_1 \neq x_2$.  Since $x_1 = x_2$ then we have that
+\[
+	d((x_1, y_1),(x_2, y_2)) = 0  \iff |y_1-y_2| = 0 \iff y_1 = y_2
+\]
+And so we the result.  Now we prove symmetry.  If $x_1 = x_2$ then we have
+\[
+	d((x_1, y_1),(x_2, y_2)) = |y_1 - y_2| = |y_2-y_1| = d((x_2, y_2),(x_1, y_1))
+\]
+If $x_1 \neq x_2$ then we get
+\[
+	d((x_1, y_1),(x_2, y_2)) = 1+ |y_1 - y_2| =  1+|y_2-y_1| = d((x_2, y_2),(x_1, y_1))
+\]
+Now for the triangle inequality.  First we consider the case where $x_1 = x_2$.  If $(x_3,y_3)$ is such that $x_3 = x_1$ then we have that
+\[
+	 d((x_1, y_1),(x_3, y_3)) + d((x_3, y_3),(x_2, y_2)) = |y_1-y_3| + |y_3-y_2| \geq |y_1-y_3+y_3-y_2| 
+\]
+\[
+	= |y_1 - y_2| = d((x_1, y_1),(x_2, y_2))
+\]
+Now if $x_1 = x_2$ and $x_3 \neq x_1$ then we get that
+\[
+	 d((x_1, y_1),(x_3, y_3)) + d((x_3, y_3),(x_2, y_2))  = 1+ |y_1-y_3| + 1 +|y_3-y_2| \geq |y_1 - y_2|  = d((x_1, y_1),(x_2, y_2))
+\]
+Now if $x_1 \neq x_2$, but $x_3 = x_1$ then we have
+\[
+	d((x_1, y_1),(x_3, y_3)) + d((x_3, y_3),(x_2, y_2)) = |y_1-y_3| + 1 +|y_3-y_2| \geq |y_1 - y_2|  = d((x_1, y_1),(x_2, y_2))
+\]
+It is exactly the same for the case that $x_1 \neq x_2$ and $x_3 = x_2$:
+\[
+	d((x_1, y_1),(x_3, y_3)) + d((x_3, y_3),(x_2, y_2)) = 1 +|y_1-y_3|  +|y_3-y_2| \geq |y_1 - y_2|  = d((x_1, y_1),(x_2, y_2))
+\]
+Now if $x_1, x_2$ and $x_3$ are all distinct, then we have that
+\[
+	d((x_1, y_1),(x_3, y_3)) + d((x_3, y_3),(x_2, y_2))  = 1+ |y_1-y_3| + 1 +|y_3-y_2| \geq 1+ |y_1 - y_2| = d((x_1, y_1),(x_2, y_2))
+\]
+So then $d$ is a metric.\\
+(b). To show that the first set is open, we claim that $0 \times(-\frac{1}{2}, \frac{1}{2}) = B_d((0,0), \frac{1}{2})$.  Recall that
+\[
+	B_d((0,0), \frac{1}{2}) = \{(x, y) : d((0,0), (x,y)) < \frac{1}{2} \}
+\]
+Notice that if $x \neq 0$ then we have that $d((0,0),(x,y)) = 1+|y| > \frac{1}{2}$, and thus $ (x,y) \notin  B_d((0,0), \frac{1}{2}) $. So then
+\[
+	B_d((0,0), \frac{1}{2}) = \{(0, y) : d((0,0), (0,y)) < \frac{1}{2} \} = \{(0,y) : |y| < \frac{1}{2}\} = \{0\} \times (-\frac{1}{2}, \frac{1}{2})
+\]
+Now we need to show that the second set is compact.  This begins with the observation that any open ball $B_d((x_0, y_0),r)$ consists of two parts:  the first being the central line ${x_0} \times (y_0-r, y_0+r)$ and the second part being the strip $\{(x,y) : |y_0-y| < r-1\}$.  It is worth noting that the second part is empty if $r >1$. Also, note that if we show that any set of open balls that covers this set has a finite subcover, then an arbitrary open cover, being a union of open balls, will have a finite subcover.  So now let
+\[
+	\{0\} \times \left[ -\frac{1}{2}, \frac{1}{2} \right] = \bigcup_{\gamma \in \Lambda} B_d((x_\gamma,y_\gamma), r_\gamma)
+\] 
+be an open cover of balls.  Then $B_d((x_\gamma,y_\gamma), r_\gamma)$ either intersects our set in the strip portion of the central line of the ball, or on the line $\{0\} \times (y_\gamma-r_\gamma, y_\gamma - r_\gamma)$.  Let $\Lambda_1$ be the set of indices for which the corresponding ball intercepts on the central line, and let $\Lambda_2$ be the set of indices for which the corresponding ball intersects on the strip.  It is then easy to see that
+\[
+	\bigcup_{\gamma \in \Lambda} B_d((x_\gamma,y_\gamma), r_\gamma) \subset \bigcup_{\gamma \in \Lambda_1} \{(x,y) : |y-y_\gamma|<r_\gamma\} \cup \bigcup_{\gamma \in \Lambda_2}  \{(x,y) : |y-y_\gamma|<r_\gamma-1\}
+\]
+The separation of the indices was done in such a way that the strips in the first part of this union corresponding to those balls that intersect the set on the central line, and those strips in the second part correspond to balls the intersect our set off the central line.  Now $ \{0\} \times \left[ -\frac{1}{2}, \frac{1}{2} \right] $ is compact in $\mathbb{R}^2$ under the standard topology, and the above union of strips forms an open cover in this topology, and thus there must be a finite subcover.  Use then the correspondence of the strips and balls to get a finite subcover under this new metric.\\
+(c).  This set is not compact.  Notice that
+\[
+	\bigcup_{x \in[-1,1]} B_d((x,0),\frac{1}{2})
+\]
+is an open cover that cannot have a finite subcover.  To see this, notice that we are just covering the given rectangle in vertical lines of length one, and no rectangle can be covered by finitely many lines.
+\vskip.1in
+\textbf{Problem 6.}
+\vskip.1in
+\textbf{Solution} (a).  First notice that $F_n(x) \geq 0$ on $[0,\infty)$, since it is a product of nonnegative terms for any $n$.  It is easy to see that
+\[	
+	F_n^\prime (x) = -e^{-x}\left(1+\frac{x}{n}\right)^{n-1}\frac{x}{n} \leq 0 \mbox{ for } x \in [0,\infty)
+\]
+So then $F_n$ is decreasing for every $n$, which means that $\max F_n(x) = F_n(0) = 1$.  Hence $F_n(x) \leq 1$ for all $n$ and $x$.  So the desired constants are 0 and 1.\\
+(b)  Notice Using what we have above we get
+\[
+	 0 \leq \left(1+\frac{x}{n}\right)^{n}e^{-2x} \leq e^{-2x}
+\]
+Now since $e^{-2x}$ is continuous, it is also measurable.  Furthermore, we know that pointwise $(1+\frac{x}{n})^n \to e^x$.  Also, we can see that $\left(1+\frac{x}{n}\right)^{n}e^{-2x} $ is continuous and thus measurable.So then the Lebesgue Dominated Convergence theorem applies and we have that for any $n,m$
+\[
+	\lim \int_0^m \left(1+\frac{x}{n}\right)^{n}e^{-2x} dx = \int_0^m e^{x}e^{-2x} dx = -e^{-m} + 1
+\]
+Now let $m$ go to infinity to get that the final result is 1.
+\vskip.1in
+\textbf{Problem 7.}
+\vskip.1in
+\textbf{Solution}  (a).  Let $f$ and $g$ be Lipshcitz, with Lipschitz constants $M_f$ and $M_g$.  Let $M = \max\{M_f, M_g\}$.  Then we have that
+\[
+	|(f+g)(x) - (f+g)(y)| \leq |f(x) - f(y)| + |g(x) - g(y)| \leq M_f|x-y| + M_g|x-y| \leq M|x-y| + M|x-y| = 2M|x-y|
+\]
+Thus $f+g$ is Lipschitz.\\
+(b). Let $f$ and $g$ be as above, but further suppose they are mutually bounded by a constant $N$.  Then we have that
+\[
+	|fg(x) - fg(y)| = |fg(x) - f(x)g(y) + f(x)g(y) - fg(y)| \leq |fg(x) - f(x)g(y)| + |f(x)g(y) - fg(y)| 
+\]
+\[
+	= |f(x)||g(x) - g(y)| + |g(y)||f(x) - f(y)| \leq NM_g + NM_f \leq 2NM
+\]
+(c).  Consider $f(x) = x$ and notice that this is Lipschitz on $\mathbb{R}$ with a Lipschitz constant of 1.  However $f(x)f(x) = x^2$ us not Lipschitz on $\mathbb{R}$, since the derivative is unbounded on $\mathbb{R}$.
+\vskip.1in
+\textbf{Problem 8.}
+\vskip.1in
+\textbf{Solution} Convert to polar form.  Then note how the modulus of the images behaves, in particular it will reduce to a polar equation, which will give various types of lemniscates for different values of $r$.
+\vskip.1in
+\textbf{Problem 9}
+\vskip.1in 
+\textbf{Solution}  For notice that since $\omega$ is a primitive $m$th root, we have that $\omega \neq 1$ and since $m > 2$ we have that $\omega^2 \neq 1$.  As a result we have that
+\[
+	\omega^m-1 = (\omega - 1)(\omega^{m-1} + \ldots + 1) = 0
+\]
+Which gives that $\sum_{k=0}^{m-1} \omega^k = 0$.  Similarly
+\[
+	\omega^{2m}-1 = (\omega^2 - 1)(\omega^{2(m-1)} + \ldots + 1) = 0
+\]
+Now notice that
+\[
+	\frac{1}{m} \sum_{k=0}^{m-1} |\alpha + \omega^k\beta|^2\omega^k = \frac{1}{m} \sum_{k=0}^{m-1} (\alpha + \omega^k\beta)(\overline{\alpha} + \overline{\omega^k}\overline{\beta})\omega^k
+\]
+\[
+	\frac{1}{m} \sum_{k=0}^{m-1} (\alpha\overline{\alpha} + \overline{\alpha}\beta\omega^k + \alpha \overline{\beta}\overline{\omega^k} + \beta\overline{\beta})\omega^k
+= \frac{1}{m} \sum_{k=0}^{m-1}  |\alpha|^2\omega^k + |\beta|^2\omega^k + \overline{\alpha}\beta \omega^{2k} + \alpha \overline{\beta}
+\]
+Using the above relation we get that
+\[
+	 \frac{1}{m} \sum_{k=0}^{m-1}  |\alpha|^2\omega^k + |\beta|^2\omega^k + \overline{\alpha}\beta \omega^{2k} + \alpha \overline{\beta} = \alpha\overline{\beta}
+\]
+\vskip.1in
+\textbf{Problem 10}
+\vskip.1in
+\textbf{Solution}  Straightforward integraltype problem.
+
+
+\end{document}

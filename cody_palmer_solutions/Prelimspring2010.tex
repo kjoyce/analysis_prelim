@@ -1,0 +1,215 @@
+\documentclass{article}
+\usepackage{amssymb, latexsym, amsmath, eucal, graphics, fullpage, epsfig, amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{notation}{Notation}
+
+\begin{document}
+\setlength{\baselineskip}{18pt}
+\textbf{Problem 1.}
+\vskip.1in
+\textbf{Solution} First we notice that if $z_2=0$ we get that
+\[
+	0=n\left|\frac{z_2}{z_1}\right|^{n-1} < 1 = \frac{|z_1|}{|z_1|-|z_2|}
+\]
+SO the result holds trivially for $z_2=0$  So now assume that $|z_2|>0$  Then we have that
+\[
+	\frac{|z_1|}{|z_1|-|z_2|} = \frac{1}{1-\left|\frac{z_2}{z_1}\right|}= \sum_{k=0}^\infty \left|\frac{z_2}{z_1}\right|^k >\sum_{k=0}^{n-1} \left|\frac{z_2}{z_1}\right|^k
+\]
+Now since $\left|\frac{z_2}{z_1}\right|<1$, we have that $\left|\frac{z_1}{z_2}\right|^{n-1} \leq \left|\frac{z_1}{z_2}\right|^k$ for all $0 \leq k \leq n-1$.  Hence
+\[
+	\sum_{k=0}^{n-1} \left|\frac{z_2}{z_1}\right|^k \geq \sum_{k=0}^{n-1} \left|\frac{z_2}{z_1}\right|^{n-1} = n\left|\frac{z_2}{z_1}\right|^{n-1}
+\]
+and thus
+\[
+	\frac{|z_1|}{|z_1|-|z_2|} >  n\left|\frac{z_2}{z_1}\right|^{n-1}
+\]
+\textbf{Problem 2}
+\vskip.1in
+\textbf{Solution}  Let $x_0$ be a discontinuity of $f$.  Then for any increasing sequence $a_n$ such that $a_n\to x_0$ then by virtue of the increasing nature of $f$ we get $f(a_n) \leq f(a_{n+1}) \leq f(x_0)$ and thus $f(x_0-) - \lim_{x \to x_0^-}f(x)$ exists.  We can similarly show that $f(x_0+) = \lim_{x \to x_0^+}f(x)$ exists by considering decreasing sequences to $x_0$.  Now since $x_0$ is a discontinuity, and since $f$ is increasing we must have that $f(x_0-) < f(x_0+)$.  Now let $A$ be  the setr of discontinuities of $f$ in $[a,b]$.  Define, for $n \geq 1$:
+\[
+	B_n = \left\{ x \in A : \frac{1}{n+1} < f(x+)-f(x-) \leq \frac{1}{n} \right\}
+\]
+and 
+\[
+	B_0 = \left\{ x \in A : 1 <  f(x+)-f(x-) \right\}
+\]
+Now assume that $A$ is uncountable.  Notice that
+\[
+	A = \bigcup_{k=0}^\infty B_k
+\]
+Since $A$ is uncountable, there must be a $B_j$ that is infinite, else $A$ is the countable union of finite sets, and would thus have to be countable.  Since $B_j$ is infinite then it has a subset $\{x_i\}_{i=1}^\infty$ such that $a < x_1 < x_2 < \ldots < b$. See that for ever $n$ we have, by virtue of $f$ being increasing
+\[
+	\sum_{k=1}^n f(x_k+)-f(x_k-) \leq \sum_{k=1}^n f(x_{k+1}+)-f(x_k-) = f(x_n+) - f(x_1-) \leq f(b+) -f(a-)
+\]
+So then the partial sums of
+\[
+	\sum_{k=1}^\infty f(x_k+)-f(x_k-)
+\]
+are bounded and increasing, which means the series converges.  But, since each $x_k \in B_j$ we have that
+\[
+	 \sum_{k=1}^\infty f(x_k+)-f(x_k-) >  \sum_{k=1}^\infty \frac{1}{j+1} = \infty
+\]
+which implies that the series should diverge.  This is a contradiction, and so then $A$ cannot be uncountable.
+\vskip.1in
+\textbf{Problem 3}
+\vskip.1in
+\textbf{Solution}  Suppose there is a $y \in [a,b)$ such that $f(y) < f(b)$, noting that they cannot be equal else the one to one condition fails.    Consider a $x_1 \in (y,b]$.  If $f(x_1) < f(y) < f(b)$, then, by the intermediate value theorem, there is a $x_2 \in (x_1, b)$ such that $f(x_2) = f(y)$, which contradicts that $f$ is one to one.  So then we must have that $f(y) < f(x)$ for all $x \in (y,b)$.  With this fact we can complete the proof.  Suppose that $f(a) < f(b)$, then by the above fact we have that $f(a) < f(x)$ for all $x \in (a,b]$.  Now if $f(x) > f(b)$, then we would have that $f(a) < f(b) < f(x)$, and the IVT would give that there is a $x_1 \in (a,x)$, such that $f(x_1) = f(b)$, a contradiction.  So we have that $f(a) < f(x) < f(b)$ for all $x \in (a,b)$.  Now we can apply the above fact with any $y \in (a,b)$ instead of $a$, to get that $f(y) < f(x)$ for all $x \in (y,b)$.  This gives that $f$ is increasing.  Now if $f(a) > f(b)$, then we need consider $g=-f$ to get that $g(a) < g(b)$, and by the previous argument we have that $g$ is increasing, and thus $f$ is decreasing.
+\vskip.1in
+\textbf{Problem 4}
+\vskip.1in
+\textbf{Solution} For any $\beta \in \mathcal{A}$, define $a_\beta = \{x\in E : f_\beta (x) > a\}$, and let 
+\[
+              A_a = \{x \in E : f(x) = \sup_\alpha f_\alpha (x) >a\}.
+\]
+First we claim that $a_\beta \subset A_a$ for all $a$ and $\beta \in \mathcal{A}$.  To show this let $y \in a_\beta$.  Then we have that $f_\beta(y) > a$, and thus we have that $\sup_\alpha f_\alpha(y) > a$, and thus $y \in A_a$.  Next we show that $a_\beta$ is open, whcih follows from the fact that
+\[
+	a_\beta = f_\beta^{-1}(a,\infty)
+\]
+And since $(a,\infty)$ is open and $f_\beta$ is continuous, then we must have that its inverse image is open, hence $a_\beta$ is open.  Now we prove that $f$ is lsc.  THis amounts to showing that $A_a$ is open.  If $x \in A_a$, then we have that $\sup_\alpha f_\alpha(y) > a$, and thus we must have that there is a $\beta$ such that $f_\beta(y) > a$, else $a$ would be greater than the supremum.  This gives that $y \in a_\beta \subset A_a$, and so there is an open subset of $A_a$ that contains $y$, and since all our choices were arbitrary, we have there every point of $A_a$ has an open neighborhood contained in $A_a$, and thus $A_a$ is open.\\
+Now since $f(x) > 0$ we have that $E = f^{-1}(0,\infty)$.  Furthermore we have that
+\[
+	E = f^{-1}(0,\infty) - \bigcup_{a > 0} f^{-1}(a,\infty)
+\]
+Now, since $f$ is lsc, we have that each of the $f^{-1}(a,\infty)$ is open, and the above union constitutes an open cover of $E$, and since $E$ is compact, there must be a finite subcover, i.e. there are $a_n > 0$ such that 
+\[
+	E = \bigcup_{k=1}^n f^{-1}(a_n,\infty)
+\]
+If we let $\delta = \min{a_n}$, then we have that $E = f^{-1}(\delta, \infty)$, and thus we have that $f(x) > \delta > 0$.\\
+Now, this result need not be true for the case that $f$ is usc.  Let $E = [0,1]$ with the subspace topology.  Consider the following function
+\[
+	f(x) = \begin{cases}
+					1 & x=0\\
+					x & 0 < x \leq 1
+		\end{cases}
+\]
+It is easily seen that this does not satsfy the desired condition fromthe previous part.  We want to show that it is USC.  Now for $a \leq 0$ we have that
+\[
+	\{x \in E : f(x)>a\} = \emptyset
+\]
+For $0<a\leq 1$:
+\[
+	\{x \in E : f(x)>a\} = (0,a)
+\]
+and for $a > 1$:
+\[
+	\{x \in E : f(x)>a\} = [0,1] = E
+\]
+In all cases, these sets are open, and thus $f$ is usc.
+\vskip.1in\textbf{Problem 5}
+\vskip.1in
+\textbf{Solution}  We can give such a sequence by usind a doubly indexed sequence, which is still a countable list, and thus essentially still a sequence, when considered under a lexicograpghical ordering.  Define for any $n$ and $0 \leq m < n$:
+\[
+	f_{n,m}(x) = \chi_{\left[\frac{m}{n}, \frac{m+1}{n}\right]}(x)
+\]
+the characteristic function of the interval $[\frac{m}{n},\frac{m+1}{n}]$.  First note that since these are all characteristic functions of measurables sets, they are themselves trivially measurable.  Moreover
+\[
+	\int_0^1 \chi_{\left[\frac{m}{n}, \frac{m+1}{n}\right]} = \frac{1}{n} \to 0
+\]
+However, let $x$ be an arbitrary element of $[0,1]$.  Then for any $n$, there is an $m$ such that $\frac{m}{n} \leq x \leq \frac{m+1}{n}$, which is found by choosing the largest $m$ such that $\frac{m}{n} \leq x$.  In other words, for any $n$ there is an $m$ such that $f_{n,m}(x) = 1$, and thus $\{f_{n,m}(x)$ cannot be convergent.
+\vskip.1in
+\textbf{Problem 6}
+\vskip.1in
+\textbf{Solution}
+\vskip.1in
+\textbf{Problem 7}
+\vskip.1in
+\textbf{Solution} We shall first show that $f$ is uniformly continuous and thus continuous.  First note that since $X$ is compact, then we must have that $f_n$ is uniformly equicontinuous.   this follows from noting that the negation of uniform equicontinuity is that there is one $f_n$ is the sequence that fails to be uniformly continuous, but since $X$ compact, and each $f_n$ is continuous, they all must be uniformly continuous.  Now then we can go on to show the uniform continuity of $f$.  Let $\epsilon<0$ be given, and let $\delta$ be such that $d(x,y) < \delta$ implies $|f_n(x) - f_n(y)| < \frac{\epsilon}{2}$ for all $n$ (we appeal to the uniform equicontinuity to get such a $\delta$).  Now let $n \to \infty$, and since we have pointwise convergence, and absolute value is continuous, we get that
+\[
+	|f(x) - f(y)| = \lim_{n \to \infty}|f_n(x) - f_n(y)| \leq \frac{\epsilon}{2} < \epsilon
+\]
+Hence $f$ is uniformly continuous.\\
+We can now move on to proving that the convergence is uniform.  let $\epsilon > 0$ be given, and suppose that $\delta_1$ is such that $d(x,y) < \delta_1 \Rightarrow |f_n(x) - f_n(y)| < \frac{\epsilon}{3}$, we are appealing to the uniform equicontinuity to  get $\delta_1$.  Similarly, let $\delta_2$ be such that $d(x,y) < \delta_2 \Rightarrow |f(x) -f(y)| < \frac{\epsilon}{3}$, and we are appealing to the uniform continuity of $f$ to get such a $\delta_2$.  Now let $\delta = \min \{\delta_1, \delta_2\}$.  We note that 
+\[
+	\bigcup_{x \in X} B(x,\delta)
+\]
+forms an open cover of $X$, and by compactness, we must have a finite subcover i.e. there are finitely many $x_i \in X$ such that
+\[
+	X = \bigcup_{i=1}^k B(x_i,\delta).
+\]
+Now let $N_i$ be such that $|f_n(x_i) - f(x_i)| < \frac{\epsilon}{3}$ for all $n \geq N_i$, and let $N = \max_{1 \leq i \leq k} N_i$.  Now, for any $x$ there is an $x_i$ such that $x \in B(x_i,\delta)$, and thus for all $n \geq N$, we have, forr any $x \in X$:
+\[
+	|f_n(x) - f(x)| =|f_n(x) - f_n(x_i) + f)n(x_i) - f(x_i) + f(x_i) - f(x)| 
+\]
+\[
+	\leq |f_n(x) - f_n(x_i)| + |f_n(x_i) - f(x_i)| + |f(x_i) - f(x)|
+\]
+Since $d(x,x_i) <\delta < \delta_1$ we get that $ |f_n(x) - f_n(x_i)| < \frac{\epsilon}{3}$, and similarly, since $d(x,x_i) < \delta < \delta_2$ we get that $|f(x_i) - f(x)| < \frac{\epsilon}{3}$.  Because $n \geq N \geq N_i$ we have that $|f_n(x) - f_n(x_i)| <\frac{\epsilon}{3}$.  Combining all these we get that for all $n \geq N$ and any $x \in X$:
+\[
+	|f_n(x) - f(x)| < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon
+\]
+So then $f_n$ converges uniformly to $f$.
+\vskip.1in
+\textbf{Problem 8}
+\vskip.1in
+\textbf{Solution}   By the maximum modulus theorem we know that it will attain the maximum modula of the boundary of this sqaure.  So then we need only consider the 4 sides. Let $0 \leq x,y \leq 2\pi$.\\
+In the case where $z=x$ we see that $\max|\sin z| = \max|\sin x| = 1$.\\
+When $z = iy$ we have that
+\[
+	\max|\sin z| = \max |\sin iy| = \max \frac{|e^{i(iy)} - e^{-i(iy)}|}{2} = \max \frac{|e^{-y} - e^y|}{2} = \max \frac{e^y - e^{-y}}{2}
+\]
+Now since
+\[
+	\frac{\partial}{\partial y} \frac{e^y - e^{-y}}{2} = \frac{e^y+e^{-y}}{2} > 0
+\]
+we have that this function is an increasing one.  So then
+\[
+	\max |\sin iy| = \max \frac{e^y - e^{-y}}{2} = \frac{e^{2\pi}-e^{-2\pi}}{2}
+\]
+Now, when we consider the case that $z = 2\pi + iy$ note that 
+\[
+	\sin(2\pi+iy) = \cos(2\pi)\sin(iy) + \cos(iy)\sin(2\pi) = \sin(iy)
+\]
+So then the prefvious case applies.\\
+When we look at $z = x + 2\pi i$, note that, using the triangle inequality
+\[
+	|\sin(x+2\pi i)| = \frac{|e^{ix}e^{-2\pi} - e^{-ix}e^{2\pi}|}{2} \leq \frac{e^{-2\pi} + e^{2\pi}}{2}
+\]
+and so it cannot exceeed the maximum given on the line $z=iy$.  In summary the maximum occurs when $z = 2\pi i$ and it is equal to $\frac{e^{-2\pi} + e^{2\pi}}{2}$.
+\vskip.1in
+\textbf{Problem 9}
+\vskip.1in
+\textbf{Solution}  Assume that $f$ is non constant.  Since $\Omega$ is connected and open, the open mapping theorem applies, which says that $f$ must map $\Omega$ to an open subset of $\mathbb{C}$.  But since $|f|=\alpha$ is constant then we have that the image of $f$ is contained in the circle $|z|=\alpha$, and thus cannot be an open subset of $\mathbb{C}$ (this is because every neighborhood of a point on a circle, by definition, contains a point not on the circle).  This is a contradiction, and so $f$ must be constant.
+\vskip.1in
+\textbf{Problem 10}
+\vskip.1in
+\textbf{Solution}  So, first notice that $sin(z)$ is nonzero off of the real line.  So then we have isolated singularities at $\pm n\pi$, and at 0.  We will calculate the integral using these residues in a standard way.  The most taxing of these residues will be the one at 0.  We will be using the laurent expansion to find it.  As a first step we will find the laurent expansion of $\frac{1}{\sin(z)}$.  Notice that
+\[
+	\lim_{z \to 0} \frac{z}{\sin(z)} = 1
+\]
+and thus $\frac{1}{\sin(z)}$ has a simple pole at 0.  This gives that, plugging is the series expansion for $\sin(z)$:
+\[
+	\frac{1}{z-\frac{z^3}{3!} + \frac{z^5}{5!} - \ldots} = \frac{a_{-1}}{z} + a_0 + a_1x + \ldots
+\]
+Multplying both sides by $z$ gives
+\[
+	\frac{1}{1-\frac{z^2}{3!} + \frac{z^4}{5!} - \ldots} = a_{-1} + a_0z + a_1z^2
+\]
+Letting $z=0$ gives that $a_{-1} = 1$.  Differentiating the above expansion gives that
+\[
+	\frac{-(-\frac{2z}{3!} + \frac{4z^3}{5!} - \ldots)}{(1-\frac{z^2}{3!} + \frac{z^4}{5!}-\ldots)^2} = a_0 + 2a_1z + \ldots
+\]
+Again let $z=0$ to get that $a_0=0$.  Differentiate one more time (left as an exercise for the reader), and plug in $z=0$ again to get that
+\[
+	\frac{1}{3} = 2a_1 \Rightarrow a_1 = \frac{1}{6}
+\]
+This should come as no surprise.  This gives the series exapansion
+\[
+	\frac{1}{z^2\sin(z)} = \frac{1}{z^3} + \frac{1}{6}\frac{1}{z} + \ldots
+\]
+and thus we have that $Res(\frac{1}{z^2\sin(z)},0) = \frac{1}{6}$. Further more we can see that since we have simple poles at $\pm n\pi$
+\[
+	Res(\frac{1}{z^2\sin(z)}, \pm n\pi) = \frac{\frac{1}{(\pm n\pi)^2}}{\sin^\prime(\pm n \pi)} \frac{(-1)^n}{n^2\pi^2}
+\]
+So then the value of the integral is $2\pi i$ time the sum of all the residues, noting that for negative $n$ the residues are the same as positive $n$, and so we can just double them.  This gives the resulting formula
+\[
+	\int_{C_N} \frac{1}{z^2\sin(z)} dz = 2\pi i \left[ \frac{1}{6} + 2 \sum_{n=1}^N \frac{(-1)^n}{\pi^2n^2} \right]
+\]
+It is easily apparent that this intergral converges to $0$ as $N \to \infty$ (Consider the modulus, and the fact that $z^2$ and $\sin(z)$ take on maximum values on the boundary).  Hence
+\[
+	 \frac{1}{6} + 2 \sum_{n=1}^\infty \frac{(-1)^n}{\pi^2n^2} = 0 \Rightarrow -\sum_{n=1}^\infty \frac{(-1)^n}{n^2} = \frac{\pi^2}{12} \Rightarrow  \sum_{n=1}^\infty \frac{(-1)^{n+1}}{n^2} = \frac{\pi^2}{12} 
+\]
+\end{document}

@@ -1,0 +1,24 @@
+\begin{thebibliography}{Boa10}
+
+\bibitem[BC04]{brown04}
+James~Ward Brown and Ruel~V. Churchill.
+\newblock {\em Complex Variables and Applications}.
+\newblock McGraw-Hill, 7th edition, 2004.
+
+\bibitem[Boa10]{boas10}
+Harold~P. Boas.
+\newblock Julius and {J}ulia: Mastering the art of the {S}chwarz lemma.
+\newblock {\em The American Mathematical Monthly}, 117(9):770--785, 2010.
+
+\bibitem[Ste04]{steele04}
+J~Michael Steele.
+\newblock {\em The Cauchy-Schwarz master class: an introduction to the art of
+  mathematical inequalities}.
+\newblock Cambridge University Press, 2004.
+
+\bibitem[Str00]{strichartz00}
+Robert~S Strichartz.
+\newblock {\em The way of analysis}.
+\newblock Jones \& Bartlett Learning, 2000.
+
+\end{thebibliography}

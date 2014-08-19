@@ -1,0 +1,217 @@
+\documentclass{article}
+\usepackage{amssymb, latexsym, amsmath, eucal, graphics, fullpage, epsfig, amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{notation}{Notation}
+
+\begin{document}
+\setlength{\baselineskip}{18pt}
+\textbf{Problem 1.}
+\vskip.1in
+\textbf{Solution}
+We shall prove the inequality by induction.  First we consider the base case.  Then using that $a \geq b$ we have that
+\[
+	a_2 = \frac{a+b}{2} \leq \frac{2a}{2} = a = a_1 \Rightarrow a_1 \geq a_2
+\]
+\[
+	b_2 = \sqrt{ab} \geq \sqrt{bb} = b = b_1 \Rightarrow b_2 \geq b_1
+\]
+Also, note that
+\[
+	\frac{(\sqrt{a} - \sqrt{b})^2}{2} \geq 0 \Rightarrow \frac{a - 2\sqrt{a}\sqrt{b} + b}{2} \geq 0 \Rightarrow \frac{a+b}{2} \geq \sqrt{a}\sqrt{b} \Rightarrow a_2 \geq b_2
+\]
+So then we have established our base case $a_1 \geq a_2 \geq b_2 \geq b_1$.  Now assume true for $n=k$ to get that
+\[
+	a_{k-1} \geq a_k \geq b_k \geq b_{k-1}
+\]
+Using very similar tactics as above, we get from the fact that $a_k \geq b_k$:
+\[
+	a_{k+1} = \frac{a_k+b_k}{2} \leq \frac{2a_k}{2} = a_k \Rightarrow a_k \geq a_{k+1}
+\]
+\[
+	b_{k+1} = \sqrt{a_kb_k} \geq \sqrt{b_kb_k}  = b_k \Rightarrow b_{k+1} \geq b_k
+\]
+\[
+	\frac{(\sqrt{a_k} - \sqrt{b_k})^2}{2} \geq 0 \Rightarrow \frac{a_k - 2\sqrt{a_k}\sqrt{b_k} + b_k}{2} \geq 0 \Rightarrow \frac{a_k+b_k}{2} \geq \sqrt{a_k}\sqrt{b_k} \Rightarrow a_{k+1} \geq b_{k+1}
+\]
+So that $a_{k} \geq a_{k+1} \geq b_{k+1} \geq b_{k}$.  So the inequality holds for all natural numbers.  As a result we get that
+\[
+	a \geq a_{n-1} \geq a_n \geq b_n \geq b_{n-1} \geq b
+\]
+So that $a_n$ is a decreasing sequence bounded by $b$ and thus convergent, and that $b_n$ is an increasing  sequence bounded by $a$ and must be convergent.  All that remains is to show that they have the same limit.  Since both sequences converge and $a_{n+1} = \frac{a_n + b_n}{2}$, we are justified in writing that
+\[
+	\lim a_n = \lim \frac{a_n+b_n}{2} = \frac{1}{2}\lim a_n + \frac{1}{2} \lim b_n \Rightarrow \frac{1}{2} \lim a_n = \frac{1}{2} \lim b_n
+\]
+Which gives that the sequences have the same limit.
+\vskip.1in
+\textbf{Problem 2.}
+\vskip.1in
+\textbf{Solution} For part (a), the sequence need not be Cauchy.  Consider the following counterexample.  Let 
+\[
+	a_n = \sum_{k=1}^n \frac{1}{k}
+\]
+be the sequence.  Note that these are just the partial sums of tyhe harmonic series, and thus they must diverge,  Since they diverge to $\infty$, this sequence cannot be Cauchy.  However:
+\[
+	|a_{n+1} - a_n| = \frac{1}{n+1} \to 0 \mbox{ as } n \to \infty
+\]
+The statement in (b) is true.  Here follows the proof:  Let $a_n$ be a sequence that satisfies the given property.  Now for any $n,m$ with $n > m$ we get that
+\[
+	|a_n - a_m| = \left| \sum_{i=n}^{m-1} a_i - a_{i+1} \right| \leq \sum_{i=n}^{m-1} |a_i - a_{i+1}|<\sum_{i=n}^{m-1} r^k < \sum_{i=n}^\infty r^k 
+\]
+Now since $0 < r <1$ we have that $\sum^\infty r^k$ converges, and thus we have that the tail $\sum_{k=n}^\infty r^k \to 0$.  So then let $\epsilon > 0$ be given, and suppose that $N$ is such that for $n \geq m$ we have that $\sum_{k=n}^\infty r^k \ < \epsilon$.  Then for all $n,m \geq N$ we have that
+\[
+	|a_n - a_m| <\sum_{i=n}^\infty r^k <\epsilon
+\]
+and thus the sequence is Cauchy.
+\vskip.1in
+\textbf{Problem 3}
+\vskip.1in
+\textbf{Solution} We argue by induction.  First we consider the base case of $n=2$.  First note that because $2^{p+1} > p+1$, and thus we have that $1 \geq \frac{2^{p+1}}{p+1}$. Since $p$ is a positive integer we have that
+\[
+	\frac{2}{p+1} - 1 \leq 0 \Rightarrow 2^p(\frac{2}{p+1} - 1) \leq 0 \leq 1 \Rightarrow \frac{2^{p+1}}{p+1} - 2^p \leq 1 \Rightarrow \frac{2^{p+1}}{p+1} \leq 1+2^p
+\]
+Combining the inequalities we get that
+\[
+	1 \leq \frac{2^{p+1}}{p+1}  \leq 1+p
+\]
+which is the desired inequality for the case $n=2$.  Now assume that it holds for $n=m$.  Notice that
+\[
+	\frac{(m+1)^p}{p+1} = \frac{1}{p+1} \sum_{r=0}^{p+1} \frac{(p+1)!}{r!(p+1-r)!} m^{p+1-r} = \sum_{r=0}^{p+1} \frac{p!}{r!(p+1-r)!} m^{p+1-r}  = \frac{m^{p+1}}{p+1} + \sum_{r=1}^{p+1} \frac{p!}{r!(p+1-r)!}m^{p+1-r}
+\]
+Let $\ell = r-1$ and we get that
+\[
+	\frac{(m+1)^p}{p+1} =  \frac{m^{p+1}}{p+1} + \sum_{\ell =0}^p \frac{p!}{\ell !(p-\ell)!}m^{p-\ell} = \frac{m^{p+1}}{p+1} + (m+1)^p
+\]
+Now we apply the induction hypothesis to the $\frac{m^{p+1}}{p+1} $ term to get that
+\[
+	\sum_{k=1}^{m-1} k^p + (m+1)^p \leq \frac{(m+1)^p}{p+1} \leq \sum_{k=1}^m k^p + (m+1)^p
+\]
+And since $m^p \leq (m+1)^p$, we get
+\[
+	\sum_{k=1}^m k^p \leq \frac{(m+1)^p}{p+1} \leq \sum_{k=1}^{m+1} k^p
+\]
+and so the inequality is true for $n=m+1$, and the result holds by induction.
+\vskip.1in
+\textbf{Problem 4}
+\vskip.1in
+\textbf{Solution}  The result need not be true, and we offer the following as a counterexample.  let $f_n$ be the function given by the line fom $(0,0)$ to $(\frac{1}{2n}, n)$, the line from $(\frac{1}{2n}, n)$ to $(\frac{1}{n}, 0)$, and then equal to 0 for the remaining $x$ in $[0,1]$.  A figure would go nicely here, but if you just draw it out you'll see what I mean.  Notice that $f_n$ converges pointwise to 0, since for any $x$ we need only let $N_x$ be such that $\frac{1}{N_x} < x$, and we see that $f_n(x) = 0$ for all $n \geq N_x$.  However, we can calculate the integral of these function geometrically as 
+\[
+	\int_0^1 f_n(x) dx = \frac{1}{2}\frac{1}{n}n = \frac{1}{2} 
+\]
+So then $\lim \int_0^1 f_n = \frac{1}{2}$, and we have our counter example.\\
+We could modify these hypotheses in several ways in order to achieve the desired result.  Most elementary, we could assume that all of the functions in the sequence are monotonic, which would force the convergence to 0 to be uniform.  Or we could just assume that the convergence be uniform, which would allow us to interchange the integral sign and the limit.  Reaching into the higher level real analysis, we could consider the Lebesgue Dominated convergence theorem, which says that if the $f_n$ are dominated by a lebesgue integrable function on $[0,1]$, then we can interchange the limit and integral.
+\vskip.1in
+\textbf{Problem 5}
+\vskip.1in
+\textbf{Solution}  First we will show that the metric is continuous in both variables.  First, suppose that $x_n \to x$.  Then we have that $d(x_n,x) \to 0$.  Then for any $y \in X$ we have that
+\[
+	d(x_n,y) \leq d(x_n, x) + d(x,y) \Rightarrow \lim d(x_n,y) \leq d(x,y)
+\]
+Similarly
+\[
+	d(x,y) \leq d(x,x_n) + d(x_n,y) = d(x_n,x) + d(x_n,y) \Rightarrow d(x,y) \leq d(x_n,y)
+\]
+and thus $\lim d(x_n,y) = d(x,y)$.  Continuity in the second variable follows from symmetry of the metric.\\
+Now, let $x \in X$.  Since $Y$ is dense there is a $y_n \subset Y$ such that $y_n \to x$.  This implies that $y_n$ is Cauchy.  So then for all $\epsilon > 0$ there is an $N$ such that for all $n,m \geq N$ we have $d(y_n,y_m) \leq \epsilon$.  This means that
+\[
+	|f(y_n)-f(y_m)| = d(y_n,y_m) < \epsilon
+\]
+and thus $f(y_n)$ forms a cauchy sequence in $\mathbb{R}$, which being complete, means that $f(y_n)$ converges to a limit, amd moreover, this limit is unique.  So we define $g(x) = \lim f(y_n)$ where $y_n \to x$.  In order to fully justify this definition we need to make sure that the value of $g(x)$ is independent of our choice of sequence that converges to $x$.  So let $y_n$ and $z_n$ be sequences in $Y$ that converge to $x$.  Notice that 
+\[
+	|f(y_n) - f(z_n)| = d(y_n, z_n) \leq d(y_n, x) + d(z_n,x) \to 0
+\]
+So then $\lim |f(y_n) - f(z_n)| = 0$, which gives that $\lim f(y_n) = \lim f(z_n)$, and so $g$ is well defined.  Now we need only to show that $g$ has the desired properties.  First we want to show that $g(y) = f(y)$ for all $y \in Y$.  This is trivial since the sequence $\{y\} \to y$, which gives that $g(y) = \lim f(y) = f(y)$.  The uniqueness of $g$ follows from the uniqueness of the limit.  Also, let $x_1, x_2 \in X$, and suppose that $y_n \to x_1$ and $z_n \to x_2$, then
+\[
+	|g(x_1)-g(x_2)| = \lim |f(y_n)-f(z_n)| = \lim d(y_n,z_n) = d(x_1, x_2)
+\]
+where the last equality follows from the continuity of the metric shown above. 
+\vskip.1in
+\textbf{Problem 6}
+\vskip.1in
+\textbf{Solution}  FIrst we note that $f_n$ converges pointwise to 0.  Now see that
+\[
+	f_n\left(\frac{1}{n} \right) = \frac{1}{2}, \mbox{ for all } n
+\]
+This means that $f_n$ cannot be uniformly convergent, since for $\epsilon=\frac{1}{4}$ we have that $|f_n(\frac{1}{n})| = \frac{1}{2} > \epsilon$ for all $n$.\\
+However, on the interval $[1,\infty)$ it is uniformly convergent.  Consider the following
+\[
+	f_n^\prime(x) = \frac{n(1+n^2x^2(1-2x))}{(1+n^2x^2)^2}
+\]
+And when $x \geq 1$ we have that 
+\[
+	1-2x < -1 \Rightarrow n^2x^2(1-2x) < -1 \Rightarrow 1+n^2x^2(1-2x) < 0 \Rightarrow f_n^\prime(x) < 0
+\]
+So then each $f_n$ is monotonically decreasing on $[1,\infty)$.  So then, since $f_n$ converges pointwise to zero, given $\epsilon>0$ there is an $N$ such that for all $n \geq N$ we have that 
+\[
+	 |f_n(1)| \leq \epsilon
+\]
+But since every $f_n$ is monotonically decreasing on $[1,\infty)$ we get that, for all $x \in [1,\infty)$:
+\[
+	|f_n(x)| \leq |f_n(1)| < \epsilon
+\]
+for all $n \geq N$.  Thus $f_n$ is uniformly convergent on $[1,\infty)$.
+\textbf{Problem 7}
+\vskip.1in
+\textbf{Solution}
+\vskip.1in
+\textbf{Problem 8}
+\vskip.1in
+\textbf{Solution}  Using standard Complex integral evaluation techniques, and the residue theorem we will have that it's value is $\frac{2 \pi}{3}$.
+\vskip.1in
+\textbf{Problem 9}
+\vskip.1in
+\textbf{Solution} Since we want for $f$ to be an entire function we will say that it takes the form $f(x+iy) = u(x,y)+iv(x,y)$.  Then we have that
+\[
+	u = (x+1)(x^2+2x+1-3y^2)=x^3+2x^2+x-3xy^2+x^2+2x+1-3y^2 = x^3+3x^2+3x-3xy^2-3y^2+1
+\]
+And hence
+\[
+	u_x = 3x^2+6x+3-3y^2
+\]
+By the Cauchy Riemann equation we have that
+\[
+	v_y= 3x^2+6x+3-3y^2
+\]
+Which gives that
+\[
+	v = 3x^2y+6xy+3y-y^3+g(x)
+\]
+for some function $g$.  Furthermore, from the Cauchy Rieman equations we want that $v_x = -u_y$ which means
+\[
+	6xy+6y+g^\prime(x) = -(-6xy-6y) \Rightarrow g^\prime(x)=0
+\]
+So then $g(x)=\alpha$ for some $\alpha \in \mathbb{R}$.  So far we have that
+\[	
+	f(x+iy) = (x+1)(x^2+2x+1-3y^2) + i(3x^2y+6xy+3y-y^3+\alpha)
+\]
+Since $f(0)=1+i$, pluggin into the above equation we get that
+\[
+	1+i = 1+i\alpha
+\]
+Hence $\alpha=1$ and we get that
+\[
+	f(x+iy) = (x+1)(x^2+2x+1-3y^2) + i(3x^2y+6xy+3y-y^3+1)
+\]
+
+\vskip.1in
+\textbf{Problem 10}
+\vskip.1in
+\textbf{Solution} Consider that
+\[
+	\cos^n(\theta) = \left(\frac{e^{i\theta} + e^{-i\theta}}{2}\right)^n = \frac{1}{2^n}\sum_{k=0}^n \binom{n}{k}e^{i(n-k)\theta}e^{-ik\theta}
+\]	
+\[
+	= \frac{1}{2^n}\sum_{k=0}^n \binom{n}{k}e^{i(n-2k)\theta}
+\]
+Notice that $\cos^n(\theta)$ is real.  Thus we have that
+\[
+	\cos^n(\theta)=Re(\cos^n(\theta)) = Re\left( \frac{1}{2^n}\sum_{k=0}^n \binom{n}{k}e^{i(n-2k)\theta}\right) =  \frac{1}{2^n}\sum_{k=0}^n \binom{n}{k}Re \left(e^{i(n-2k)\theta}\right)
+\]
+\[
+	= \frac{1}{2^n}\sum_{k=0}^n \binom{n}{k}\cos((n-2k)\theta)
+\]
+
+\end{document}

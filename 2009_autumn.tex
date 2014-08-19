@@ -1,0 +1,166 @@
+\documentclass{homework}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{cleveref}
+\usepackage{upgreek}
+\usepackage[framed]{mcode}
+\usepackage{mathrsfs}
+\usepackage{units}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\newtheorem{lemma}{Lemma}
+\DeclareMathOperator*{\Res}{Res}
+
+\course{2009 Autumn Analysis Exam Solutions}
+\author{Kevin Joyce}
+
+
+\begin{document} 
+\newcommand{\figref}[1]{\figurename~\ref{#1}}
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\SS}{\mathcal S}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\TTheta}{\overline{\underline \Theta} }
+\newcommand{\del}{\partial}
+\newcommand{\approxsim}{\overset{\cdotp}{\underset{\cdotp}{\sim}}}
+\newcommand{\FF}{\mathcal F}
+\renewcommand{\Re}{\mathrm{Re}\,}
+\renewcommand{\Im}{\mathrm{Im}\,}
+\newcommand{\HH}{\mathcal H}
+\nocite{*}
+
+{\bf 4.} Let $f$ be a function defined on $[1/2,1]$ which is continuous at $1$.  Prove that the sequence $(x^nf(x))_n$ converges for every $x\in [1/2,1]$, and that this convergence is uniform if and only if $f$ is bounded and $f(1) = 0$.
+
+\begin{solution}
+  First if $x = 1$, then $x^nf(x) = f(1)$ for all $n$, and thus converges to $f(1)$.  Fix $x\in [1/2,1)$, then for a given $\eps >0$,  
+  $$
+    n> \ln \left(\frac {\eps}{|f(x)|} \right)/\ln(x) \iff n \ln x  < \left(\frac {\eps}{|f(x)|} \right) \implies x^n < \frac{\eps}{|f(x)|}
+  $$
+  by applying the increasing function $e^x$ to both sides of the inequality.
+  Hence $ |x^nf(x)| = x^n|f(x)| < \eps $ implies $(x^nf(x))_n$ converges to $0$.  
+  and thus $(x^nf(x))_n$ converges to the function $g$ where $g(x) = 0$ when $1/2\le x <1$ and $g(1) = 1$.
+
+  Now, suppose $|f(x)| \le M$ for each $x$ and $f(1) = 1$.  Then if we take
+  $$
+    n> \ln \left(\frac {\eps}{M} \right)/\ln(x) 
+  $$
+  a similar calculation replacing $|f(x)|$ by $M$ yields $|x^nf(x)| \le x^n M < \eps$ implies uniform convergence to the constant $0$.  And, in the case where $f(1) = 0$, is equal to $g$.
+
+  On the other hand, if we assume that the convergence is uniform, then  since each function $g_n$ where $g_n(x) = x^nf(x)$ are continuous on $[1/2,1]$.  Hence the point-wise limit $g(x)$ must be continuous which implies $f(1) = \lim f(1/n) = 0$.
+\end{solution}
+
+{\bf 5.} Suppose $f:[0,\infty) \to \RR$ is decreasing, and that $\int_0^\infty f(x) dx$ converges.  Prove that for every $\delta > 0$ the series $\sum_{n=1}^\infty f(n\delta)$ converges and
+$$
+  \lim_{\delta \to 0^+} \delta \sum_{n=1}^\infty f(n\delta) = \int_0^\infty f(x)\,dx
+$$
+
+\begin{solution}
+  We first show that $f(x) \ge 0$ for all $x$. Assume otherwise, then there exists an $x_0<0$ and since $f$ is decreasing, then $f(x) < f(x_0) < 0$ for all $x>x_0$.  Thus
+  $$
+    \int_0^N f(x)\,dx = \int_0^{x_0} f(x)\,dx + \int_{x_0}^N f(x)\,dx \le \int_0^{x_0} f(x)\,dx - f(x_0)(x_0-N) \to -\infty
+  $$
+  as $N\to\infty$.
+
+  Thus, it suffices to to prove that $\sum_{n=1}^\infty f(n\delta)$ is bounded above.  For each $\delta>0$, $(0,\delta,2\delta,\dots,N\delta)$ is a partition of $[0,N\delta]$. Since $f$ is decreasing and positive
+  $$
+    \delta \sum_{n=1}^N f(n\delta) = \sum_P \inf_{[x_i-x_{i-1}]}\{f(t)\}\Delta_i = L(P,f) \le \int_0^{N\delta} f(x)\,dx \le \int_0^\infty f(x)\,dx.
+  $$ 
+  Hence $\sum_{n=1}^N f(n\delta) \le \frac 1\delta \int_0^\infty f(x)\,dx$.
+
+  Now, let $\eps >0$ be given, and let $R>0$ such that
+  $$
+    \int_0^\infty f(x)\,dx - \eps < \int_0^R f(x)\,dx.
+  $$
+  For the family of partitions $(0,\delta,2\delta,\dots,N_R\delta,R)$, indexed by all $\delta >0$, we have that the maximum width of each inteval goes to 0 as $\delta \to 0$, hence, for sufficiently small $\delta>0$, we have
+  $$
+    \int_0^R f(x)\,dx - \eps < L(P,f) = \delta \sum_{n=1}^N f(n\delta). 
+  $$
+  Hence 
+  $$
+    \int_0^\infty f(x)\,dx - 2\eps <\delta\sum_{n=1}^\infty f(n\delta) = L(P,f) \le \int_0^Rf(x)\,dx \le \int_0^\infty f(x),dx
+  $$
+  and the convergence is evident.
+\end{solution}
+
+{\bf 7.} Let $(X,d)$ be a metrix space. A function $f:X\to \RR$ is called Lipschitz if there is a constant $L$ such that $|f(x) - f(y)| \le Ld(x,y)$, for all $x,y\in X$.
+
+\begin{quote}
+  {\bf (a)} Show that every Lipschitz function is uniformly continuous and give an example of a uniformly continuous function that is not Lipschitz.
+  \begin{solution}
+    Let $f$ be a Lipschitz function with Lipschitz constant $L$ and $\eps >0$ be given, then observe
+    $$
+      |f(x) - f(y)| \le Ld(x,y) < \eps
+    $$
+    by choosing $x,y$ such that $d(x,y)<\eps/L$.
+
+    On the other hand, consider $f:[0,1] \to \RR$ by $f(x) = \sqrt x$.  This function is uniformly continuous as a continuous function with a compact domain. However, for any given $L\ge0$, choose $x<\frac 1{L^2}$ and $y=0$, then 
+    $$
+      |f(x) - f(y)| = \left|\frac 1L\right| = L\left|\frac 1{L^2} - 0\right| > L|x - y|.
+    $$
+  \end{solution}
+\end{quote}
+Let $f$ be a bounded uniformly continuous real-valued function on $X$.  For each positive integer $n$, consider the function $f_n$ defined by
+$$
+  f_n(x) = \inf\{f(y) + nd(x,y):y\in X\},
+$$
+for $x\in X$.  Prove the following statements:
+\begin{quote}
+  {\bf (b)} Each $f_n$ is a Lipschitz function on $X$.
+  \begin{solution}
+    Let $x_1 \not= x_2$ in $X$ labeled such that $f(x_1) \le f(x_2)$ so that $|f(x_2) - f(x_1)| = f(x_2) - f(x_1)$. Let $\eps > 0$ be given.  There exists a $y_1 \in X$ so that 
+    $$
+      f(y_1) + nd(x_1,y_1) \le f_n(x) + \eps
+    $$
+    since $f_n(x)$ is the greatest of the upper bounds.  Now, for $f_n(x_2)$ we have
+    \begin{align*}
+      f_n(x_2) 
+      &\le f(y_1) + nd(x_2,y_1)\\
+      &=   f(y_1) + nd(x_2,y_1) - nd(y_1,x_1)+ nd(y_1,x_1)\\
+      &\stackrel*\le f(y_1) + nd(x_2,x_1) + nd(y_1,x_1)\\
+      &\le f_n(x_1) + \eps +nd(x_2,x_1).
+    \end{align*} 
+    Hence, $|f_n(x_2) - f_n(x_1)| \le nd(x_2,x_1) + \eps$ for an arbitrary $\eps >0$, which suffices for $f_n$ to be Lipschitz.
+
+    $$
+    ^*nd(x_2,y_1) \le nd(y_1,x_1) + nd(x_2,x_1) \implies nd(x_2,y_1) - nd(y_1,x_1)\le nd(x_2,x_1) 
+    $$
+  \end{solution}
+\end{quote}
+\begin{quote}
+  {\bf (c)} $f_n\to f$ uniformly on $X$ as $n\to \infty$.
+  \begin{solution}
+    Let $|f(x)|\le M$ and $\eps>0$ be given.  First, observe $f_n(x) \le f(x) + nd(x,x) = f(x)$, hence $|f(x) - f_n(x)| = f(x) - f_n(x)$.  Let $\delta >0$ be such that $|f(x) - f(y)| < \frac \eps2$ whenever $d(x,y)<\delta$.  Choose $n\ge \frac{2M}\delta$.  Now, for any $x\in X$, there exists $y_x$ such that
+    $$
+      f(y_x) + nd(x,y_x) \le f_n(x) + \frac \eps2 \iff f(y_x) - f_n(x)  + nd(x,y_x)< \eps.
+    $$
+    So 
+    \begin{align*}
+      f(x) - f_n(x) 
+      &= f(x) - f(y_x) + \big(f(y_x) - f_n(x) + nd(x,y_x)\big) - nd(x,y_x)\\
+      &< f(x) - f(y_x) - nd(x,y_x) + \frac \eps2.
+    \intertext{ 
+      We proceed in two cases, when $d(x,y_x) \ge \delta$ or when
+      $d(x,y_x) < \delta$.  In the first case, $n > \frac{2M}{\delta}$ implies $nd(x,y_x) > \frac{2M}{\delta} \delta  = 2M$, so
+    }
+      f(x) - f_n(x) 
+      &< f(x) - f(y_x) - 2M + \frac \eps2\\
+      &\le (f(x) - M) - (f(y_x) + M) + \frac \eps2\\
+      &\le \frac \eps2,
+    \intertext{
+      where we used the facts that $f(x) \le M$ and $f(y_x) \ge -M$.  In the other case where $d(x,y_x) < \delta$,
+    }
+      f(x) - f_n(x) 
+      &< \frac \eps2 - nd(x,y_x) + \frac \eps2 \\
+      &\le \eps,
+    \end{align*}
+    since $nd(x,y_x)\ge 0$. Since our choice of $n$ did not depend on $x$, the convergence is uniform.
+    \end{solution}
+\end{quote}
+\bibliographystyle{alpha}
+\bibliography{analysis_prelim}
+\end{document}
+
+
+

@@ -1,0 +1,41 @@
+\documentclass{homework}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{cleveref}
+\usepackage{upgreek}
+\usepackage[framed]{mcode}
+\usepackage{mathrsfs}
+\usepackage{units}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\newtheorem{lemma}{Lemma}
+\DeclareMathOperator*{\Res}{Res}
+
+\course{2010 Spring Analysis Exam Solutions}
+\author{Kevin Joyce}
+
+
+\begin{document} 
+\newcommand{\figref}[1]{\figurename~\ref{#1}}
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\SS}{\mathcal S}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\TTheta}{\overline{\underline \Theta} }
+\newcommand{\del}{\partial}
+\newcommand{\approxsim}{\overset{\cdotp}{\underset{\cdotp}{\sim}}}
+\newcommand{\FF}{\mathcal F}
+\renewcommand{\Re}{\mathrm{Re}\,}
+\renewcommand{\Im}{\mathrm{Im}\,}
+\newcommand{\HH}{\mathcal H}
+\nocite{*}
+
+{\bf 1.} Let $a$ and $b$ be positive real numbers with $a\ge b$. Define sequences $\{a_n\}$ and $\{b_n\}$ recursively as follows: $a_1 = a, b_1 = b,a_{n+1} = \frac{a_n+b_n}2, b_{n+1} = \sqrt{a_nb_n}$. Prove that for every natural number $n$, $a_n \ge a_{n+1} \ge b_{n+1} \ge b_n$.
+ Show that the sequences $\{a_n\}$ and $\{b_n\}$ are convergent and have the same limit.
+\bibliographystyle{alpha}
+\bibliography{analysis_prelim}
+\end{document}
+
+
+
